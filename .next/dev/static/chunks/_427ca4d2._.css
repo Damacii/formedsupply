@@ -132,6 +132,11 @@
   margin: 0;
 }
 
+.OrdersPage-module__YxSxva__orderList {
+  gap: .8rem;
+  display: grid;
+}
+
 .OrdersPage-module__YxSxva__orderCard {
   padding: var(--space-3);
   background: #fff;

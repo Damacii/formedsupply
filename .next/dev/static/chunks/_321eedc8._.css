@@ -307,7 +307,15 @@
 }
 
 .AdminPage-module__eSrwlG__searchInput {
-  min-width: 240px;
+  width: 100%;
+  min-width: 0;
+}
+
+@media (min-width: 600px) {
+  .AdminPage-module__eSrwlG__searchInput {
+    width: auto;
+    min-width: 240px;
+  }
 }
 
 /*# sourceMappingURL=_321eedc8._.css.map*/

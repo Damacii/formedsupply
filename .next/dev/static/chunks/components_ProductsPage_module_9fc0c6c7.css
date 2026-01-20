@@ -143,10 +143,16 @@
 }
 
 .ProductsPage-module__0ctMtq__actions {
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr;
   gap: .5rem;
   margin-top: 1rem;
   display: grid;
+}
+
+@media (min-width: 600px) {
+  .ProductsPage-module__0ctMtq__actions {
+    grid-template-columns: 1fr 1fr;
+  }
 }
 
 .ProductsPage-module__0ctMtq__viewLink, .ProductsPage-module__0ctMtq__primaryLink {

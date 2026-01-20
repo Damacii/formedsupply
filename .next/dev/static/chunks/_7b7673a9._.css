@@ -221,8 +221,12 @@ button, input {
   height: 2px;
 }
 
-.Navbar-module__nuAbfa__navCta {
+.Navbar-module__nuAbfa__navActions {
   display: none;
+}
+
+.Navbar-module__nuAbfa__navCta, .Navbar-module__nuAbfa__navAdmin {
+  display: inline-flex;
 }
 
 @media (min-width: 768px) {
@@ -251,9 +255,10 @@ button, input {
     font-weight: 600;
   }
 
-  .Navbar-module__nuAbfa__navCta {
-    justify-content: center;
+  .Navbar-module__nuAbfa__navActions {
+    justify-content: flex-end;
     align-items: center;
+    gap: var(--space-2);
     display: inline-flex;
   }
 }

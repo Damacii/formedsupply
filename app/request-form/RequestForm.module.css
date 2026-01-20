@@ -350,8 +350,14 @@
 }
 
 .selectionItem input {
-  width: 120px;
+  width: 80px;
   text-align: center;
+}
+
+@media (min-width: 600px) {
+  .selectionItem input {
+    width: 120px;
+  }
 }
 
 .removeButton {
@@ -400,7 +406,7 @@
   }
 
   .copy h1 {
-    white-space: nowrap;
+    /* white-space: nowrap; Removed to prevent overflow */
   }
 
   .formRow {
