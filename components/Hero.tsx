@@ -1,6 +1,213 @@
+"use client";
+
+import {
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+  type ChangeEvent,
+  type CSSProperties,
+  type KeyboardEvent,
+  type PointerEvent,
+} from "react";
 import styles from "./Hero.module.css";
 
+type HeroSlide = {
+  id: string;
+  src?: string;
+  sku?: string;
+  href?: string;
+  className?: string;
+};
+
+const HERO_SLIDES_KEY = "formedSupplyHeroSlides";
+
 export default function Hero() {
+  const defaultSlides = useMemo<HeroSlide[]>(
+    () => [
+      { id: "default-1", className: styles.heroSlideOne, sku: "FS-101" },
+      { id: "default-2", className: styles.heroSlideTwo, sku: "FS-204" },
+      { id: "default-3", className: styles.heroSlideThree, sku: "FS-318" },
+    ],
+    []
+  );
+  const [customSlides, setCustomSlides] = useState<HeroSlide[]>([]);
+  const [isEditing, setIsEditing] = useState(false);
+  const slides = customSlides.length ? customSlides : defaultSlides;
+  const slideCount = slides.length;
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [dragX, setDragX] = useState(0);
+  const [isDragging, setIsDragging] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
+  const dragStartX = useRef(0);
+  const dragMoved = useRef(false);
+  const hasLoaded = useRef(false);
+  const dragStyle = { "--drag-x": `${dragX}px` } as CSSProperties;
+  const activeSlide = slides[activeIndex];
+  const activeSku = activeSlide?.sku ?? "";
+
+  useEffect(() => {
+    const stored = window.localStorage.getItem(HERO_SLIDES_KEY);
+    if (stored) {
+      try {
+        const parsed = JSON.parse(stored) as HeroSlide[];
+        if (Array.isArray(parsed)) {
+          setCustomSlides(
+            parsed.map((slide) => ({
+              id: slide.id || `stored-${Math.random().toString(16).slice(2)}`,
+              src: slide.src,
+              sku: slide.sku,
+              href: slide.href,
+            }))
+          );
+        }
+      } catch {
+        setCustomSlides([]);
+      }
+    }
+    hasLoaded.current = true;
+  }, []);
+
+  useEffect(() => {
+    if (!hasLoaded.current) return;
+    if (customSlides.length === 0) {
+      window.localStorage.removeItem(HERO_SLIDES_KEY);
+      return;
+    }
+    window.localStorage.setItem(HERO_SLIDES_KEY, JSON.stringify(customSlides));
+  }, [customSlides]);
+
+  useEffect(() => {
+    const updateEditorState = () => {
+      setIsEditing(window.location.hash === "#edit-site");
+    };
+    updateEditorState();
+    window.addEventListener("hashchange", updateEditorState);
+    return () => window.removeEventListener("hashchange", updateEditorState);
+  }, []);
+
+  useEffect(() => {
+    if (isDragging || isHovered || slideCount < 2) {
+      return;
+    }
+    const timer = window.setInterval(() => {
+      setActiveIndex((index) => (index + 1) % slideCount);
+    }, 5000);
+    return () => window.clearInterval(timer);
+  }, [isDragging, isHovered, slideCount]);
+
+  useEffect(() => {
+    if (activeIndex >= slideCount) {
+      setActiveIndex(0);
+    }
+  }, [activeIndex, slideCount]);
+
+  const handleCloseEditor = () => {
+    setIsEditing(false);
+    if (window.location.hash === "#edit-site") {
+      history.replaceState(null, "", window.location.pathname + window.location.search);
+    }
+  };
+
+  const handleImageUpload = async (event: ChangeEvent<HTMLInputElement>) => {
+    const files = Array.from(event.target.files ?? []);
+    if (!files.length) return;
+    const uploads = await Promise.all(
+      files.map(
+        (file) =>
+          new Promise<HeroSlide>((resolve, reject) => {
+            const reader = new FileReader();
+            reader.onload = () => {
+              resolve({
+                id: `${Date.now()}-${Math.random().toString(16).slice(2)}`,
+                src: String(reader.result || ""),
+                sku: "",
+                href: "",
+              });
+            };
+            reader.onerror = () => reject(new Error("Failed to read image"));
+            reader.readAsDataURL(file);
+          })
+      )
+    );
+    setCustomSlides((prev) => [...prev, ...uploads]);
+    event.target.value = "";
+  };
+
+  const handleSlideMetaChange = (
+    index: number,
+    field: "sku" | "href",
+    value: string
+  ) => {
+    setCustomSlides((prev) =>
+      prev.map((slide, slideIndex) =>
+        slideIndex === index ? { ...slide, [field]: value } : slide
+      )
+    );
+  };
+
+  const handleRemoveSlide = (index: number) => {
+    setCustomSlides((prev) => prev.filter((_, slideIndex) => slideIndex !== index));
+  };
+
+  const handlePointerDown = (event: PointerEvent<HTMLDivElement>) => {
+    dragStartX.current = event.clientX;
+    dragMoved.current = false;
+    setIsDragging(true);
+    (event.currentTarget as HTMLDivElement).setPointerCapture(event.pointerId);
+  };
+
+  const handlePointerMove = (event: PointerEvent<HTMLDivElement>) => {
+    if (!isDragging) return;
+    const delta = event.clientX - dragStartX.current;
+    if (Math.abs(delta) > 6) {
+      dragMoved.current = true;
+    }
+    setDragX(delta);
+  };
+
+  const handlePointerUp = (event: PointerEvent<HTMLDivElement>) => {
+    if (!isDragging) return;
+    const delta = event.clientX - dragStartX.current;
+    setIsDragging(false);
+    setDragX(0);
+    (event.currentTarget as HTMLDivElement).releasePointerCapture(event.pointerId);
+    if (Math.abs(delta) < 40) {
+      return;
+    }
+    setActiveIndex((index) => {
+      if (delta > 0) {
+        return (index - 1 + slideCount) % slideCount;
+      }
+      return (index + 1) % slideCount;
+    });
+  };
+
+  const handlePointerCancel = () => {
+    setIsDragging(false);
+    setDragX(0);
+    dragMoved.current = false;
+  };
+
+  const handleSliderClick = () => {
+    if (isDragging || dragMoved.current) {
+      return;
+    }
+    const href = activeSlide?.href;
+    if (href) {
+      window.location.href = href;
+    }
+  };
+
+  const handleKeyDown = (event: KeyboardEvent<HTMLDivElement>) => {
+    if (event.key === "ArrowLeft") {
+      setActiveIndex((index) => (index - 1 + slideCount) % slideCount);
+    }
+    if (event.key === "ArrowRight") {
+      setActiveIndex((index) => (index + 1) % slideCount);
+    }
+  };
+
   return (
     <section id="hero" className={styles.hero}>
       <div className={`container ${styles.heroGrid}`}>
@@ -26,19 +233,112 @@ export default function Hero() {
         <div
           className={styles.heroVisual}
           role="img"
-          aria-label="Abstract product mockup"
+          aria-label="Rotating product highlights"
           data-reveal
         >
-          <div className={styles.heroShapeA}></div>
-          <div className={styles.heroShapeB}></div>
-          <div className={styles.heroCard}>
-            <div className={styles.heroCardLabel}>Formed Supply</div>
-            <div className={styles.heroCardLines}></div>
-            <div className={styles.heroCardLines}></div>
-            <div className={`${styles.heroCardLines} ${styles.heroCardLinesShort}`}></div>
+          <div className={styles.heroSliderWrap}>
+            <div
+              className={`${styles.heroSlider} ${isDragging ? styles.heroSliderDragging : ""}`}
+              style={dragStyle}
+              role="group"
+              aria-roledescription="carousel"
+              aria-label="Product visuals"
+              tabIndex={0}
+              onPointerDown={handlePointerDown}
+              onPointerMove={handlePointerMove}
+              onPointerUp={handlePointerUp}
+              onPointerCancel={handlePointerCancel}
+              onKeyDown={handleKeyDown}
+              onMouseEnter={() => setIsHovered(true)}
+              onMouseLeave={() => setIsHovered(false)}
+              onClick={handleSliderClick}
+            >
+              {slides.map((slide, index) => {
+                const position =
+                  index === activeIndex
+                    ? styles.heroSlideFront
+                    : index === (activeIndex + 1) % slideCount
+                    ? styles.heroSlideMid
+                    : styles.heroSlideBack;
+                const slideStyle = slide.src
+                  ? ({ backgroundImage: `url(${slide.src})` } as CSSProperties)
+                  : undefined;
+                return (
+                  <div
+                    key={slide.id}
+                    className={`${styles.heroSlide} ${slide.className ?? ""} ${position}`}
+                    style={slideStyle}
+                    aria-hidden="true"
+                  ></div>
+                );
+              })}
+            </div>
+            <div className={styles.heroSkuBox}>
+              Product being shown is SKU:{" "}
+              <span>{activeSku ? activeSku : "Unassigned"}</span>
+            </div>
           </div>
-          <div className={styles.heroTower}></div>
-          <div className={`${styles.heroTower} ${styles.heroTowerSlim}`}></div>
+        </div>
+      </div>
+      <div className={`container ${styles.heroEditorAnchor}`} id="edit-site"></div>
+      <div className={`container ${styles.heroEditor} ${isEditing ? styles.heroEditorOpen : ""}`}>
+        <div className={styles.heroEditorHeader}>
+          <div>
+            <h2>Edit Site</h2>
+            <p>Upload hero images and link each one to a SKU or product page.</p>
+          </div>
+          <div className={styles.heroEditorActions}>
+            <button className="btn btn-secondary" type="button" onClick={handleCloseEditor}>
+              Close Editor
+            </button>
+          </div>
+        </div>
+        <div className={styles.heroEditorForm}>
+          <label className={styles.heroEditorField}>
+            <span>Upload hero images</span>
+            <input type="file" accept="image/*" multiple onChange={handleImageUpload} />
+          </label>
+          {customSlides.length === 0 ? (
+            <p className={styles.heroEditorEmpty}>No hero images uploaded yet.</p>
+          ) : (
+            <div className={styles.heroEditorList}>
+              {customSlides.map((slide, index) => (
+                <div key={slide.id} className={styles.heroEditorItem}>
+                  <div className={styles.heroEditorThumb}>
+                    {slide.src ? <img src={slide.src} alt="" /> : null}
+                  </div>
+                  <label className={styles.heroEditorField}>
+                    <span>SKU</span>
+                    <input
+                      type="text"
+                      value={slide.sku ?? ""}
+                      onChange={(event) =>
+                        handleSlideMetaChange(index, "sku", event.target.value)
+                      }
+                    />
+                  </label>
+                  <label className={styles.heroEditorField}>
+                    <span>Product link</span>
+                    <input
+                      type="url"
+                      value={slide.href ?? ""}
+                      placeholder="https://"
+                      onChange={(event) =>
+                        handleSlideMetaChange(index, "href", event.target.value)
+                      }
+                    />
+                  </label>
+                  <button
+                    className="btn btn-secondary"
+                    type="button"
+                    onClick={() => handleRemoveSlide(index)}
+                  >
+                    Remove
+                  </button>
+                </div>
+              ))}
+            </div>
+          )}
         </div>
       </div>
     </section>

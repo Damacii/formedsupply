@@ -59,9 +59,14 @@ export default function Navbar() {
             )
           )}
         </nav>
-        <a className={`${styles.navCta} btn btn-primary`} href="/request-form">
-          Request a Quote
-        </a>
+        <div className={styles.navActions}>
+          <a className={`${styles.navAdmin} btn btn-secondary`} href="/#edit-site">
+            Edit Site
+          </a>
+          <a className={`${styles.navCta} btn btn-primary`} href="/request-form">
+            Request a Quote
+          </a>
+        </div>
       </div>
     </header>
   );

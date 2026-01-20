@@ -64,8 +64,16 @@
   background: var(--text);
 }
 
+.navActions {
+  display: none;
+}
+
 .navCta {
-    display: none;
+  display: inline-flex;
+}
+
+.navAdmin {
+  display: inline-flex;
 }
 
 @media (min-width: 768px) {
@@ -94,9 +102,10 @@
       letter-spacing: 0.05em;
   }
 
-  .navCta {
+  .navActions {
     display: inline-flex;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-end;
+    gap: var(--space-2);
   }
 }
