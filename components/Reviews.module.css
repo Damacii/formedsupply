@@ -1,0 +1,121 @@
+.reviews {
+  padding: var(--space-6) 0;
+  background: var(--bg);
+  border-top: 1px solid var(--accent);
+  border-bottom: 1px solid var(--accent);
+}
+
+.carousel {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.carouselTrack {
+  overflow-x: auto;
+  overflow-y: visible;
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 100%;
+  gap: var(--space-3);
+  width: 100%;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+  padding-bottom: 4px; /* Space for outline if needed */
+}
+
+.carouselTrack::-webkit-scrollbar {
+  display: none;
+}
+
+.reviewCard {
+  background: #FFFFFF;
+  border-radius: 0;
+  padding: var(--space-4);
+  border: 1px solid var(--accent);
+  box-shadow: 4px 4px 0 rgba(17, 17, 17, 0.05);
+  scroll-snap-align: start;
+  display: flex;
+  flex-direction: column;
+  min-height: 260px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.reviewCard:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0 rgba(17, 17, 17, 0.1);
+  border-color: #111;
+}
+
+.reviewCard p {
+  color: var(--muted);
+  margin: var(--space-3) 0;
+  font-size: 1rem;
+  font-style: italic;
+}
+
+.stars {
+  letter-spacing: 0.1em;
+  color: #111;
+  font-size: 0.8rem;
+}
+
+.reviewer {
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--text);
+  font-size: 0.85rem;
+  letter-spacing: 0.05em;
+}
+
+.reviewFooter {
+  margin-top: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+  font-size: 0.8rem;
+  color: var(--muted);
+  text-transform: uppercase;
+}
+
+.reviewSource {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-weight: 600;
+}
+
+.carouselDots {
+  display: flex;
+  justify-content: center;
+  gap: 0.6rem;
+  margin-top: var(--space-4);
+}
+
+.carouselDots button {
+  width: 10px;
+  height: 10px;
+  border-radius: 0; /* Square dots */
+  border: 1px solid #111;
+  background: transparent;
+  cursor: pointer;
+}
+
+.carouselDots button[aria-current="true"] {
+  background: #111;
+}
+
+@media (min-width: 768px) {
+  .carouselTrack {
+    grid-auto-columns: calc(100% / 2 - 0.75rem);
+  }
+}
+
+@media (min-width: 1024px) {
+  .carouselTrack {
+    grid-auto-columns: calc(100% / 3 - 1rem);
+  }
+}

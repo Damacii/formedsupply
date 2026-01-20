@@ -1,0 +1,194 @@
+/* [project]/components/ProductsPage.module.css [app-client] (css) */
+.ProductsPage-module__0ctMtq__page {
+  padding-bottom: var(--space-8);
+  background-color: var(--bg);
+}
+
+.ProductsPage-module__0ctMtq__section {
+  padding: var(--space-6) 0;
+  border-bottom: 1px solid var(--accent);
+}
+
+.ProductsPage-module__0ctMtq__sectionHeader {
+  margin-bottom: var(--space-4);
+  justify-content: space-between;
+  align-items: flex-end;
+  display: flex;
+}
+
+.ProductsPage-module__0ctMtq__sectionHeader h2 {
+  text-transform: uppercase;
+  letter-spacing: -.02em;
+  margin: 0;
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 800;
+}
+
+.ProductsPage-module__0ctMtq__grid {
+  gap: var(--space-4);
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  display: grid;
+}
+
+.ProductsPage-module__0ctMtq__card {
+  border: 1px solid var(--accent);
+  background: #fff;
+  border-radius: 0;
+  flex-direction: column;
+  height: 100%;
+  padding: 0;
+  transition: all .2s;
+  display: flex;
+  position: relative;
+}
+
+.ProductsPage-module__0ctMtq__card:hover {
+  z-index: 10;
+  border-color: #111;
+  transform: translate(-2px, -2px);
+  box-shadow: 8px 8px #1111111a;
+}
+
+.ProductsPage-module__0ctMtq__mediaFrame {
+  border-bottom: 1px solid var(--accent);
+  background: #f4f4f2;
+  border-radius: 0;
+  width: 100%;
+  position: relative;
+}
+
+.ProductsPage-module__0ctMtq__card:hover .ProductsPage-module__0ctMtq__mediaFrame {
+  border-bottom-color: #111;
+}
+
+.ProductsPage-module__0ctMtq__cardMedia {
+  aspect-ratio: 1;
+  border-radius: 0;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+.ProductsPage-module__0ctMtq__mediaPrimary, .ProductsPage-module__0ctMtq__mediaHover {
+  object-fit: cover;
+  mix-blend-mode: multiply;
+  width: 100%;
+  height: 100%;
+  padding: 1rem;
+  transition: opacity .2s;
+  display: block;
+  position: absolute;
+  inset: 0;
+}
+
+.ProductsPage-module__0ctMtq__mediaPrimary {
+  opacity: 1;
+}
+
+.ProductsPage-module__0ctMtq__mediaHover {
+  opacity: 0;
+}
+
+.ProductsPage-module__0ctMtq__card:hover .ProductsPage-module__0ctMtq__mediaHover {
+  opacity: 1;
+}
+
+.ProductsPage-module__0ctMtq__card:hover .ProductsPage-module__0ctMtq__mediaPrimary {
+  opacity: 0;
+}
+
+.ProductsPage-module__0ctMtq__mediaPlaceholder {
+  background-color: #f0f0f0;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  display: flex;
+}
+
+.ProductsPage-module__0ctMtq__mediaPlaceholder:after {
+  content: "NO IMAGE";
+  color: #ccc;
+  font-size: .8rem;
+  font-weight: 700;
+}
+
+.ProductsPage-module__0ctMtq__cardBody {
+  padding: var(--space-3);
+  flex-direction: column;
+  flex-grow: 1;
+  gap: .5rem;
+  display: flex;
+}
+
+.ProductsPage-module__0ctMtq__tag {
+  display: none;
+}
+
+.ProductsPage-module__0ctMtq__card h3 {
+  text-transform: uppercase;
+  letter-spacing: .02em;
+  color: #111;
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.ProductsPage-module__0ctMtq__subtitle {
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: .05em;
+  margin: 0 0 auto;
+  font-size: .9rem;
+}
+
+.ProductsPage-module__0ctMtq__actions {
+  grid-template-columns: 1fr 1fr;
+  gap: .5rem;
+  margin-top: 1rem;
+  display: grid;
+}
+
+.ProductsPage-module__0ctMtq__viewLink, .ProductsPage-module__0ctMtq__primaryLink {
+  text-transform: uppercase;
+  letter-spacing: .05em;
+  text-align: center;
+  border-radius: 0;
+  justify-content: center;
+  align-items: center;
+  padding: .6rem .5rem;
+  font-size: .8rem;
+  font-weight: 700;
+  transition: all .2s;
+  display: inline-flex;
+}
+
+.ProductsPage-module__0ctMtq__viewLink {
+  color: #111;
+  background: none;
+  border: 1px solid #ccc;
+}
+
+.ProductsPage-module__0ctMtq__viewLink:hover {
+  background: #f9f9f9;
+  border-color: #111;
+}
+
+.ProductsPage-module__0ctMtq__primaryLink {
+  color: #fff;
+  background: #111;
+  border: 1px solid #111;
+}
+
+.ProductsPage-module__0ctMtq__primaryLink:hover {
+  color: #fff;
+  background: #333;
+}
+
+.ProductsPage-module__0ctMtq__empty {
+  color: var(--muted);
+  margin-top: var(--space-2);
+  font-style: italic;
+}
+
+/*# sourceMappingURL=components_ProductsPage_module_9fc0c6c7.css.map*/

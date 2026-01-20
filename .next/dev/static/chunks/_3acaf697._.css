@@ -1,0 +1,261 @@
+/* [project]/app/admin/products/new/AdminProducts.module.css [app-client] (css) */
+.AdminProducts-module__xCpSqq__page {
+  padding: var(--space-6) 0 var(--space-6);
+}
+
+.AdminProducts-module__xCpSqq__header {
+  margin-bottom: var(--space-4);
+}
+
+.AdminProducts-module__xCpSqq__headerRow {
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-2);
+  display: flex;
+}
+
+.AdminProducts-module__xCpSqq__signOut {
+  border: 1px solid var(--accent);
+  cursor: pointer;
+  background: none;
+  border-radius: 999px;
+  padding: .4rem .9rem;
+  font-size: .9rem;
+}
+
+.AdminProducts-module__xCpSqq__header h1 {
+  margin-bottom: .5rem;
+  font-size: clamp(2rem, 4vw, 2.8rem);
+}
+
+.AdminProducts-module__xCpSqq__header p {
+  color: var(--muted);
+}
+
+.AdminProducts-module__xCpSqq__form {
+  gap: var(--space-3);
+  display: grid;
+}
+
+.AdminProducts-module__xCpSqq__grid {
+  gap: var(--space-2);
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  display: grid;
+}
+
+.AdminProducts-module__xCpSqq__fieldLabel {
+  color: var(--text);
+  gap: .4rem;
+  font-weight: 500;
+  display: grid;
+}
+
+.AdminProducts-module__xCpSqq__fieldInput, .AdminProducts-module__xCpSqq__fieldTextarea {
+  border: 1px solid var(--accent);
+  background: #fff;
+  border-radius: 10px;
+  padding: .65rem .8rem;
+}
+
+.AdminProducts-module__xCpSqq__fieldInput[multiple] {
+  min-height: 120px;
+}
+
+.AdminProducts-module__xCpSqq__multiSelect {
+  outline: none;
+  position: relative;
+}
+
+.AdminProducts-module__xCpSqq__multiSelectToggle {
+  text-align: left;
+  border: 1px solid var(--accent);
+  width: 100%;
+  font: inherit;
+  cursor: pointer;
+  background: #fff;
+  border-radius: 10px;
+  padding: .65rem .8rem;
+}
+
+.AdminProducts-module__xCpSqq__multiSelectPanel {
+  border: 1px solid var(--accent);
+  z-index: 10;
+  background: #fff;
+  border-radius: 10px;
+  gap: .4rem;
+  padding: .6rem;
+  display: grid;
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  right: 0;
+  box-shadow: 0 12px 24px #11111114;
+}
+
+.AdminProducts-module__xCpSqq__multiSelectOption {
+  align-items: center;
+  gap: .4rem;
+  font-size: .9rem;
+  display: inline-flex;
+}
+
+.AdminProducts-module__xCpSqq__multiSelectOption input {
+  accent-color: #111;
+}
+
+.AdminProducts-module__xCpSqq__fieldTextarea {
+  resize: vertical;
+  min-height: 90px;
+}
+
+.AdminProducts-module__xCpSqq__helperText {
+  color: var(--muted);
+  margin-top: .35rem;
+  font-size: .85rem;
+}
+
+.AdminProducts-module__xCpSqq__fullWidth {
+  grid-column: 1 / -1;
+}
+
+.AdminProducts-module__xCpSqq__checkboxRow {
+  grid-column: 1 / -1;
+  align-items: center;
+  gap: .6rem;
+  font-weight: 500;
+  display: inline-flex;
+}
+
+.AdminProducts-module__xCpSqq__checkboxGroup {
+  flex-wrap: wrap;
+  gap: .5rem;
+  display: flex;
+}
+
+.AdminProducts-module__xCpSqq__checkboxChip {
+  border: 1px solid var(--accent);
+  background: #fff;
+  border-radius: 999px;
+  align-items: center;
+  gap: .4rem;
+  padding: .4rem .8rem;
+  font-size: .85rem;
+  display: inline-flex;
+}
+
+.AdminProducts-module__xCpSqq__checkboxChip input {
+  accent-color: #111;
+}
+
+.AdminProducts-module__xCpSqq__checkboxInput {
+  width: 16px;
+  height: 16px;
+}
+
+.AdminProducts-module__xCpSqq__success {
+  color: #1f4d2c;
+  background: #eef6f0;
+  border: 1px solid #cde7d4;
+  border-radius: 12px;
+  padding: .75rem 1rem;
+}
+
+.AdminProducts-module__xCpSqq__error {
+  color: #7a1f1f;
+  background: #fcecec;
+  border: 1px solid #f2c7c7;
+  border-radius: 12px;
+  padding: .75rem 1rem;
+}
+
+.AdminProducts-module__xCpSqq__imageGrid {
+  grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
+  gap: .8rem;
+  max-width: 480px;
+  display: grid;
+}
+
+.AdminProducts-module__xCpSqq__imageThumb {
+  border: 1px solid var(--accent);
+  aspect-ratio: 1;
+  background: #fff;
+  border-radius: 12px;
+  max-width: 120px;
+  overflow: hidden;
+}
+
+.AdminProducts-module__xCpSqq__imageThumb img {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* [project]/components/AdminLoginPrompt.module.css [app-client] (css) */
+.AdminLoginPrompt-module__X4nhdq__page {
+  padding: var(--space-6) 0;
+}
+
+.AdminLoginPrompt-module__X4nhdq__card {
+  border: 1px solid var(--accent);
+  border-radius: var(--radius-md);
+  background: var(--card);
+  max-width: 520px;
+  padding: var(--space-4);
+  box-shadow: var(--shadow);
+}
+
+.AdminLoginPrompt-module__X4nhdq__card h1 {
+  margin-bottom: .75rem;
+  font-size: 1.8rem;
+}
+
+.AdminLoginPrompt-module__X4nhdq__card p {
+  color: var(--muted);
+  margin-bottom: 1.5rem;
+}
+
+.AdminLoginPrompt-module__X4nhdq__modeToggle {
+  margin-bottom: var(--space-3);
+  gap: .5rem;
+  display: inline-flex;
+}
+
+.AdminLoginPrompt-module__X4nhdq__modeButton, .AdminLoginPrompt-module__X4nhdq__modeActive {
+  border: 1px solid var(--accent);
+  cursor: pointer;
+  background: none;
+  border-radius: 999px;
+  padding: .35rem .9rem;
+  font-size: .9rem;
+}
+
+.AdminLoginPrompt-module__X4nhdq__modeActive {
+  background: var(--text);
+  color: var(--bg);
+  border-color: var(--text);
+}
+
+.AdminLoginPrompt-module__X4nhdq__form {
+  gap: var(--space-2);
+  display: grid;
+}
+
+.AdminLoginPrompt-module__X4nhdq__form label {
+  gap: .4rem;
+  font-weight: 500;
+  display: grid;
+}
+
+.AdminLoginPrompt-module__X4nhdq__form input {
+  border: 1px solid var(--accent);
+  background: #fff;
+  border-radius: 10px;
+  padding: .7rem .8rem;
+}
+
+.AdminLoginPrompt-module__X4nhdq__status {
+  color: var(--muted);
+}
+
+/*# sourceMappingURL=_3acaf697._.css.map*/

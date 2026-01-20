@@ -1,0 +1,6 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 1, "column": 0}, "map": {"version":3,"sources":["turbopack:///[project]/components/Lead.module.css"],"sourcesContent":[".lead {\n  padding: var(--space-5) 0;\n}\n\n.leadGrid {\n  display: grid;\n  gap: var(--space-3);\n  align-items: center;\n}\n\n.leadCopy p {\n  color: var(--muted);\n}\n\n.leadForm {\n  display: grid;\n  gap: var(--space-2);\n}\n\n.formRow {\n  display: grid;\n  gap: var(--space-2);\n}\n\n.leadForm input,\n.leadForm textarea {\n  padding: 0.9rem 1rem;\n  border-radius: 16px;\n  border: 1px solid var(--accent);\n  background: #fff;\n  font: inherit;\n}\n\n.formNote {\n  color: var(--muted);\n  min-height: 1.2rem;\n}\n\n@media (min-width: 768px) {\n  .leadGrid {\n    grid-template-columns: 1.2fr 1fr;\n  }\n\n  .formRow {\n    grid-template-columns: repeat(2, minmax(0, 1fr));\n  }\n}\n"],"names":[],"mappings":"AAAA;;;;AAIA;;;;;;AAMA;;;;AAIA;;;;;AAUA;;;;;;;;AASA;;;;;AAKA;EACE;;;;EAIA"}}]
+}

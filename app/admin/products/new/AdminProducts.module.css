@@ -1,0 +1,192 @@
+.page {
+  padding: var(--space-6) 0 var(--space-6);
+}
+
+.header {
+  margin-bottom: var(--space-4);
+}
+
+.headerRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+}
+
+.signOut {
+  padding: 0.4rem 0.9rem;
+  border-radius: 999px;
+  border: 1px solid var(--accent);
+  background: transparent;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.header h1 {
+  font-size: clamp(2rem, 4vw, 2.8rem);
+  margin-bottom: 0.5rem;
+}
+
+.header p {
+  color: var(--muted);
+}
+
+.form {
+  display: grid;
+  gap: var(--space-3);
+}
+
+.grid {
+  display: grid;
+  gap: var(--space-2);
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
+.fieldLabel {
+  display: grid;
+  gap: 0.4rem;
+  font-weight: 500;
+  color: var(--text);
+}
+
+.fieldInput,
+.fieldTextarea {
+  padding: 0.65rem 0.8rem;
+  border-radius: 10px;
+  border: 1px solid var(--accent);
+  background: #ffffff;
+}
+
+.fieldInput[multiple] {
+  min-height: 120px;
+}
+
+.multiSelect {
+  position: relative;
+  outline: none;
+}
+
+.multiSelectToggle {
+  width: 100%;
+  text-align: left;
+  padding: 0.65rem 0.8rem;
+  border-radius: 10px;
+  border: 1px solid var(--accent);
+  background: #ffffff;
+  font: inherit;
+  cursor: pointer;
+}
+
+.multiSelectPanel {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  right: 0;
+  background: #ffffff;
+  border: 1px solid var(--accent);
+  border-radius: 10px;
+  padding: 0.6rem;
+  display: grid;
+  gap: 0.4rem;
+  z-index: 10;
+  box-shadow: 0 12px 24px rgba(17, 17, 17, 0.08);
+}
+
+.multiSelectOption {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.9rem;
+}
+
+.multiSelectOption input {
+  accent-color: #111111;
+}
+
+.fieldTextarea {
+  min-height: 90px;
+  resize: vertical;
+}
+
+.helperText {
+  font-size: 0.85rem;
+  color: var(--muted);
+  margin-top: 0.35rem;
+}
+
+.fullWidth {
+  grid-column: 1 / -1;
+}
+
+.checkboxRow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-weight: 500;
+  grid-column: 1 / -1;
+}
+
+.checkboxGroup {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.checkboxChip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.4rem 0.8rem;
+  border-radius: 999px;
+  border: 1px solid var(--accent);
+  background: #ffffff;
+  font-size: 0.85rem;
+}
+
+.checkboxChip input {
+  accent-color: #111111;
+}
+
+.checkboxInput {
+  width: 16px;
+  height: 16px;
+}
+
+.success {
+  padding: 0.75rem 1rem;
+  border-radius: 12px;
+  background: #eef6f0;
+  color: #1f4d2c;
+  border: 1px solid #cde7d4;
+}
+
+.error {
+  padding: 0.75rem 1rem;
+  border-radius: 12px;
+  background: #fcecec;
+  color: #7a1f1f;
+  border: 1px solid #f2c7c7;
+}
+
+.imageGrid {
+  display: grid;
+  gap: 0.8rem;
+  grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
+  max-width: 480px;
+}
+
+.imageThumb {
+  border: 1px solid var(--accent);
+  border-radius: 12px;
+  overflow: hidden;
+  background: #ffffff;
+  aspect-ratio: 1 / 1;
+  max-width: 120px;
+}
+
+.imageThumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}

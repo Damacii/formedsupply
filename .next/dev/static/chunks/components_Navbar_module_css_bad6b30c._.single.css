@@ -1,0 +1,103 @@
+/* [project]/components/Navbar.module.css [app-client] (css) */
+.Navbar-module__nuAbfa__siteHeader {
+  background: var(--bg);
+  border-bottom: 1px solid var(--accent);
+  z-index: 100;
+  padding: 1.5rem 0;
+  position: sticky;
+  top: 0;
+}
+
+.Navbar-module__nuAbfa__siteHeader[data-scrolled="true"] {
+  background: var(--bg);
+  border-bottom: 1px solid #111;
+}
+
+.Navbar-module__nuAbfa__headerInner {
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-2);
+  display: flex;
+}
+
+.Navbar-module__nuAbfa__logoWrap {
+  align-items: center;
+  display: inline-flex;
+}
+
+.Navbar-module__nuAbfa__logoImage {
+  width: auto;
+  height: 44px;
+  display: block;
+}
+
+.Navbar-module__nuAbfa__logoText {
+  text-transform: uppercase;
+  letter-spacing: -.05em;
+  color: var(--text);
+  font-size: 1.5rem;
+  font-weight: 800;
+}
+
+.Navbar-module__nuAbfa__mainNav {
+  display: none;
+}
+
+.Navbar-module__nuAbfa__navToggle {
+  border: 2px solid var(--text);
+  cursor: pointer;
+  background: none;
+  border-radius: 0;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  width: 48px;
+  height: 48px;
+  display: inline-flex;
+}
+
+.Navbar-module__nuAbfa__navToggleBar {
+  background: var(--text);
+  width: 24px;
+  height: 2px;
+}
+
+.Navbar-module__nuAbfa__navCta {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .Navbar-module__nuAbfa__headerInner {
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    display: grid;
+  }
+
+  .Navbar-module__nuAbfa__navToggle {
+    display: none;
+  }
+
+  .Navbar-module__nuAbfa__mainNav {
+    justify-content: center;
+    align-items: center;
+    gap: var(--space-4);
+    flex-direction: row;
+    display: flex;
+  }
+
+  .Navbar-module__nuAbfa__mainNav a {
+    text-transform: uppercase;
+    letter-spacing: .05em;
+    font-size: .9rem;
+    font-weight: 600;
+  }
+
+  .Navbar-module__nuAbfa__navCta {
+    justify-content: center;
+    align-items: center;
+    display: inline-flex;
+  }
+}
+
+/*# sourceMappingURL=components_Navbar_module_css_bad6b30c._.single.css.map*/

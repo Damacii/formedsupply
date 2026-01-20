@@ -1,0 +1,62 @@
+.trusted {
+  padding: var(--space-5) 0 var(--space-4);
+  border-bottom: 1px solid var(--accent);
+}
+
+.logoMarquee {
+  position: relative;
+  overflow: hidden;
+  border-radius: 0;
+  padding: var(--space-2) 0;
+  background: var(--bg); /* Match bg */
+  border-top: 1px solid var(--accent);
+  border-bottom: 1px solid var(--accent);
+}
+
+.logoMarquee::before,
+.logoMarquee::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 80px;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Remove gradient fades for a harder cut-off look, or keep minimal */
+.logoMarquee::before {
+  left: 0;
+  background: linear-gradient(90deg, var(--bg) 0%, rgba(244, 244, 242, 0) 100%);
+}
+
+.logoMarquee::after {
+  right: 0;
+  background: linear-gradient(270deg, var(--bg) 0%, rgba(244, 244, 242, 0) 100%);
+}
+
+.logoTrack {
+  display: flex;
+  gap: var(--space-4); /* Increased gap */
+  align-items: center;
+  width: max-content;
+  color: var(--muted);
+  animation: marquee 30s linear infinite;
+}
+
+.logoTrack svg {
+  width: 140px;
+  height: auto;
+  flex-shrink: 0;
+  filter: grayscale(100%); /* Force B&W */
+  opacity: 0.8;
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}

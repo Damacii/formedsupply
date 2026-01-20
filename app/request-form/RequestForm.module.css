@@ -1,0 +1,413 @@
+.page {
+  padding: var(--space-6) 0 var(--space-8);
+  background-color: var(--color-off-white, #F4F4F2);
+}
+
+.layout {
+  display: grid;
+  gap: var(--space-4);
+  align-items: start;
+}
+
+.copy {
+  display: grid;
+  gap: var(--space-2);
+  max-width: 560px;
+}
+
+.copy h1 {
+  font-size: clamp(2.2rem, 4vw, 3.2rem);
+  text-transform: uppercase;
+  letter-spacing: -0.03em;
+  line-height: 1.05;
+  margin-bottom: 0;
+  font-weight: 800;
+}
+
+.copy p {
+  color: var(--color-text-light, #666);
+  font-size: 1.1rem;
+  line-height: 1.5;
+  max-width: 40ch;
+}
+
+.trustRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-top: 0.4rem;
+  padding-top: 0.8rem;
+  border-top: 1px solid rgba(17, 17, 17, 0.1);
+}
+
+.trustRow span {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.trustRow span::before {
+  content: '';
+  display: block;
+  width: 6px;
+  height: 6px;
+  background-color: currentColor;
+}
+
+.form {
+  display: grid;
+  gap: var(--space-3);
+  background: #ffffff;
+  border: 2px solid #111;
+  padding: var(--space-4);
+  /* No rounded corners for industrial feel */
+  border-radius: 0;
+  box-shadow: 8px 8px 0px rgba(17, 17, 17, 0.1); /* Hard shadow */
+}
+
+.stepHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-4);
+  padding-bottom: var(--space-3);
+  border-bottom: 2px solid #111;
+  margin-bottom: var(--space-1);
+}
+
+.stepEyebrow {
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #111;
+  margin: 0 0 0.2rem;
+}
+
+.stepHeader h2 {
+  font-size: 1.35rem;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+.stepDescription {
+  color: var(--color-text-light, #666);
+  margin: 0.2rem 0 0;
+  font-size: 0.95rem;
+}
+
+.stepper {
+  display: inline-flex;
+  gap: 4px;
+}
+
+.stepDot {
+  width: 8px;
+  height: 8px;
+  background: #E0E0DE;
+  border: 1px solid transparent;
+}
+
+.stepDotActive {
+  background: #111;
+  border-color: #111;
+}
+
+.formRow {
+  display: grid;
+  gap: var(--space-4);
+}
+
+.form label {
+  display: grid;
+  gap: 0.5rem;
+  font-weight: 600;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #111;
+}
+
+.form input,
+.form select,
+.form textarea {
+  padding: 0.8rem 1rem;
+  border-radius: 0; /* Square inputs */
+  border: 1px solid #CCC;
+  background: #fff;
+  font: inherit;
+  font-size: 1rem;
+  color: #111;
+  transition: border-color 0.2s;
+}
+
+.form input:focus,
+.form select:focus,
+.form textarea:focus {
+  outline: none;
+  border-color: #111;
+  background-color: #FAFAFA;
+}
+
+.fullWidth {
+  grid-column: 1 / -1;
+}
+
+.formNote {
+  color: #111;
+  min-height: 1.2rem;
+  font-weight: 500;
+  font-size: 0.9rem;
+  margin-top: 1rem;
+  text-align: center;
+}
+
+.helperText {
+  color: var(--color-text-light, #999);
+  font-size: 0.8rem;
+  margin-top: 0.2rem;
+  text-transform: none;
+  letter-spacing: 0;
+  font-weight: 400;
+}
+
+.groupLabel {
+  font-weight: 600;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.8rem;
+}
+
+.chipGroup {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.6rem 1rem;
+  border-radius: 0;
+  border: 1px solid #CCC;
+  background: #ffffff;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: all 0.2s;
+}
+
+.chip:hover {
+  border-color: #111;
+}
+
+.chip:has(input:checked) {
+  background-color: #111;
+  color: #FFF;
+  border-color: #111;
+}
+
+.chip input {
+  /* Hide default checkbox visually but keep accessible */
+  appearance: none;
+  width: 0;
+  height: 0;
+  margin: 0;
+  padding: 0;
+  border: none;
+}
+
+.productList {
+  display: grid;
+  gap: 0.6rem;
+  max-height: 260px;
+  overflow-y: auto;
+  padding-right: 0.3rem;
+}
+
+.productsLayout {
+  display: grid;
+  gap: var(--space-4);
+}
+
+.productsColumn {
+  display: grid;
+  gap: var(--space-3);
+}
+
+.productRow {
+  display: grid;
+  grid-template-columns: auto auto 1fr;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.4rem 0.6rem;
+  border: 1px solid #e0e0de;
+  cursor: pointer;
+}
+
+.productRowActive {
+  border-color: #111;
+}
+
+.productRow input {
+  accent-color: #111;
+}
+
+.productThumb {
+  width: 40px;
+  height: 40px;
+  background: #f4f4f2;
+  border: 1px solid #e0e0de;
+  overflow: hidden;
+}
+
+.productThumb img,
+.imagePlaceholder {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.productMeta {
+  display: grid;
+  gap: 0.1rem;
+}
+
+.productName {
+  font-weight: 700;
+  font-size: 0.95rem;
+}
+
+.productMoq {
+  color: var(--color-text-light, #666);
+  font-size: 0.8rem;
+}
+
+.selectionPanel {
+  border: 1px solid #111;
+  border-radius: 0;
+  padding: 1.5rem;
+  background: #F4F4F2;
+  margin-bottom: 2rem;
+  min-height: 140px;
+}
+
+.selectionPanel h3 {
+  margin: 0 0 1rem;
+  font-size: 1rem;
+  text-transform: uppercase;
+}
+
+.selectionList {
+  display: grid;
+  gap: 1rem;
+}
+
+.selectionItem {
+  display: grid;
+  grid-template-columns: auto 1fr auto auto;
+  align-items: center;
+  gap: 0.8rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #DDD;
+}
+
+.selectionItem:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.selectionItem p {
+  font-weight: 600;
+  margin: 0;
+}
+
+.selectionMedia {
+  width: 48px;
+  height: 48px;
+  background: #f4f4f2;
+  border: 1px solid #e0e0de;
+  overflow: hidden;
+}
+
+.selectionMedia img,
+.selectionMedia .imagePlaceholder {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.selectionInfo {
+  display: grid;
+  gap: 0.2rem;
+}
+
+.selectionItem input {
+  width: 120px;
+  text-align: center;
+}
+
+.removeButton {
+  border: 1px solid #111;
+  background: #ffffff;
+  padding: 0.4rem 0.8rem;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+}
+
+@media (min-width: 900px) {
+  .productsLayout {
+    grid-template-columns: 1.1fr 0.9fr;
+    align-items: start;
+  }
+
+  .selectionPanel {
+    min-height: 320px;
+  }
+}
+
+.formActions {
+  display: flex;
+  justify-content: flex-end; /* Align buttons to right */
+  gap: 1rem;
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid #EEE;
+}
+
+/* Button overrides for this form if global styles aren't enough */
+.formActions button {
+  border-radius: 0;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 0.8rem 2rem;
+}
+
+@media (min-width: 900px) {
+  .layout {
+    grid-template-columns: 1fr;
+    gap: var(--space-6);
+  }
+
+  .copy h1 {
+    white-space: nowrap;
+  }
+
+  .formRow {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  
+  .form {
+    padding: var(--space-6);
+  }
+}

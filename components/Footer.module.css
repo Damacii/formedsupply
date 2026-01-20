@@ -1,0 +1,112 @@
+.siteFooter {
+  padding: var(--space-6) 0 var(--space-4);
+  background: #111111;
+  color: #FFFFFF;
+}
+
+.footerGrid {
+  display: grid;
+  gap: var(--space-5);
+}
+
+.footerBrand {
+  display: grid;
+  gap: 1rem;
+}
+
+.footerLogoRow {
+  display: inline-flex;
+  align-items: center;
+}
+
+.footerLogo {
+  height: 32px;
+  width: auto;
+  display: block;
+  filter: invert(1); /* Ensure logo is white */
+}
+
+.footerWordmark {
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  font-size: 1.2rem;
+  text-transform: uppercase;
+  color: #FFF;
+}
+
+.footerSocials {
+  display: flex;
+  gap: 1rem;
+}
+
+.footerSocials a {
+  width: 40px;
+  height: 40px;
+  border-radius: 0; /* Square */
+  border: 1px solid #333;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #999;
+  transition: all 0.2s;
+  background: #000;
+}
+
+.footerSocials a:hover {
+  border-color: #FFF;
+  color: #FFF;
+}
+
+.footerSocials svg {
+  width: 18px;
+  height: 18px;
+  display: block;
+}
+
+.footerCol h3 {
+  margin-bottom: var(--space-3);
+  text-transform: uppercase;
+  font-size: 0.85rem;
+  letter-spacing: 0.1em;
+  color: #666; /* Muted header */
+  font-weight: 700;
+}
+
+.footerCol ul {
+    list-style: none;
+}
+
+.footerCol a,
+.footerCol p {
+  color: #CCC;
+  display: block;
+  margin-bottom: 0.8rem;
+  font-size: 0.95rem;
+  transition: color 0.2s;
+}
+
+.footerCol a:hover {
+  color: #FFF;
+  padding-left: 4px; /* Subtle movement */
+}
+
+.footerDivider {
+  height: 1px;
+  background: #333;
+  margin-top: var(--space-5);
+}
+
+.footerBottom {
+  text-align: center;
+  color: #555;
+  margin-top: var(--space-4);
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+@media (min-width: 900px) {
+  .footerGrid {
+    grid-template-columns: 1.5fr repeat(4, 1fr);
+  }
+}

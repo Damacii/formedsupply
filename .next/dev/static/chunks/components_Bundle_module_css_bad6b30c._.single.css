@@ -1,0 +1,92 @@
+/* [project]/components/Bundle.module.css [app-client] (css) */
+.Bundle-module__PmQ9wG__bundle {
+  padding: var(--space-6) 0;
+  border-bottom: 1px solid var(--accent);
+}
+
+.Bundle-module__PmQ9wG__bundleGrid {
+  gap: var(--space-6);
+  display: grid;
+}
+
+.Bundle-module__PmQ9wG__bundleContent h2 {
+  margin-bottom: var(--space-3);
+  text-transform: uppercase;
+  font-weight: 800;
+}
+
+.Bundle-module__PmQ9wG__bundleContent p {
+  color: var(--muted);
+  font-size: 1.1rem;
+}
+
+.Bundle-module__PmQ9wG__bundleList {
+  margin: var(--space-4) 0;
+  color: var(--text);
+  border-top: 1px solid var(--accent);
+  list-style: none;
+}
+
+.Bundle-module__PmQ9wG__bundleList li {
+  border-bottom: 1px solid var(--accent);
+  text-transform: uppercase;
+  letter-spacing: .05em;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 0;
+  font-size: .9rem;
+  font-weight: 600;
+  display: flex;
+}
+
+.Bundle-module__PmQ9wG__bundleList li:after {
+  content: "✓";
+  font-weight: 800;
+}
+
+.Bundle-module__PmQ9wG__bundleNote {
+  margin-bottom: var(--space-4);
+  color: var(--muted);
+  font-size: .9rem;
+  font-style: italic;
+}
+
+.Bundle-module__PmQ9wG__bundleVisual {
+  background: var(--bg);
+  background-image: repeating-linear-gradient(45deg, #f4f4f2 0 10px, #e0e0de 10px 20px);
+  border: 2px solid #111;
+  border-radius: 0;
+  align-content: center;
+  gap: 1rem;
+  min-height: 300px;
+  padding: 0;
+  display: grid;
+  box-shadow: 8px 8px #1111111a;
+}
+
+.Bundle-module__PmQ9wG__bundleVisual:hover {
+  transform: none;
+  box-shadow: 8px 8px #1111111a;
+}
+
+.Bundle-module__PmQ9wG__bundleBlock {
+  background: #fff;
+  border: 1px solid #111;
+  width: 80%;
+  height: 60px;
+  margin: 0 auto;
+}
+
+.Bundle-module__PmQ9wG__bundleBlockWide {
+  width: 90%;
+  height: 100px;
+}
+
+@media (min-width: 768px) {
+  .Bundle-module__PmQ9wG__bundleGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: center;
+  }
+}
+
+/*# sourceMappingURL=components_Bundle_module_css_bad6b30c._.single.css.map*/

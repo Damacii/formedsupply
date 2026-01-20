@@ -1,0 +1,91 @@
+.bundle {
+  padding: var(--space-6) 0;
+  border-bottom: 1px solid var(--accent);
+}
+
+.bundleGrid {
+  display: grid;
+  gap: var(--space-6);
+}
+
+.bundleContent h2 {
+  margin-bottom: var(--space-3);
+  text-transform: uppercase;
+  font-weight: 800;
+}
+
+.bundleContent p {
+  color: var(--muted);
+  font-size: 1.1rem;
+}
+
+.bundleList {
+  list-style: none;
+  margin: var(--space-4) 0;
+  color: var(--text);
+  border-top: 1px solid var(--accent);
+}
+
+.bundleList li {
+  padding: 1rem 0;
+  border-bottom: 1px solid var(--accent);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 0.9rem;
+  letter-spacing: 0.05em;
+}
+
+.bundleList li::after {
+  content: '✓';
+  font-weight: 800;
+}
+
+.bundleNote {
+  margin-bottom: var(--space-4);
+  color: var(--muted);
+  font-style: italic;
+  font-size: 0.9rem;
+}
+
+.bundleVisual {
+  background: var(--bg);
+  border-radius: 0;
+  padding: 0;
+  min-height: 300px;
+  display: grid;
+  gap: 1rem;
+  align-content: center;
+  border: 2px solid #111;
+  box-shadow: 8px 8px 0 rgba(17,17,17,0.1);
+  /* Use a pattern or simple block */
+  background-image: repeating-linear-gradient(45deg, #f4f4f2 0, #f4f4f2 10px, #e0e0de 10px, #e0e0de 20px);
+}
+
+.bundleVisual:hover {
+  transform: none;
+  box-shadow: 8px 8px 0 rgba(17,17,17,0.1);
+}
+
+/* Blocks can be simplified placeholders */
+.bundleBlock {
+  height: 60px;
+  background: #FFF;
+  border: 1px solid #111;
+  width: 80%;
+  margin: 0 auto;
+}
+
+.bundleBlockWide {
+  height: 100px;
+  width: 90%;
+}
+
+@media (min-width: 768px) {
+  .bundleGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: center;
+  }
+}

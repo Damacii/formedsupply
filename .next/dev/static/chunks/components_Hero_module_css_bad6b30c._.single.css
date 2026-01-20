@@ -1,0 +1,79 @@
+/* [project]/components/Hero.module.css [app-client] (css) */
+.Hero-module__Z8hQ_W__hero {
+  padding: var(--space-6) 0 var(--space-6);
+  border-bottom: 1px solid var(--accent);
+  background-color: var(--bg);
+  position: relative;
+}
+
+.Hero-module__Z8hQ_W__heroGrid {
+  gap: var(--space-6);
+  z-index: 1;
+  display: grid;
+  position: relative;
+}
+
+.Hero-module__Z8hQ_W__heroContent {
+  max-width: 800px;
+}
+
+.Hero-module__Z8hQ_W__heroContent h1 {
+  margin-bottom: var(--space-3);
+  text-transform: uppercase;
+  letter-spacing: -.03em;
+  font-size: clamp(3rem, 6vw, 5.5rem);
+  font-weight: 800;
+  line-height: .95;
+}
+
+.Hero-module__Z8hQ_W__heroSubhead {
+  color: var(--muted);
+  margin-bottom: var(--space-4);
+  max-width: 50ch;
+  font-size: 1.25rem;
+  line-height: 1.4;
+}
+
+.Hero-module__Z8hQ_W__heroActions {
+  gap: var(--space-3);
+  margin-bottom: var(--space-5);
+  flex-wrap: wrap;
+  display: flex;
+}
+
+.Hero-module__Z8hQ_W__trustRow {
+  gap: var(--space-4);
+  text-transform: uppercase;
+  color: var(--text);
+  padding-top: var(--space-3);
+  border-top: 2px solid var(--accent);
+  flex-wrap: wrap;
+  font-size: .85rem;
+  font-weight: 600;
+  display: flex;
+}
+
+.Hero-module__Z8hQ_W__trustRow span {
+  align-items: center;
+  gap: .5rem;
+  display: flex;
+}
+
+.Hero-module__Z8hQ_W__trustRow span:before {
+  content: "";
+  background: var(--text);
+  width: 6px;
+  height: 6px;
+}
+
+.Hero-module__Z8hQ_W__heroVisual {
+  display: none;
+}
+
+@media (min-width: 900px) {
+  .Hero-module__Z8hQ_W__heroGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/*# sourceMappingURL=components_Hero_module_css_bad6b30c._.single.css.map*/

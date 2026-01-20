@@ -1,0 +1,6 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 1, "column": 0}, "map": {"version":3,"sources":["turbopack:///[project]/components/Differentiators.module.css"],"sourcesContent":[".differentiators {\n  padding: var(--space-6) 0;\n  background-color: #FFFFFF; /* White section for contrast */\n}\n\n.diffGrid {\n  display: grid;\n  gap: var(--space-4);\n}\n\n.featureCard {\n  background: var(--bg);\n  border: 1px solid var(--accent);\n  border-radius: 0;\n  padding: var(--space-4);\n  box-shadow: none;\n  transition: border-color 0.2s ease;\n  height: 100%;\n  display: flex;\n  flex-direction: column;\n}\n\n.featureCard h3 {\n  margin-bottom: var(--space-2);\n  text-transform: uppercase;\n  font-size: 1.1rem;\n}\n\n.featureCard p {\n  color: var(--muted);\n  font-size: 0.95rem;\n}\n\n.featureCard:hover {\n  border-color: #111;\n}\n\n.diffVisual {\n  display: none; /* Simplify visual noise */\n}\n\n@media (min-width: 768px) {\n  .diffGrid {\n    grid-template-columns: repeat(3, minmax(0, 1fr));\n  }\n}"],"names":[],"mappings":"AAAA;;;;;AAKA;;;;;AAKA;;;;;;;;;;;;AAYA;;;;;;AAMA;;;;;AAKA;;;;AAIA;;;;AAIA;EACE"}}]
+}

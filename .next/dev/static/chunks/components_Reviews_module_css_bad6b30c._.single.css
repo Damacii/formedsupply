@@ -1,0 +1,123 @@
+/* [project]/components/Reviews.module.css [app-client] (css) */
+.Reviews-module__XcOq9a__reviews {
+  padding: var(--space-6) 0;
+  background: var(--bg);
+  border-top: 1px solid var(--accent);
+  border-bottom: 1px solid var(--accent);
+}
+
+.Reviews-module__XcOq9a__carousel {
+  align-items: center;
+  gap: var(--space-2);
+  display: flex;
+  position: relative;
+}
+
+.Reviews-module__XcOq9a__carouselTrack {
+  gap: var(--space-3);
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+  grid-auto-columns: 100%;
+  grid-auto-flow: column;
+  width: 100%;
+  padding-bottom: 4px;
+  display: grid;
+  overflow: auto visible;
+}
+
+.Reviews-module__XcOq9a__carouselTrack::-webkit-scrollbar {
+  display: none;
+}
+
+.Reviews-module__XcOq9a__reviewCard {
+  padding: var(--space-4);
+  border: 1px solid var(--accent);
+  scroll-snap-align: start;
+  background: #fff;
+  border-radius: 0;
+  flex-direction: column;
+  min-height: 260px;
+  transition: transform .2s, box-shadow .2s;
+  display: flex;
+  box-shadow: 4px 4px #1111110d;
+}
+
+.Reviews-module__XcOq9a__reviewCard:hover {
+  border-color: #111;
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px #1111111a;
+}
+
+.Reviews-module__XcOq9a__reviewCard p {
+  color: var(--muted);
+  margin: var(--space-3) 0;
+  font-size: 1rem;
+  font-style: italic;
+}
+
+.Reviews-module__XcOq9a__stars {
+  letter-spacing: .1em;
+  color: #111;
+  font-size: .8rem;
+}
+
+.Reviews-module__XcOq9a__reviewer {
+  text-transform: uppercase;
+  color: var(--text);
+  letter-spacing: .05em;
+  font-size: .85rem;
+  font-weight: 700;
+}
+
+.Reviews-module__XcOq9a__reviewFooter {
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-2);
+  color: var(--muted);
+  text-transform: uppercase;
+  margin-top: auto;
+  font-size: .8rem;
+  display: flex;
+}
+
+.Reviews-module__XcOq9a__reviewSource {
+  align-items: center;
+  gap: .4rem;
+  font-weight: 600;
+  display: inline-flex;
+}
+
+.Reviews-module__XcOq9a__carouselDots {
+  margin-top: var(--space-4);
+  justify-content: center;
+  gap: .6rem;
+  display: flex;
+}
+
+.Reviews-module__XcOq9a__carouselDots button {
+  cursor: pointer;
+  background: none;
+  border: 1px solid #111;
+  border-radius: 0;
+  width: 10px;
+  height: 10px;
+}
+
+.Reviews-module__XcOq9a__carouselDots button[aria-current="true"] {
+  background: #111;
+}
+
+@media (min-width: 768px) {
+  .Reviews-module__XcOq9a__carouselTrack {
+    grid-auto-columns: calc(50% - .75rem);
+  }
+}
+
+@media (min-width: 1024px) {
+  .Reviews-module__XcOq9a__carouselTrack {
+    grid-auto-columns: calc(33.3333% - 1rem);
+  }
+}
+
+/*# sourceMappingURL=components_Reviews_module_css_bad6b30c._.single.css.map*/

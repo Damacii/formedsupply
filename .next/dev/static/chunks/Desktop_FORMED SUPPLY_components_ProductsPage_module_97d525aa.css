@@ -1,0 +1,121 @@
+/* [project]/Desktop/FORMED SUPPLY/components/ProductsPage.module.css [app-client] (css) */
+.ProductsPage-module__IR8hbW__page {
+  padding-bottom: var(--space-6);
+}
+
+.ProductsPage-module__IR8hbW__hero {
+  padding: var(--space-6) 0 var(--space-4);
+  border-bottom: 1px solid var(--accent);
+  background: linear-gradient(160deg, #ffffffb3, #d0c7bd59);
+}
+
+.ProductsPage-module__IR8hbW__hero h1 {
+  margin-bottom: var(--space-2);
+  font-size: clamp(2.2rem, 5vw, 3.4rem);
+}
+
+.ProductsPage-module__IR8hbW__subhead {
+  color: var(--muted);
+  max-width: 56ch;
+}
+
+.ProductsPage-module__IR8hbW__section {
+  padding: var(--space-5) 0;
+}
+
+.ProductsPage-module__IR8hbW__sectionHeader {
+  margin-bottom: var(--space-3);
+}
+
+.ProductsPage-module__IR8hbW__sectionHeader h2 {
+  font-size: clamp(1.6rem, 3vw, 2.4rem);
+}
+
+.ProductsPage-module__IR8hbW__grid {
+  gap: var(--space-3);
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  display: grid;
+}
+
+.ProductsPage-module__IR8hbW__card {
+  background: var(--card);
+  border: 1px solid var(--accent);
+  border-radius: var(--radius-md);
+  padding: var(--space-3);
+  transition: transform var(--motion-medium) var(--ease), box-shadow var(--motion-medium) var(--ease);
+  flex-direction: column;
+  align-items: flex-start;
+  display: flex;
+  box-shadow: 0 8px 18px #1111110a;
+}
+
+.ProductsPage-module__IR8hbW__card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 18px 32px #1111111f;
+}
+
+.ProductsPage-module__IR8hbW__card h3 {
+  margin: var(--space-2) 0 var(--space-1);
+  font-size: 1.1rem;
+}
+
+.ProductsPage-module__IR8hbW__viewLink {
+  color: #fff;
+  background: #111;
+  border: 1px solid #111;
+  border-radius: 999px;
+  align-items: center;
+  gap: .4rem;
+  margin-top: auto;
+  padding: .4rem .9rem;
+  font-size: .95rem;
+  font-weight: 600;
+  display: inline-flex;
+}
+
+.ProductsPage-module__IR8hbW__viewLink:after {
+  content: \"→\";
+  font-size: .95rem;
+}
+
+.ProductsPage-module__IR8hbW__cardMedia {
+  border-radius: var(--radius-sm);
+  background: var(--media-primary);
+  border: 1px solid #1111111a;
+  width: 100px;
+  height: 100px;
+  position: relative;
+  overflow: hidden;
+}
+
+.ProductsPage-module__IR8hbW__mediaPrimary, .ProductsPage-module__IR8hbW__mediaHover {
+  transition: opacity var(--motion-medium) var(--ease);
+  position: absolute;
+  inset: 0;
+}
+
+.ProductsPage-module__IR8hbW__mediaPrimary {
+  background: linear-gradient(135deg, var(--media-primary), #fff);
+  opacity: 1;
+}
+
+.ProductsPage-module__IR8hbW__mediaHover {
+  background: linear-gradient(135deg, var(--media-hover), #fff);
+  opacity: 0;
+}
+
+.ProductsPage-module__IR8hbW__card:hover .ProductsPage-module__IR8hbW__mediaHover {
+  opacity: 1;
+}
+
+.ProductsPage-module__IR8hbW__card:hover .ProductsPage-module__IR8hbW__mediaPrimary {
+  opacity: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ProductsPage-module__IR8hbW__card, .ProductsPage-module__IR8hbW__mediaPrimary, .ProductsPage-module__IR8hbW__mediaHover {
+    transition: none;
+  }
+}
+
+/*# sourceMappingURL=Desktop_FORMED%20SUPPLY_components_ProductsPage_module_97d525aa.css.map*/

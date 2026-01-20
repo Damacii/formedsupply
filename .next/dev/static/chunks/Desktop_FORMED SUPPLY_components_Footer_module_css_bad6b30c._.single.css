@@ -1,0 +1,85 @@
+/* [project]/Desktop/FORMED SUPPLY/components/Footer.module.css [app-client] (css) */
+.Footer-module__sk_lKa__siteFooter {
+  padding: var(--space-5) 0 var(--space-3);
+  border-top: 1px solid var(--accent);
+  background: #f1ede9;
+}
+
+.Footer-module__sk_lKa__footerGrid {
+  gap: var(--space-4);
+  display: grid;
+}
+
+.Footer-module__sk_lKa__footerBrand {
+  gap: .75rem;
+  display: grid;
+}
+
+.Footer-module__sk_lKa__footerLogoRow {
+  align-items: center;
+  display: inline-flex;
+}
+
+.Footer-module__sk_lKa__footerLogo {
+  width: auto;
+  height: 40px;
+  display: block;
+}
+
+.Footer-module__sk_lKa__footerWordmark {
+  letter-spacing: .14em;
+  font-size: .9rem;
+  font-weight: 700;
+}
+
+.Footer-module__sk_lKa__footerSocials {
+  gap: .6rem;
+  display: flex;
+}
+
+.Footer-module__sk_lKa__footerSocials a {
+  border: 1px solid var(--accent);
+  width: 32px;
+  height: 32px;
+  color: var(--muted);
+  border-radius: 50%;
+  justify-content: center;
+  align-items: center;
+  display: inline-flex;
+}
+
+.Footer-module__sk_lKa__footerSocials svg {
+  width: 16px;
+  height: 16px;
+  display: block;
+}
+
+.Footer-module__sk_lKa__footerCol h3 {
+  margin-bottom: var(--space-1);
+}
+
+.Footer-module__sk_lKa__footerCol a, .Footer-module__sk_lKa__footerCol p {
+  color: var(--muted);
+  margin-bottom: .5rem;
+  display: block;
+}
+
+.Footer-module__sk_lKa__footerDivider {
+  background: var(--accent);
+  height: 1px;
+  margin-top: var(--space-4);
+}
+
+.Footer-module__sk_lKa__footerBottom {
+  text-align: center;
+  color: var(--muted);
+  margin-top: var(--space-3);
+}
+
+@media (min-width: 768px) {
+  .Footer-module__sk_lKa__footerGrid {
+    grid-template-columns: minmax(180px, 1.2fr) repeat(4, minmax(140px, 1fr));
+  }
+}
+
+/*# sourceMappingURL=Desktop_FORMED%20SUPPLY_components_Footer_module_css_bad6b30c._.single.css.map*/

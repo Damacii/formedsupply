@@ -1,0 +1,49 @@
+/* [project]/components/Differentiators.module.css [app-client] (css) */
+.Differentiators-module__HOH8_W__differentiators {
+  padding: var(--space-6) 0;
+  background-color: #fff;
+}
+
+.Differentiators-module__HOH8_W__diffGrid {
+  gap: var(--space-4);
+  display: grid;
+}
+
+.Differentiators-module__HOH8_W__featureCard {
+  background: var(--bg);
+  border: 1px solid var(--accent);
+  padding: var(--space-4);
+  box-shadow: none;
+  border-radius: 0;
+  flex-direction: column;
+  height: 100%;
+  transition: border-color .2s;
+  display: flex;
+}
+
+.Differentiators-module__HOH8_W__featureCard h3 {
+  margin-bottom: var(--space-2);
+  text-transform: uppercase;
+  font-size: 1.1rem;
+}
+
+.Differentiators-module__HOH8_W__featureCard p {
+  color: var(--muted);
+  font-size: .95rem;
+}
+
+.Differentiators-module__HOH8_W__featureCard:hover {
+  border-color: #111;
+}
+
+.Differentiators-module__HOH8_W__diffVisual {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .Differentiators-module__HOH8_W__diffGrid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+/*# sourceMappingURL=components_Differentiators_module_css_bad6b30c._.single.css.map*/

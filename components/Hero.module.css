@@ -1,0 +1,77 @@
+.hero {
+  position: relative;
+  padding: var(--space-6) 0 var(--space-6);
+  border-bottom: 1px solid var(--accent);
+  background-color: var(--bg);
+}
+
+.heroGrid {
+  position: relative;
+  display: grid;
+  gap: var(--space-6);
+  z-index: 1;
+}
+
+.heroContent {
+  max-width: 800px;
+}
+
+.heroContent h1 {
+  font-size: clamp(3rem, 6vw, 5.5rem);
+  line-height: 0.95;
+  margin-bottom: var(--space-3);
+  text-transform: uppercase;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+}
+
+.heroSubhead {
+  font-size: 1.25rem;
+  color: var(--muted);
+  margin-bottom: var(--space-4);
+  max-width: 50ch;
+  line-height: 1.4;
+}
+
+.heroActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  margin-bottom: var(--space-5);
+}
+
+.trustRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-4);
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: var(--text);
+  padding-top: var(--space-3);
+  border-top: 2px solid var(--accent);
+}
+
+.trustRow span {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.trustRow span::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  background: var(--text);
+}
+
+/* Replaced soft visual with industrial block or grid */
+.heroVisual {
+  display: none; /* Hide for now, focusing on typography as requested "clean B2B" usually typography heavy */
+}
+
+@media (min-width: 900px) {
+  .heroGrid {
+    grid-template-columns: 1fr; /* Single column for maximum impact of text */
+  }
+}

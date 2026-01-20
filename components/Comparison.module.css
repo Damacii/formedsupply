@@ -1,0 +1,71 @@
+.comparison {
+  padding: var(--space-6) 0;
+  background: var(--bg);
+}
+
+.tableWrap {
+  overflow-x: auto;
+  border: 2px solid #111;
+  border-radius: 0;
+  background: var(--card);
+  box-shadow: 8px 8px 0 rgba(17,17,17,0.1);
+}
+
+.comparisonTable {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 640px;
+}
+
+.comparisonTable th,
+.comparisonTable td {
+  padding: 1.5rem;
+  border-bottom: 1px solid #111;
+  border-right: 1px solid #111;
+  text-align: left;
+}
+
+.comparisonTable th:last-child,
+.comparisonTable td:last-child {
+  border-right: none;
+}
+
+.comparisonTable th {
+  background: #f4f4f2;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-size: 0.9rem;
+}
+
+/* Specific styling for Formed Supply Column if it's the 2nd one */
+.comparisonTable th:nth-child(2),
+.comparisonTable td:nth-child(2) {
+  background: #111;
+  color: #FFF;
+  text-align: center;
+  border-right: 1px solid #333;
+}
+
+.comparisonTable th:nth-child(2) {
+  border-radius: 0;
+}
+
+.comparisonTable td:nth-child(2) {
+  border-bottom: 1px solid #333;
+}
+
+.comparisonTable tbody tr:last-child td {
+  border-bottom: none;
+}
+
+/* Center align other columns */
+.comparisonTable th:nth-child(n + 3),
+.comparisonTable td:nth-child(n + 3) {
+  text-align: center;
+}
+
+.comparisonCta {
+  margin-top: var(--space-5);
+  text-align: center;
+}

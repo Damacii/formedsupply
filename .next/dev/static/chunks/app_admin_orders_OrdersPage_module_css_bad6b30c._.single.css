@@ -1,0 +1,108 @@
+/* [project]/app/admin/orders/OrdersPage.module.css [app-client] (css) */
+.OrdersPage-module__YxSxva__page {
+  padding: var(--space-6) 0 var(--space-6);
+}
+
+.OrdersPage-module__YxSxva__header {
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: var(--space-3);
+  margin-bottom: var(--space-4);
+  flex-wrap: wrap;
+  display: flex;
+}
+
+.OrdersPage-module__YxSxva__eyebrow {
+  text-transform: uppercase;
+  letter-spacing: .12em;
+  color: var(--muted);
+  margin-bottom: .4rem;
+  font-size: .75rem;
+}
+
+.OrdersPage-module__YxSxva__header h1 {
+  margin-bottom: .4rem;
+  font-size: clamp(2rem, 4vw, 2.8rem);
+}
+
+.OrdersPage-module__YxSxva__subhead {
+  color: var(--muted);
+  max-width: 46ch;
+}
+
+.OrdersPage-module__YxSxva__headerActions {
+  flex-wrap: wrap;
+  gap: .8rem;
+  display: inline-flex;
+}
+
+.OrdersPage-module__YxSxva__panel {
+  padding: var(--space-4);
+  background: #fff;
+  border: 1px solid #11111114;
+  border-radius: 24px;
+  box-shadow: 0 12px 28px #11111114;
+}
+
+.OrdersPage-module__YxSxva__panelHeader {
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-2);
+  margin-bottom: var(--space-2);
+  display: flex;
+}
+
+.OrdersPage-module__YxSxva__countBadge {
+  border: 1px solid #11111126;
+  border-radius: 999px;
+  padding: .25rem .65rem;
+  font-size: .85rem;
+  font-weight: 600;
+}
+
+.OrdersPage-module__YxSxva__empty {
+  color: var(--muted);
+  margin: 0;
+}
+
+.OrdersPage-module__YxSxva__orderCard {
+  padding: var(--space-3);
+  background: #fff;
+  border: 1px solid #11111114;
+  border-radius: 18px;
+  gap: .4rem;
+  display: grid;
+}
+
+.OrdersPage-module__YxSxva__orderHeader {
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-2);
+  display: flex;
+}
+
+.OrdersPage-module__YxSxva__orderTitle {
+  margin: 0 0 .2rem;
+  font-weight: 600;
+}
+
+.OrdersPage-module__YxSxva__orderMeta {
+  color: var(--muted);
+  margin: 0;
+  font-size: .9rem;
+}
+
+.OrdersPage-module__YxSxva__orderStatus {
+  color: #fff;
+  background: #1f4d2c;
+  border-radius: 999px;
+  padding: .25rem .7rem;
+  font-size: .8rem;
+}
+
+.OrdersPage-module__YxSxva__orderDetails {
+  color: var(--text);
+  margin: 0;
+}
+
+/*# sourceMappingURL=app_admin_orders_OrdersPage_module_css_bad6b30c._.single.css.map*/

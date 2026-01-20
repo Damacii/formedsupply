@@ -1,0 +1,249 @@
+.page {
+  padding: var(--space-2) 0 var(--space-8);
+  background: var(--bg);
+}
+
+.header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--space-4);
+  margin-bottom: var(--space-6);
+  padding-bottom: var(--space-4);
+  border-bottom: 2px solid #111;
+}
+
+.header h1 {
+  font-size: clamp(2.5rem, 4vw, 3.5rem);
+  margin-bottom: 0.5rem;
+  text-transform: uppercase;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+.header p {
+  color: var(--muted);
+  font-size: 1.1rem;
+}
+
+.headerActions {
+  display: inline-flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.listHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--space-4);
+  gap: var(--space-3);
+  flex-wrap: wrap;
+}
+
+.listHeader h2 {
+  font-size: 1.5rem;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+.cards {
+  display: grid;
+  gap: var(--space-4);
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+}
+
+.card {
+  background: #ffffff;
+  border: 1px solid var(--accent);
+  border-radius: 0;
+  padding: 0;
+  box-shadow: none;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  transition: all 0.2s ease;
+}
+
+.card:hover {
+  border-color: #111;
+  box-shadow: 8px 8px 0 rgba(17,17,17,0.1);
+  transform: translate(-2px, -2px);
+  z-index: 5;
+}
+
+.mediaFrame {
+  position: relative;
+  border-radius: 0;
+  width: 100%;
+  border-bottom: 1px solid var(--accent);
+  background: #f4f4f2;
+}
+
+.card:hover .mediaFrame {
+  border-bottom-color: #111;
+}
+
+.cardMedia {
+  position: relative;
+  border-radius: 0;
+  overflow: hidden;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+}
+
+.cardMedia img,
+.imagePlaceholder {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: contain;
+  padding: 1rem;
+  mix-blend-mode: multiply;
+}
+
+.imagePlaceholder {
+  background: #F0F0F0;
+  padding: 0;
+}
+
+.cardBody {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: var(--space-3);
+  flex-grow: 1;
+}
+
+.cardHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.cardBody h3 {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.meta {
+  color: var(--muted);
+  margin: 0;
+  font-size: 0.85rem;
+  font-family: monospace;
+}
+
+.subtitle {
+  color: #111;
+  margin: 0;
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: auto;
+}
+
+.cardActions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1px;
+  background: var(--accent);
+  border-top: 1px solid var(--accent);
+}
+
+.card:hover .cardActions {
+  background: #111;
+  border-top-color: #111;
+}
+
+.cardActions > * {
+  border-radius: 0;
+  border: none;
+  background: #FFF;
+  padding: 0.8rem;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: #111;
+  cursor: pointer;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cardActions > *:hover {
+  background: #f4f4f2;
+}
+
+/* Full width for delete if needed, or grid layout tweaks */
+.cardActions button:last-child {
+  grid-column: 1 / -1;
+  color: #c00;
+}
+
+.details {
+  display: grid;
+  gap: 0.2rem;
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid #EEE;
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+.active,
+.inactive {
+  font-size: 0.75rem;
+  padding: 0.2rem 0.5rem;
+  border-radius: 0;
+  border: 1px solid #111;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+.active {
+  background: #111;
+  color: #FFF;
+}
+
+.inactive {
+  background: transparent;
+  color: #999;
+  border-color: #CCC;
+}
+
+.empty {
+  color: var(--muted);
+  font-style: italic;
+}
+
+.filters {
+  display: inline-flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.searchInput,
+.selectInput {
+  padding: 0.6rem 1rem;
+  border-radius: 0;
+  border: 1px solid #CCC;
+  background: #ffffff;
+  font-size: 0.9rem;
+  height: 44px;
+}
+
+.selectInput:focus,
+.searchInput:focus {
+  border-color: #111;
+  outline: none;
+}
+
+.searchInput {
+  min-width: 240px;
+}

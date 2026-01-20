@@ -1,0 +1,68 @@
+/* [project]/components/AdminLoginPrompt.module.css [app-client] (css) */
+.AdminLoginPrompt-module__X4nhdq__page {
+  padding: var(--space-6) 0;
+}
+
+.AdminLoginPrompt-module__X4nhdq__card {
+  border: 1px solid var(--accent);
+  border-radius: var(--radius-md);
+  background: var(--card);
+  max-width: 520px;
+  padding: var(--space-4);
+  box-shadow: var(--shadow);
+}
+
+.AdminLoginPrompt-module__X4nhdq__card h1 {
+  margin-bottom: .75rem;
+  font-size: 1.8rem;
+}
+
+.AdminLoginPrompt-module__X4nhdq__card p {
+  color: var(--muted);
+  margin-bottom: 1.5rem;
+}
+
+.AdminLoginPrompt-module__X4nhdq__modeToggle {
+  margin-bottom: var(--space-3);
+  gap: .5rem;
+  display: inline-flex;
+}
+
+.AdminLoginPrompt-module__X4nhdq__modeButton, .AdminLoginPrompt-module__X4nhdq__modeActive {
+  border: 1px solid var(--accent);
+  cursor: pointer;
+  background: none;
+  border-radius: 999px;
+  padding: .35rem .9rem;
+  font-size: .9rem;
+}
+
+.AdminLoginPrompt-module__X4nhdq__modeActive {
+  background: var(--text);
+  color: var(--bg);
+  border-color: var(--text);
+}
+
+.AdminLoginPrompt-module__X4nhdq__form {
+  gap: var(--space-2);
+  display: grid;
+}
+
+.AdminLoginPrompt-module__X4nhdq__form label {
+  gap: .4rem;
+  font-weight: 500;
+  display: grid;
+}
+
+.AdminLoginPrompt-module__X4nhdq__form input {
+  border: 1px solid var(--accent);
+  background: #fff;
+  border-radius: 10px;
+  padding: .7rem .8rem;
+}
+
+.AdminLoginPrompt-module__X4nhdq__status {
+  color: var(--muted);
+}
+
+/*# sourceMappingURL=components_AdminLoginPrompt_module_css_bad6b30c._.single.css.map*/

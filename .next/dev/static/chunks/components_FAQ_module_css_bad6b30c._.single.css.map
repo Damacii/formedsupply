@@ -1,0 +1,6 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 1, "column": 0}, "map": {"version":3,"sources":["turbopack:///[project]/components/FAQ.module.css"],"sourcesContent":[".faq {\n  padding: var(--space-6) 0 var(--space-8);\n  border-top: 1px solid var(--accent);\n}\n\n.faqList {\n  display: grid;\n  gap: var(--space-3);\n  max-width: 800px;\n  margin: 0 auto;\n}\n\n.faqItem {\n  background: var(--bg);\n  border-radius: 0;\n  border: 1px solid var(--accent);\n  padding: 0;\n  transition: border-color 0.2s;\n}\n\n.faqItem[open] {\n  border-color: #111;\n  background: #FFF;\n}\n\n.faqItem summary {\n  cursor: pointer;\n  font-weight: 700;\n  padding: 1.5rem;\n  list-style: none; /* Hide default marker */\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n  text-transform: uppercase;\n  font-size: 0.95rem;\n  letter-spacing: 0.05em;\n}\n\n.faqItem summary::-webkit-details-marker {\n  display: none;\n}\n\n.faqItem summary::after {\n  content: '+';\n  font-size: 1.2rem;\n  font-weight: 400;\n}\n\n.faqItem[open] summary::after {\n  content: '−';\n}\n\n.faqContent {\n  padding: 0 1.5rem 1.5rem 1.5rem;\n  color: var(--muted);\n  line-height: 1.6;\n}\n\n.faqItem p {\n  margin-top: 0;\n}"],"names":[],"mappings":"AAAA;;;;;AAKA;;;;;;;AAOA;;;;;;;;AAQA;;;;;AAKA;;;;;;;;;;;;;AAaA;;;;AAIA;;;;;;AAMA;;;;AAIA;;;;;;AAMA"}}]
+}

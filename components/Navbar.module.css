@@ -1,0 +1,102 @@
+.siteHeader {
+  position: sticky;
+  top: 0;
+  background: var(--bg);
+  border-bottom: 1px solid var(--accent);
+  z-index: 100;
+  padding: 1.5rem 0; /* Taller, more substantial header */
+}
+
+.siteHeader[data-scrolled="true"] {
+    background: var(--bg);
+    border-bottom: 1px solid #111; /* Darker border on scroll */
+}
+
+.headerInner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-2);
+}
+
+.logoWrap {
+  display: inline-flex;
+  align-items: center;
+}
+
+.logoImage {
+    height: 44px;
+    width: auto;
+    display: block;
+    /* Ensure logo is black if it's an SVG, or user should provide black logo */
+}
+
+/* Text Logo fallback if image missing */
+.logoText {
+    font-size: 1.5rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: -0.05em;
+    color: var(--text);
+}
+
+.mainNav {
+  display: none;
+}
+
+.navToggle {
+  border: 2px solid var(--text);
+  background: transparent;
+  width: 48px;
+  height: 48px;
+  border-radius: 0; /* Square */
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  cursor: pointer;
+}
+
+.navToggleBar {
+  width: 24px;
+  height: 2px;
+  background: var(--text);
+}
+
+.navCta {
+    display: none;
+}
+
+@media (min-width: 768px) {
+  .headerInner {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+  }
+
+  .navToggle {
+    display: none;
+  }
+
+  .mainNav {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-4);
+  }
+  
+  .mainNav a {
+      font-weight: 600;
+      text-transform: uppercase;
+      font-size: 0.9rem;
+      letter-spacing: 0.05em;
+  }
+
+  .navCta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+}

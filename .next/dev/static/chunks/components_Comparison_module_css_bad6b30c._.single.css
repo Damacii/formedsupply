@@ -1,0 +1,68 @@
+/* [project]/components/Comparison.module.css [app-client] (css) */
+.Comparison-module__122zhW__comparison {
+  padding: var(--space-6) 0;
+  background: var(--bg);
+}
+
+.Comparison-module__122zhW__tableWrap {
+  background: var(--card);
+  border: 2px solid #111;
+  border-radius: 0;
+  overflow-x: auto;
+  box-shadow: 8px 8px #1111111a;
+}
+
+.Comparison-module__122zhW__comparisonTable {
+  border-collapse: collapse;
+  width: 100%;
+  min-width: 640px;
+}
+
+.Comparison-module__122zhW__comparisonTable th, .Comparison-module__122zhW__comparisonTable td {
+  text-align: left;
+  border-bottom: 1px solid #111;
+  border-right: 1px solid #111;
+  padding: 1.5rem;
+}
+
+.Comparison-module__122zhW__comparisonTable th:last-child, .Comparison-module__122zhW__comparisonTable td:last-child {
+  border-right: none;
+}
+
+.Comparison-module__122zhW__comparisonTable th {
+  text-transform: uppercase;
+  letter-spacing: .05em;
+  background: #f4f4f2;
+  font-size: .9rem;
+  font-weight: 800;
+}
+
+.Comparison-module__122zhW__comparisonTable th:nth-child(2), .Comparison-module__122zhW__comparisonTable td:nth-child(2) {
+  color: #fff;
+  text-align: center;
+  background: #111;
+  border-right: 1px solid #333;
+}
+
+.Comparison-module__122zhW__comparisonTable th:nth-child(2) {
+  border-radius: 0;
+}
+
+.Comparison-module__122zhW__comparisonTable td:nth-child(2) {
+  border-bottom: 1px solid #333;
+}
+
+.Comparison-module__122zhW__comparisonTable tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.Comparison-module__122zhW__comparisonTable th:nth-child(n+3), .Comparison-module__122zhW__comparisonTable td:nth-child(n+3) {
+  text-align: center;
+}
+
+.Comparison-module__122zhW__comparisonCta {
+  margin-top: var(--space-5);
+  text-align: center;
+}
+
+/*# sourceMappingURL=components_Comparison_module_css_bad6b30c._.single.css.map*/

@@ -1,0 +1,158 @@
+/* [project]/Desktop/FORMED SUPPLY/styles/globals.css [app-client] (css) */
+:root {
+  --bg: #f4f3f1;
+  --text: #111;
+  --muted: #5a5854;
+  --accent: #cfc8bf;
+  --card: #fff;
+  --shadow: 0 20px 40px #11111114;
+  --radius-lg: 28px;
+  --radius-md: 16px;
+  --radius-sm: 10px;
+  --space-1: .5rem;
+  --space-2: 1rem;
+  --space-3: 1.5rem;
+  --space-4: 2rem;
+  --space-5: 3rem;
+  --space-6: 4rem;
+  --max-width: 1200px;
+  --font: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --motion-fast: .16s;
+  --motion-medium: .32s;
+  --motion-slow: .52s;
+  --ease: cubic-bezier(.2, .8, .2, 1);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font);
+  color: var(--text);
+  background: var(--bg);
+  line-height: 1.6;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button, input {
+  font: inherit;
+}
+
+:focus-visible {
+  outline: 2px solid var(--text);
+  outline-offset: 3px;
+}
+
+.sr-only {
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  position: absolute;
+  overflow: hidden;
+}
+
+.skip-link {
+  background: var(--text);
+  color: var(--bg);
+  border-radius: var(--radius-sm);
+  z-index: 999;
+  padding: .5rem 1rem;
+  position: absolute;
+  top: -40px;
+  left: 1rem;
+}
+
+.skip-link:focus {
+  top: 1rem;
+}
+
+.container {
+  width: min(100% - 2rem, var(--max-width));
+  margin: 0 auto;
+}
+
+.btn {
+  transition: transform var(--motion-fast) var(--ease), box-shadow var(--motion-fast) var(--ease), background-color var(--motion-fast) var(--ease);
+  border: 1px solid #0000;
+  border-radius: 999px;
+  justify-content: center;
+  align-items: center;
+  padding: .85rem 1.6rem;
+  font-weight: 600;
+  display: inline-flex;
+}
+
+.btn:hover {
+  transform: translateY(-1px);
+}
+
+.btn:active {
+  transform: translateY(1px);
+}
+
+.btn-primary {
+  background: var(--text);
+  color: var(--bg);
+  box-shadow: 0 10px 20px #11111126;
+}
+
+.btn-primary:hover {
+  background: #000;
+}
+
+.btn-secondary {
+  border-color: var(--text);
+  color: var(--text);
+  background: none;
+}
+
+.section-label {
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: var(--space-2);
+  font-size: .85rem;
+}
+
+.section-header h2 {
+  margin-bottom: var(--space-3);
+  font-size: clamp(1.9rem, 4vw, 3rem);
+}
+
+.js-enabled [data-reveal], .js-enabled .reveal-item {
+  opacity: 0;
+  transition: opacity var(--motion-medium) var(--ease), transform var(--motion-medium) var(--ease);
+  will-change: opacity, transform;
+  transform: translateY(16px);
+}
+
+.js-enabled [data-reveal].is-visible, .js-enabled .reveal-item.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .btn, .js-enabled [data-reveal], .js-enabled .reveal-item {
+    transition: none;
+  }
+}
+
+/*# sourceMappingURL=Desktop_FORMED%20SUPPLY_styles_globals_css_bad6b30c._.single.css.map*/

@@ -1,0 +1,194 @@
+.page {
+  padding-bottom: var(--space-8);
+  background-color: var(--bg);
+}
+
+.section {
+  padding: var(--space-6) 0;
+  border-bottom: 1px solid var(--accent);
+}
+
+.sectionHeader {
+  margin-bottom: var(--space-4);
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.sectionHeader h2 {
+  font-size: clamp(2rem, 4vw, 3rem);
+  text-transform: uppercase;
+  font-weight: 800;
+  margin: 0;
+  letter-spacing: -0.02em;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: var(--space-4);
+}
+
+.card {
+  background: #ffffff;
+  border: 1px solid var(--accent); /* Light border initially */
+  border-radius: 0; /* Square corners */
+  padding: 0; /* Remove internal padding for full-bleed image if desired, or keep structure */
+  display: flex;
+  flex-direction: column;
+  transition: all 0.2s ease;
+  position: relative;
+  height: 100%;
+}
+
+.card:hover {
+  border-color: #111;
+  box-shadow: 8px 8px 0 rgba(17, 17, 17, 0.1);
+  transform: translate(-2px, -2px);
+  z-index: 10;
+}
+
+.mediaFrame {
+  position: relative;
+  border-radius: 0;
+  width: 100%;
+  border-bottom: 1px solid var(--accent);
+  background: #f4f4f2;
+}
+
+.card:hover .mediaFrame {
+  border-bottom-color: #111;
+}
+
+.cardMedia {
+  position: relative;
+  border-radius: 0;
+  overflow: hidden;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+}
+
+.mediaPrimary,
+.mediaHover {
+  position: absolute;
+  inset: 0;
+  transition: opacity 0.2s ease;
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Ensure it fills the square */
+  display: block;
+  padding: 1rem; /* Add breathing room for the product inside the frame */
+  mix-blend-mode: multiply; /* Helps with white background images on light bg */
+}
+
+.mediaPrimary {
+  opacity: 1;
+}
+
+.mediaHover {
+  opacity: 0;
+}
+
+.card:hover .mediaHover {
+  opacity: 1;
+}
+
+.card:hover .mediaPrimary {
+  opacity: 0;
+}
+
+.mediaPlaceholder {
+  width: 100%;
+  height: 100%;
+  background-color: #f0f0f0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mediaPlaceholder::after {
+  content: 'NO IMAGE';
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #CCC;
+}
+
+.cardBody {
+  padding: var(--space-3);
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  flex-grow: 1;
+}
+
+.tag {
+  display: none; /* Hide 'Just In' tag for cleaner look, or style it industrially */
+}
+
+.card h3 {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  color: #111;
+}
+
+.subtitle {
+  color: var(--muted);
+  margin: 0;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: auto; /* Push actions to bottom */
+}
+
+.actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.viewLink,
+.primaryLink {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.8rem;
+  padding: 0.6rem 0.5rem;
+  border-radius: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  transition: all 0.2s;
+  text-align: center;
+}
+
+.viewLink {
+  background: transparent;
+  color: #111;
+  border: 1px solid #CCC;
+}
+
+.viewLink:hover {
+  border-color: #111;
+  background: #f9f9f9;
+}
+
+.primaryLink {
+  background: #111;
+  color: #ffffff;
+  border: 1px solid #111;
+}
+
+.primaryLink:hover {
+  background: #333;
+  color: #FFF;
+}
+
+.empty {
+  color: var(--muted);
+  margin-top: var(--space-2);
+  font-style: italic;
+}

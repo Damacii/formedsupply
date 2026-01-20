@@ -1,0 +1,114 @@
+/* [project]/components/Footer.module.css [app-client] (css) */
+.Footer-module__EZoWya__siteFooter {
+  padding: var(--space-6) 0 var(--space-4);
+  color: #fff;
+  background: #111;
+}
+
+.Footer-module__EZoWya__footerGrid {
+  gap: var(--space-5);
+  display: grid;
+}
+
+.Footer-module__EZoWya__footerBrand {
+  gap: 1rem;
+  display: grid;
+}
+
+.Footer-module__EZoWya__footerLogoRow {
+  align-items: center;
+  display: inline-flex;
+}
+
+.Footer-module__EZoWya__footerLogo {
+  filter: invert();
+  width: auto;
+  height: 32px;
+  display: block;
+}
+
+.Footer-module__EZoWya__footerWordmark {
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: #fff;
+  font-size: 1.2rem;
+  font-weight: 800;
+}
+
+.Footer-module__EZoWya__footerSocials {
+  gap: 1rem;
+  display: flex;
+}
+
+.Footer-module__EZoWya__footerSocials a {
+  color: #999;
+  background: #000;
+  border: 1px solid #333;
+  border-radius: 0;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  transition: all .2s;
+  display: inline-flex;
+}
+
+.Footer-module__EZoWya__footerSocials a:hover {
+  color: #fff;
+  border-color: #fff;
+}
+
+.Footer-module__EZoWya__footerSocials svg {
+  width: 18px;
+  height: 18px;
+  display: block;
+}
+
+.Footer-module__EZoWya__footerCol h3 {
+  margin-bottom: var(--space-3);
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  color: #666;
+  font-size: .85rem;
+  font-weight: 700;
+}
+
+.Footer-module__EZoWya__footerCol ul {
+  list-style: none;
+}
+
+.Footer-module__EZoWya__footerCol a, .Footer-module__EZoWya__footerCol p {
+  color: #ccc;
+  margin-bottom: .8rem;
+  font-size: .95rem;
+  transition: color .2s;
+  display: block;
+}
+
+.Footer-module__EZoWya__footerCol a:hover {
+  color: #fff;
+  padding-left: 4px;
+}
+
+.Footer-module__EZoWya__footerDivider {
+  height: 1px;
+  margin-top: var(--space-5);
+  background: #333;
+}
+
+.Footer-module__EZoWya__footerBottom {
+  text-align: center;
+  color: #555;
+  margin-top: var(--space-4);
+  text-transform: uppercase;
+  letter-spacing: .05em;
+  font-size: .8rem;
+}
+
+@media (min-width: 900px) {
+  .Footer-module__EZoWya__footerGrid {
+    grid-template-columns: 1.5fr repeat(4, 1fr);
+  }
+}
+
+/*# sourceMappingURL=components_Footer_module_css_bad6b30c._.single.css.map*/

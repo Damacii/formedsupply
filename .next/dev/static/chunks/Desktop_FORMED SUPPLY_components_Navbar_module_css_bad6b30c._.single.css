@@ -1,0 +1,106 @@
+/* [project]/Desktop/FORMED SUPPLY/components/Navbar.module.css [app-client] (css) */
+.Navbar-module__vtHvba__siteHeader {
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+  z-index: 100;
+  transition: box-shadow var(--motion-medium) var(--ease), border-color var(--motion-medium) var(--ease), background-color var(--motion-medium) var(--ease);
+  background: none;
+  border-bottom: 1px solid #0000;
+  position: sticky;
+  top: 0;
+}
+
+.Navbar-module__vtHvba__siteHeader[data-scrolled="true"] {
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  background: #f4f3f1eb;
+  border-bottom-color: #1111111f;
+  box-shadow: 0 10px 24px #11111114;
+}
+
+.Navbar-module__vtHvba__headerInner {
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-2);
+  padding: .15rem 0;
+  display: flex;
+}
+
+.Navbar-module__vtHvba__logoWrap {
+  align-items: center;
+  display: inline-flex;
+}
+
+.Navbar-module__vtHvba__logoImage {
+  width: auto;
+  height: 42px;
+  display: block;
+}
+
+.Navbar-module__vtHvba__mainNav {
+  gap: var(--space-2);
+  padding: var(--space-3) 0;
+  flex-direction: column;
+  align-items: flex-start;
+  display: none;
+}
+
+.Navbar-module__vtHvba__mainNavOpen {
+  display: flex;
+}
+
+.Navbar-module__vtHvba__navToggle {
+  border: 1px solid var(--accent);
+  background: none;
+  border-radius: 50%;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  width: 42px;
+  height: 42px;
+  display: inline-flex;
+}
+
+.Navbar-module__vtHvba__navToggleBar {
+  background: var(--text);
+  border-radius: 999px;
+  width: 18px;
+  height: 2px;
+}
+
+.Navbar-module__vtHvba__navCta {
+  padding: .4rem .85rem;
+  font-size: .95rem;
+  font-weight: 500;
+  line-height: 1;
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .Navbar-module__vtHvba__headerInner {
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    display: grid;
+  }
+
+  .Navbar-module__vtHvba__navToggle {
+    display: none;
+  }
+
+  .Navbar-module__vtHvba__mainNav {
+    justify-content: center;
+    align-items: center;
+    gap: var(--space-3);
+    flex-direction: row;
+    display: flex;
+  }
+
+  .Navbar-module__vtHvba__navCta {
+    justify-content: center;
+    align-items: center;
+    display: inline-flex;
+  }
+}
+
+/*# sourceMappingURL=Desktop_FORMED%20SUPPLY_components_Navbar_module_css_bad6b30c._.single.css.map*/

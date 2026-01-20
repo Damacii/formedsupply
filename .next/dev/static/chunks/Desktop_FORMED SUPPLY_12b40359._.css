@@ -1,0 +1,347 @@
+/* [project]/Desktop/FORMED SUPPLY/styles/globals.css [app-client] (css) */
+:root {
+  --bg: #f4f3f1;
+  --text: #111;
+  --muted: #5a5854;
+  --accent: #cfc8bf;
+  --card: #fff;
+  --shadow: 0 20px 40px #11111114;
+  --radius-lg: 28px;
+  --radius-md: 16px;
+  --radius-sm: 10px;
+  --space-1: .5rem;
+  --space-2: 1rem;
+  --space-3: 1.5rem;
+  --space-4: 2rem;
+  --space-5: 3rem;
+  --space-6: 4rem;
+  --max-width: 1200px;
+  --font: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --motion-fast: .16s;
+  --motion-medium: .32s;
+  --motion-slow: .52s;
+  --ease: cubic-bezier(.2, .8, .2, 1);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font);
+  color: var(--text);
+  background: var(--bg);
+  line-height: 1.6;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button, input {
+  font: inherit;
+}
+
+:focus-visible {
+  outline: 2px solid var(--text);
+  outline-offset: 3px;
+}
+
+.sr-only {
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  position: absolute;
+  overflow: hidden;
+}
+
+.skip-link {
+  background: var(--text);
+  color: var(--bg);
+  border-radius: var(--radius-sm);
+  z-index: 999;
+  padding: .5rem 1rem;
+  position: absolute;
+  top: -40px;
+  left: 1rem;
+}
+
+.skip-link:focus {
+  top: 1rem;
+}
+
+.container {
+  width: min(100% - 2rem, var(--max-width));
+  margin: 0 auto;
+}
+
+.btn {
+  transition: transform var(--motion-fast) var(--ease), box-shadow var(--motion-fast) var(--ease), background-color var(--motion-fast) var(--ease);
+  border: 1px solid #0000;
+  border-radius: 999px;
+  justify-content: center;
+  align-items: center;
+  padding: .85rem 1.6rem;
+  font-weight: 600;
+  display: inline-flex;
+}
+
+.btn:hover {
+  transform: translateY(-1px);
+}
+
+.btn:active {
+  transform: translateY(1px);
+}
+
+.btn-primary {
+  background: var(--text);
+  color: var(--bg);
+  box-shadow: 0 10px 20px #11111126;
+}
+
+.btn-primary:hover {
+  background: #000;
+}
+
+.btn-secondary {
+  border-color: var(--text);
+  color: var(--text);
+  background: none;
+}
+
+.section-label {
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: var(--space-2);
+  font-size: .85rem;
+}
+
+.section-header h2 {
+  margin-bottom: var(--space-3);
+  font-size: clamp(1.9rem, 4vw, 3rem);
+}
+
+.js-enabled [data-reveal], .js-enabled .reveal-item {
+  opacity: 0;
+  transition: opacity var(--motion-medium) var(--ease), transform var(--motion-medium) var(--ease);
+  will-change: opacity, transform;
+  transform: translateY(16px);
+}
+
+.js-enabled [data-reveal].is-visible, .js-enabled .reveal-item.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .btn, .js-enabled [data-reveal], .js-enabled .reveal-item {
+    transition: none;
+  }
+}
+
+/* [project]/Desktop/FORMED SUPPLY/components/Navbar.module.css [app-client] (css) */
+.Navbar-module__vtHvba__siteHeader {
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+  z-index: 100;
+  transition: box-shadow var(--motion-medium) var(--ease), border-color var(--motion-medium) var(--ease), background-color var(--motion-medium) var(--ease);
+  background: none;
+  border-bottom: 1px solid #0000;
+  position: sticky;
+  top: 0;
+}
+
+.Navbar-module__vtHvba__siteHeader[data-scrolled="true"] {
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  background: #f4f3f1eb;
+  border-bottom-color: #1111111f;
+  box-shadow: 0 10px 24px #11111114;
+}
+
+.Navbar-module__vtHvba__headerInner {
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-2);
+  padding: .15rem 0;
+  display: flex;
+}
+
+.Navbar-module__vtHvba__logoWrap {
+  align-items: center;
+  display: inline-flex;
+}
+
+.Navbar-module__vtHvba__logoImage {
+  width: auto;
+  height: 42px;
+  display: block;
+}
+
+.Navbar-module__vtHvba__mainNav {
+  gap: var(--space-2);
+  padding: var(--space-3) 0;
+  flex-direction: column;
+  align-items: flex-start;
+  display: none;
+}
+
+.Navbar-module__vtHvba__mainNavOpen {
+  display: flex;
+}
+
+.Navbar-module__vtHvba__navToggle {
+  border: 1px solid var(--accent);
+  background: none;
+  border-radius: 50%;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  width: 42px;
+  height: 42px;
+  display: inline-flex;
+}
+
+.Navbar-module__vtHvba__navToggleBar {
+  background: var(--text);
+  border-radius: 999px;
+  width: 18px;
+  height: 2px;
+}
+
+.Navbar-module__vtHvba__navCta {
+  padding: .4rem .85rem;
+  font-size: .95rem;
+  font-weight: 500;
+  line-height: 1;
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .Navbar-module__vtHvba__headerInner {
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    display: grid;
+  }
+
+  .Navbar-module__vtHvba__navToggle {
+    display: none;
+  }
+
+  .Navbar-module__vtHvba__mainNav {
+    justify-content: center;
+    align-items: center;
+    gap: var(--space-3);
+    flex-direction: row;
+    display: flex;
+  }
+
+  .Navbar-module__vtHvba__navCta {
+    justify-content: center;
+    align-items: center;
+    display: inline-flex;
+  }
+}
+
+/* [project]/Desktop/FORMED SUPPLY/components/Footer.module.css [app-client] (css) */
+.Footer-module__sk_lKa__siteFooter {
+  padding: var(--space-5) 0 var(--space-3);
+  border-top: 1px solid var(--accent);
+  background: #f1ede9;
+}
+
+.Footer-module__sk_lKa__footerGrid {
+  gap: var(--space-4);
+  display: grid;
+}
+
+.Footer-module__sk_lKa__footerBrand {
+  gap: .75rem;
+  display: grid;
+}
+
+.Footer-module__sk_lKa__footerLogoRow {
+  align-items: center;
+  display: inline-flex;
+}
+
+.Footer-module__sk_lKa__footerLogo {
+  width: auto;
+  height: 40px;
+  display: block;
+}
+
+.Footer-module__sk_lKa__footerWordmark {
+  letter-spacing: .14em;
+  font-size: .9rem;
+  font-weight: 700;
+}
+
+.Footer-module__sk_lKa__footerSocials {
+  gap: .6rem;
+  display: flex;
+}
+
+.Footer-module__sk_lKa__footerSocials a {
+  border: 1px solid var(--accent);
+  width: 32px;
+  height: 32px;
+  color: var(--muted);
+  border-radius: 50%;
+  justify-content: center;
+  align-items: center;
+  display: inline-flex;
+}
+
+.Footer-module__sk_lKa__footerSocials svg {
+  width: 16px;
+  height: 16px;
+  display: block;
+}
+
+.Footer-module__sk_lKa__footerCol h3 {
+  margin-bottom: var(--space-1);
+}
+
+.Footer-module__sk_lKa__footerCol a, .Footer-module__sk_lKa__footerCol p {
+  color: var(--muted);
+  margin-bottom: .5rem;
+  display: block;
+}
+
+.Footer-module__sk_lKa__footerDivider {
+  background: var(--accent);
+  height: 1px;
+  margin-top: var(--space-4);
+}
+
+.Footer-module__sk_lKa__footerBottom {
+  text-align: center;
+  color: var(--muted);
+  margin-top: var(--space-3);
+}
+
+@media (min-width: 768px) {
+  .Footer-module__sk_lKa__footerGrid {
+    grid-template-columns: minmax(180px, 1.2fr) repeat(4, minmax(140px, 1fr));
+  }
+}
+
+/*# sourceMappingURL=Desktop_FORMED%20SUPPLY_12b40359._.css.map*/

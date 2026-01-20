@@ -1,0 +1,407 @@
+/* [project]/app/request-form/RequestForm.module.css [app-client] (css) */
+.RequestForm-module__okqXIq__page {
+  padding: var(--space-6) 0 var(--space-8);
+  background-color: var(--color-off-white, #f4f4f2);
+}
+
+.RequestForm-module__okqXIq__layout {
+  gap: var(--space-4);
+  align-items: start;
+  display: grid;
+}
+
+.RequestForm-module__okqXIq__copy {
+  gap: var(--space-2);
+  max-width: 560px;
+  display: grid;
+}
+
+.RequestForm-module__okqXIq__copy h1 {
+  text-transform: uppercase;
+  letter-spacing: -.03em;
+  margin-bottom: 0;
+  font-size: clamp(2.2rem, 4vw, 3.2rem);
+  font-weight: 800;
+  line-height: 1.05;
+}
+
+.RequestForm-module__okqXIq__copy p {
+  color: var(--color-text-light, #666);
+  max-width: 40ch;
+  font-size: 1.1rem;
+  line-height: 1.5;
+}
+
+.RequestForm-module__okqXIq__trustRow {
+  border-top: 1px solid #1111111a;
+  flex-wrap: wrap;
+  gap: .6rem;
+  margin-top: .4rem;
+  padding-top: .8rem;
+  display: flex;
+}
+
+.RequestForm-module__okqXIq__trustRow span {
+  text-transform: uppercase;
+  letter-spacing: .05em;
+  align-items: center;
+  gap: .5rem;
+  font-size: .8rem;
+  font-weight: 600;
+  display: flex;
+}
+
+.RequestForm-module__okqXIq__trustRow span:before {
+  content: "";
+  background-color: currentColor;
+  width: 6px;
+  height: 6px;
+  display: block;
+}
+
+.RequestForm-module__okqXIq__form {
+  gap: var(--space-3);
+  padding: var(--space-4);
+  background: #fff;
+  border: 2px solid #111;
+  border-radius: 0;
+  display: grid;
+  box-shadow: 8px 8px #1111111a;
+}
+
+.RequestForm-module__okqXIq__stepHeader {
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: var(--space-4);
+  padding-bottom: var(--space-3);
+  margin-bottom: var(--space-1);
+  border-bottom: 2px solid #111;
+  display: flex;
+}
+
+.RequestForm-module__okqXIq__stepEyebrow {
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  color: #111;
+  margin: 0 0 .2rem;
+  font-size: .75rem;
+  font-weight: 700;
+}
+
+.RequestForm-module__okqXIq__stepHeader h2 {
+  text-transform: uppercase;
+  margin: 0;
+  font-size: 1.35rem;
+}
+
+.RequestForm-module__okqXIq__stepDescription {
+  color: var(--color-text-light, #666);
+  margin: .2rem 0 0;
+  font-size: .95rem;
+}
+
+.RequestForm-module__okqXIq__stepper {
+  gap: 4px;
+  display: inline-flex;
+}
+
+.RequestForm-module__okqXIq__stepDot {
+  background: #e0e0de;
+  border: 1px solid #0000;
+  width: 8px;
+  height: 8px;
+}
+
+.RequestForm-module__okqXIq__stepDotActive {
+  background: #111;
+  border-color: #111;
+}
+
+.RequestForm-module__okqXIq__formRow {
+  gap: var(--space-4);
+  display: grid;
+}
+
+.RequestForm-module__okqXIq__form label {
+  text-transform: uppercase;
+  letter-spacing: .05em;
+  color: #111;
+  gap: .5rem;
+  font-size: .85rem;
+  font-weight: 600;
+  display: grid;
+}
+
+.RequestForm-module__okqXIq__form input, .RequestForm-module__okqXIq__form select, .RequestForm-module__okqXIq__form textarea {
+  font: inherit;
+  color: #111;
+  background: #fff;
+  border: 1px solid #ccc;
+  border-radius: 0;
+  padding: .8rem 1rem;
+  font-size: 1rem;
+  transition: border-color .2s;
+}
+
+.RequestForm-module__okqXIq__form input:focus, .RequestForm-module__okqXIq__form select:focus, .RequestForm-module__okqXIq__form textarea:focus {
+  background-color: #fafafa;
+  border-color: #111;
+  outline: none;
+}
+
+.RequestForm-module__okqXIq__fullWidth {
+  grid-column: 1 / -1;
+}
+
+.RequestForm-module__okqXIq__formNote {
+  color: #111;
+  text-align: center;
+  min-height: 1.2rem;
+  margin-top: 1rem;
+  font-size: .9rem;
+  font-weight: 500;
+}
+
+.RequestForm-module__okqXIq__helperText {
+  color: var(--color-text-light, #999);
+  text-transform: none;
+  letter-spacing: 0;
+  margin-top: .2rem;
+  font-size: .8rem;
+  font-weight: 400;
+}
+
+.RequestForm-module__okqXIq__groupLabel {
+  text-transform: uppercase;
+  letter-spacing: .05em;
+  margin-bottom: .8rem;
+  font-size: .85rem;
+  font-weight: 600;
+}
+
+.RequestForm-module__okqXIq__chipGroup {
+  flex-wrap: wrap;
+  gap: .8rem;
+  display: flex;
+}
+
+.RequestForm-module__okqXIq__chip {
+  cursor: pointer;
+  background: #fff;
+  border: 1px solid #ccc;
+  border-radius: 0;
+  align-items: center;
+  gap: .6rem;
+  padding: .6rem 1rem;
+  font-size: .9rem;
+  transition: all .2s;
+  display: inline-flex;
+}
+
+.RequestForm-module__okqXIq__chip:hover {
+  border-color: #111;
+}
+
+.RequestForm-module__okqXIq__chip:has(input:checked) {
+  color: #fff;
+  background-color: #111;
+  border-color: #111;
+}
+
+.RequestForm-module__okqXIq__chip input {
+  appearance: none;
+  border: none;
+  width: 0;
+  height: 0;
+  margin: 0;
+  padding: 0;
+}
+
+.RequestForm-module__okqXIq__productList {
+  gap: .6rem;
+  max-height: 260px;
+  padding-right: .3rem;
+  display: grid;
+  overflow-y: auto;
+}
+
+.RequestForm-module__okqXIq__productsLayout {
+  gap: var(--space-4);
+  display: grid;
+}
+
+.RequestForm-module__okqXIq__productsColumn {
+  gap: var(--space-3);
+  display: grid;
+}
+
+.RequestForm-module__okqXIq__productRow {
+  cursor: pointer;
+  border: 1px solid #e0e0de;
+  grid-template-columns: auto auto 1fr;
+  align-items: center;
+  gap: .6rem;
+  padding: .4rem .6rem;
+  display: grid;
+}
+
+.RequestForm-module__okqXIq__productRowActive {
+  border-color: #111;
+}
+
+.RequestForm-module__okqXIq__productRow input {
+  accent-color: #111;
+}
+
+.RequestForm-module__okqXIq__productThumb {
+  background: #f4f4f2;
+  border: 1px solid #e0e0de;
+  width: 40px;
+  height: 40px;
+  overflow: hidden;
+}
+
+.RequestForm-module__okqXIq__productThumb img, .RequestForm-module__okqXIq__imagePlaceholder {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.RequestForm-module__okqXIq__productMeta {
+  gap: .1rem;
+  display: grid;
+}
+
+.RequestForm-module__okqXIq__productName {
+  font-size: .95rem;
+  font-weight: 700;
+}
+
+.RequestForm-module__okqXIq__productMoq {
+  color: var(--color-text-light, #666);
+  font-size: .8rem;
+}
+
+.RequestForm-module__okqXIq__selectionPanel {
+  background: #f4f4f2;
+  border: 1px solid #111;
+  border-radius: 0;
+  min-height: 140px;
+  margin-bottom: 2rem;
+  padding: 1.5rem;
+}
+
+.RequestForm-module__okqXIq__selectionPanel h3 {
+  text-transform: uppercase;
+  margin: 0 0 1rem;
+  font-size: 1rem;
+}
+
+.RequestForm-module__okqXIq__selectionList {
+  gap: 1rem;
+  display: grid;
+}
+
+.RequestForm-module__okqXIq__selectionItem {
+  border-bottom: 1px solid #ddd;
+  grid-template-columns: auto 1fr auto auto;
+  align-items: center;
+  gap: .8rem;
+  padding-bottom: 1rem;
+  display: grid;
+}
+
+.RequestForm-module__okqXIq__selectionItem:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.RequestForm-module__okqXIq__selectionItem p {
+  margin: 0;
+  font-weight: 600;
+}
+
+.RequestForm-module__okqXIq__selectionMedia {
+  background: #f4f4f2;
+  border: 1px solid #e0e0de;
+  width: 48px;
+  height: 48px;
+  overflow: hidden;
+}
+
+.RequestForm-module__okqXIq__selectionMedia img, .RequestForm-module__okqXIq__selectionMedia .RequestForm-module__okqXIq__imagePlaceholder {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.RequestForm-module__okqXIq__selectionInfo {
+  gap: .2rem;
+  display: grid;
+}
+
+.RequestForm-module__okqXIq__selectionItem input {
+  text-align: center;
+  width: 120px;
+}
+
+.RequestForm-module__okqXIq__removeButton {
+  text-transform: uppercase;
+  letter-spacing: .05em;
+  cursor: pointer;
+  background: #fff;
+  border: 1px solid #111;
+  padding: .4rem .8rem;
+  font-size: .8rem;
+}
+
+@media (min-width: 900px) {
+  .RequestForm-module__okqXIq__productsLayout {
+    grid-template-columns: 1.1fr .9fr;
+    align-items: start;
+  }
+
+  .RequestForm-module__okqXIq__selectionPanel {
+    min-height: 320px;
+  }
+}
+
+.RequestForm-module__okqXIq__formActions {
+  border-top: 1px solid #eee;
+  justify-content: flex-end;
+  gap: 1rem;
+  margin-top: 1rem;
+  padding-top: 1rem;
+  display: flex;
+}
+
+.RequestForm-module__okqXIq__formActions button {
+  text-transform: uppercase;
+  letter-spacing: .05em;
+  border-radius: 0;
+  padding: .8rem 2rem;
+  font-weight: 600;
+}
+
+@media (min-width: 900px) {
+  .RequestForm-module__okqXIq__layout {
+    gap: var(--space-6);
+    grid-template-columns: 1fr;
+  }
+
+  .RequestForm-module__okqXIq__copy h1 {
+    white-space: nowrap;
+  }
+
+  .RequestForm-module__okqXIq__formRow {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .RequestForm-module__okqXIq__form {
+    padding: var(--space-6);
+  }
+}
+
+/*# sourceMappingURL=app_request-form_RequestForm_module_06647fd6.css.map*/

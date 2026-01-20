@@ -1,0 +1,6 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 14, "column": 0}, "map": {"version":3,"sources":["file:///Users/damaciistudios/Desktop/FORMED%20SUPPLY/app/admin/page.tsx"],"sourcesContent":["import Link from \"next/link\";\n\nexport default function AdminHome() {\n  return (\n    <div style={{ padding: \"4rem 0\" }}>\n      <div className=\"container\">\n        <h1 style={{ fontSize: \"2rem\", marginBottom: \"1rem\" }}>Admin</h1>\n        <p style={{ color: \"var(--muted)\", marginBottom: \"2rem\" }}>\n          Manage Formed Supply catalog and product data.\n        </p>\n        <Link className=\"btn btn-primary\" href=\"/admin/products/new\">\n          Add Product\n        </Link>\n      </div>\n    </div>\n  );\n}\n"],"names":[],"mappings":";;;;;AAAA;;;AAEe,SAAS;IACtB,qBACE,8OAAC;QAAI,OAAO;YAAE,SAAS;QAAS;kBAC9B,cAAA,8OAAC;YAAI,WAAU;;8BACb,8OAAC;oBAAG,OAAO;wBAAE,UAAU;wBAAQ,cAAc;oBAAO;8BAAG;;;;;;8BACvD,8OAAC;oBAAE,OAAO;wBAAE,OAAO;wBAAgB,cAAc;oBAAO;8BAAG;;;;;;8BAG3D,8OAAC,0LAAI;oBAAC,WAAU;oBAAkB,MAAK;8BAAsB;;;;;;;;;;;;;;;;;AAMrE"}}]
+}

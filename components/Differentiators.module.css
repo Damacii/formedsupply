@@ -1,0 +1,46 @@
+.differentiators {
+  padding: var(--space-6) 0;
+  background-color: #FFFFFF; /* White section for contrast */
+}
+
+.diffGrid {
+  display: grid;
+  gap: var(--space-4);
+}
+
+.featureCard {
+  background: var(--bg);
+  border: 1px solid var(--accent);
+  border-radius: 0;
+  padding: var(--space-4);
+  box-shadow: none;
+  transition: border-color 0.2s ease;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.featureCard h3 {
+  margin-bottom: var(--space-2);
+  text-transform: uppercase;
+  font-size: 1.1rem;
+}
+
+.featureCard p {
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+.featureCard:hover {
+  border-color: #111;
+}
+
+.diffVisual {
+  display: none; /* Simplify visual noise */
+}
+
+@media (min-width: 768px) {
+  .diffGrid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}

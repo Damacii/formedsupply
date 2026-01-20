@@ -1,0 +1,168 @@
+[00:00:00.581] Server  LOG     ✓ Ready in 449ms
+[00:00:04.030] Browser WARN    Google Maps JavaScript API has been loaded directly without loading=async. This can result in suboptimal performance. For best-practice loading patterns please see https://goo.gle/js-api-loading
+[00:00:04.030] Browser WARN    As of March 1st, 2025, google.maps.places.Autocomplete is not available to new customers. Please use google.maps.places.PlaceAutocompleteElement instead. At this time, google.maps.places.Autocomplete is not scheduled to be discontinued, but google.maps.places.PlaceAutocompleteElement is recommended over google.maps.places.Autocomplete. While google.maps.places.Autocomplete will continue to receive bug fixes for any major regressions, existing bugs in google.maps.places.Autocomplete will not be addressed. At least 12 months notice will be given before support is discontinued. Please see https://developers.google.com/maps/legacy for additional details and https://developers.google.com/maps/documentation/javascript/places-migration-overview for the migration guide.
+[00:02:42.855] Server  LOG     ✓ Compiled in 74ms
+[00:02:43.001] Browser WARN    Element with name "gmp-internal-loading-text" already defined.
+[00:02:43.001] Browser WARN    Element with name "gmp-internal-request-error-text" already defined.
+[00:02:43.001] Browser WARN    Element with name "gmp-internal-back-button" already defined.
+[00:02:43.001] Browser WARN    Element with name "gmp-internal-dialog" already defined.
+[00:02:43.001] Browser WARN    Element with name "gmp-internal-disclosure" already defined.
+[00:02:43.001] Browser WARN    Element with name "gmp-internal-disclosure-section" already defined.
+[00:02:43.001] Browser WARN    Element with name "gmp-internal-attribution" already defined.
+[00:02:43.001] Browser WARN    Element with name "gmp-internal-element-support-verification" already defined.
+[00:02:43.001] Browser ERROR   You have included the Google Maps JavaScript API multiple times on this page. This may cause unexpected errors.
+[00:02:43.001] Browser WARN    Google Maps JavaScript API has been loaded directly without loading=async. This can result in suboptimal performance. For best-practice loading patterns please see https://goo.gle/js-api-loading
+[00:02:43.001] Browser WARN    Element with name "gmp-internal-rating" already defined.
+[00:02:43.001] Browser WARN    Element with name "gmp-place-all-content" already defined.
+[00:02:43.001] Browser WARN    Element with name "gmp-place-content-config" already defined.
+[00:02:43.001] Browser WARN    Element with name "gmp-place-standard-content" already defined.
+[00:02:43.001] Browser WARN    Element with name "gmp-internal-link-button" already defined.
+[00:02:43.001] Browser WARN    Element with name "gmp-internal-menu" already defined.
+[00:02:43.001] Browser WARN    Element with name "gmp-internal-place-opening-hours" already defined.
+[00:02:43.001] Browser WARN    Element with name "gmp-internal-place-review" already defined.
+[00:02:43.001] Browser WARN    Element with name "gmp-internal-tabbed-layout" already defined.
+[00:02:43.001] Browser WARN    Element with name "gmp-internal-lightbox" already defined.
+[00:02:43.001] Browser WARN    Element with name "gmp-internal-collage" already defined.
+[00:02:43.001] Browser WARN    Element with name "gmp-internal-place-rating-summary" already defined.
+[00:02:43.001] Browser WARN    Element with name "gmp-internal-place-basic-info" already defined.
+[00:02:43.001] Browser WARN    Element with name "gmp-place-details-location-request" already defined.
+[00:02:43.001] Browser WARN    Element with name "gmp-place-details-place-request" already defined.
+[00:02:43.001] Browser WARN    Element with name "gmp-internal-circular-loader" already defined.
+[00:02:43.001] Browser WARN    Element with name "gmp-place-details-compact" already defined.
+[00:02:43.001] Browser WARN    Element with name "gmp-internal-use-place-details-compact" already defined.
+[00:02:43.001] Browser WARN    Element with name "gmp-place-media" already defined.
+[00:02:43.001] Browser WARN    Element with name "gmp-place-address" already defined.
+[00:02:43.001] Browser WARN    Element with name "gmp-place-rating" already defined.
+[00:02:43.001] Browser WARN    Element with name "gmp-place-type" already defined.
+[00:02:43.001] Browser WARN    Element with name "gmp-place-price" already defined.
+[00:02:43.001] Browser WARN    Element with name "gmp-place-accessible-entrance-icon" already defined.
+[00:02:43.001] Browser WARN    Element with name "gmp-place-open-now-status" already defined.
+[00:02:43.001] Browser WARN    Element with name "gmp-place-attribution" already defined.
+[00:02:43.001] Browser WARN    Element with name "gmp-place-website" already defined.
+[00:02:43.001] Browser WARN    Element with name "gmp-place-phone-number" already defined.
+[00:02:43.001] Browser WARN    Element with name "gmp-place-opening-hours" already defined.
+[00:02:43.001] Browser WARN    Element with name "gmp-place-summary" already defined.
+[00:02:43.001] Browser WARN    Element with name "gmp-place-type-specific-highlights" already defined.
+[00:02:43.001] Browser WARN    Element with name "gmp-place-reviews" already defined.
+[00:02:43.001] Browser WARN    Element with name "gmp-place-plus-code" already defined.
+[00:02:43.001] Browser WARN    Element with name "gmp-place-feature-list" already defined.
+[00:02:43.001] Browser WARN    Element with name "gmp-place-details" already defined.
+[00:02:43.001] Browser WARN    Element with name "gmp-internal-place-carousel" already defined.
+[00:02:43.001] Browser WARN    Element with name "gmp-internal-place-search-list-item" already defined.
+[00:02:43.001] Browser WARN    Element with name "gmp-place-nearby-search-request" already defined.
+[00:02:43.001] Browser WARN    Element with name "gmp-place-text-search-request" already defined.
+[00:02:43.001] Browser WARN    Element with name "gmp-place-search" already defined.
+[00:02:43.001] Browser WARN    Element with name "gmp-map" already defined.
+[00:02:43.001] Browser WARN    Element with name "gmp-place-autocomplete" already defined.
+[00:02:43.001] Browser WARN    Element with name "gmp-basic-place-autocomplete" already defined.
+[00:02:43.001] Browser WARN    As of March 1st, 2025, google.maps.places.Autocomplete is not available to new customers. Please use google.maps.places.PlaceAutocompleteElement instead. At this time, google.maps.places.Autocomplete is not scheduled to be discontinued, but google.maps.places.PlaceAutocompleteElement is recommended over google.maps.places.Autocomplete. While google.maps.places.Autocomplete will continue to receive bug fixes for any major regressions, existing bugs in google.maps.places.Autocomplete will not be addressed. At least 12 months notice will be given before support is discontinued. Please see https://developers.google.com/maps/legacy for additional details and https://developers.google.com/maps/documentation/javascript/places-migration-overview for the migration guide.
+[00:02:43.001] Browser WARN    Element with name "gmp-pin" already defined.
+[00:02:43.001] Browser WARN    Element with name "gmp-internal-camera-control" already defined.
+[00:03:18.129] Server  LOG     ✓ Compiled in 53ms
+[00:05:55.246] Server  LOG     ✓ Compiled in 50ms
+[00:06:13.099] Browser WARN    Google Maps JavaScript API has been loaded directly without loading=async. This can result in suboptimal performance. For best-practice loading patterns please see https://goo.gle/js-api-loading
+[00:06:13.099] Browser WARN    As of March 1st, 2025, google.maps.places.Autocomplete is not available to new customers. Please use google.maps.places.PlaceAutocompleteElement instead. At this time, google.maps.places.Autocomplete is not scheduled to be discontinued, but google.maps.places.PlaceAutocompleteElement is recommended over google.maps.places.Autocomplete. While google.maps.places.Autocomplete will continue to receive bug fixes for any major regressions, existing bugs in google.maps.places.Autocomplete will not be addressed. At least 12 months notice will be given before support is discontinued. Please see https://developers.google.com/maps/legacy for additional details and https://developers.google.com/maps/documentation/javascript/places-migration-overview for the migration guide.
+[00:08:14.282] Server  LOG     ✓ Compiled in 71ms
+[00:13:58.434] Server  LOG     ✓ Compiled in 164ms
+[00:19:43.557] Server  LOG     ✓ Compiled in 140ms
+[00:19:43.749] Browser WARN    Element with name "gmp-internal-loading-text" already defined.
+[00:19:43.749] Browser WARN    Element with name "gmp-internal-request-error-text" already defined.
+[00:19:43.749] Browser WARN    Element with name "gmp-internal-back-button" already defined.
+[00:19:43.749] Browser WARN    Element with name "gmp-internal-dialog" already defined.
+[00:19:43.749] Browser WARN    Element with name "gmp-internal-disclosure" already defined.
+[00:19:43.749] Browser WARN    Element with name "gmp-internal-disclosure-section" already defined.
+[00:19:43.749] Browser WARN    Element with name "gmp-internal-attribution" already defined.
+[00:19:43.749] Browser WARN    Element with name "gmp-internal-element-support-verification" already defined.
+[00:19:43.749] Browser ERROR   You have included the Google Maps JavaScript API multiple times on this page. This may cause unexpected errors.
+[00:19:43.749] Browser WARN    Google Maps JavaScript API has been loaded directly without loading=async. This can result in suboptimal performance. For best-practice loading patterns please see https://goo.gle/js-api-loading
+[00:19:43.749] Browser WARN    Element with name "gmp-internal-rating" already defined.
+[00:19:43.749] Browser WARN    Element with name "gmp-place-all-content" already defined.
+[00:19:43.749] Browser WARN    Element with name "gmp-place-content-config" already defined.
+[00:19:43.749] Browser WARN    Element with name "gmp-place-standard-content" already defined.
+[00:19:43.749] Browser WARN    Element with name "gmp-internal-link-button" already defined.
+[00:19:43.749] Browser WARN    Element with name "gmp-internal-menu" already defined.
+[00:19:43.749] Browser WARN    Element with name "gmp-internal-place-opening-hours" already defined.
+[00:19:43.749] Browser WARN    Element with name "gmp-internal-place-review" already defined.
+[00:19:43.749] Browser WARN    Element with name "gmp-internal-tabbed-layout" already defined.
+[00:19:43.749] Browser WARN    Element with name "gmp-internal-lightbox" already defined.
+[00:19:43.749] Browser WARN    Element with name "gmp-internal-collage" already defined.
+[00:19:43.749] Browser WARN    Element with name "gmp-internal-place-rating-summary" already defined.
+[00:19:43.749] Browser WARN    Element with name "gmp-internal-place-basic-info" already defined.
+[00:19:43.749] Browser WARN    Element with name "gmp-place-details-location-request" already defined.
+[00:19:43.749] Browser WARN    Element with name "gmp-place-details-place-request" already defined.
+[00:19:43.749] Browser WARN    Element with name "gmp-internal-circular-loader" already defined.
+[00:19:43.749] Browser WARN    Element with name "gmp-place-details-compact" already defined.
+[00:19:43.749] Browser WARN    Element with name "gmp-internal-use-place-details-compact" already defined.
+[00:19:43.749] Browser WARN    Element with name "gmp-place-media" already defined.
+[00:19:43.749] Browser WARN    Element with name "gmp-place-address" already defined.
+[00:19:43.749] Browser WARN    Element with name "gmp-place-rating" already defined.
+[00:19:43.749] Browser WARN    Element with name "gmp-place-type" already defined.
+[00:19:43.749] Browser WARN    Element with name "gmp-place-price" already defined.
+[00:19:43.749] Browser WARN    Element with name "gmp-place-accessible-entrance-icon" already defined.
+[00:19:43.749] Browser WARN    Element with name "gmp-place-open-now-status" already defined.
+[00:19:43.749] Browser WARN    Element with name "gmp-place-attribution" already defined.
+[00:19:43.749] Browser WARN    Element with name "gmp-place-website" already defined.
+[00:19:43.749] Browser WARN    Element with name "gmp-place-phone-number" already defined.
+[00:19:43.749] Browser WARN    Element with name "gmp-place-opening-hours" already defined.
+[00:19:43.749] Browser WARN    Element with name "gmp-place-summary" already defined.
+[00:19:43.749] Browser WARN    Element with name "gmp-place-type-specific-highlights" already defined.
+[00:19:43.749] Browser WARN    Element with name "gmp-place-reviews" already defined.
+[00:19:43.749] Browser WARN    Element with name "gmp-place-plus-code" already defined.
+[00:19:43.749] Browser WARN    Element with name "gmp-place-feature-list" already defined.
+[00:19:43.749] Browser WARN    Element with name "gmp-place-details" already defined.
+[00:19:43.749] Browser WARN    Element with name "gmp-internal-place-carousel" already defined.
+[00:19:43.749] Browser WARN    Element with name "gmp-internal-place-search-list-item" already defined.
+[00:19:43.749] Browser WARN    Element with name "gmp-place-nearby-search-request" already defined.
+[00:19:43.749] Browser WARN    Element with name "gmp-place-text-search-request" already defined.
+[00:19:43.749] Browser WARN    Element with name "gmp-place-search" already defined.
+[00:19:43.749] Browser WARN    Element with name "gmp-map" already defined.
+[00:19:43.749] Browser WARN    Element with name "gmp-place-autocomplete" already defined.
+[00:19:43.749] Browser WARN    Element with name "gmp-basic-place-autocomplete" already defined.
+[00:19:43.749] Browser WARN    As of March 1st, 2025, google.maps.places.Autocomplete is not available to new customers. Please use google.maps.places.PlaceAutocompleteElement instead. At this time, google.maps.places.Autocomplete is not scheduled to be discontinued, but google.maps.places.PlaceAutocompleteElement is recommended over google.maps.places.Autocomplete. While google.maps.places.Autocomplete will continue to receive bug fixes for any major regressions, existing bugs in google.maps.places.Autocomplete will not be addressed. At least 12 months notice will be given before support is discontinued. Please see https://developers.google.com/maps/legacy for additional details and https://developers.google.com/maps/documentation/javascript/places-migration-overview for the migration guide.
+[00:19:43.749] Browser WARN    Element with name "gmp-pin" already defined.
+[00:19:43.749] Browser WARN    Element with name "gmp-internal-camera-control" already defined.
+[00:20:08.064] Server  LOG     ✓ Compiled in 34ms
+[00:27:32.949] Server  LOG     ✓ Compiled in 126ms
+[00:27:49.158] Server  LOG     ✓ Compiled in 42ms
+[00:29:44.228] Browser WARN    Google Maps JavaScript API has been loaded directly without loading=async. This can result in suboptimal performance. For best-practice loading patterns please see https://goo.gle/js-api-loading
+[00:29:44.228] Browser WARN    As of March 1st, 2025, google.maps.places.Autocomplete is not available to new customers. Please use google.maps.places.PlaceAutocompleteElement instead. At this time, google.maps.places.Autocomplete is not scheduled to be discontinued, but google.maps.places.PlaceAutocompleteElement is recommended over google.maps.places.Autocomplete. While google.maps.places.Autocomplete will continue to receive bug fixes for any major regressions, existing bugs in google.maps.places.Autocomplete will not be addressed. At least 12 months notice will be given before support is discontinued. Please see https://developers.google.com/maps/legacy for additional details and https://developers.google.com/maps/documentation/javascript/places-migration-overview for the migration guide.
+[00:33:30.123] Server  LOG     ✓ Compiled in 44ms
+[00:33:43.328] Browser WARN    Detected `scroll-behavior: smooth` on the `<html>` element. To disable smooth scrolling during route transitions, add `data-scroll-behavior="smooth"` to your <html> element. Learn more: https://nextjs.org/docs/messages/missing-data-scroll-behavior
+[00:33:53.517] Server  LOG     ✓ Compiled in 22ms
+[00:35:01.781] Server  LOG     ✓ Compiled in 54ms
+[00:35:20.158] Server  LOG     ✓ Compiled in 35ms
+[00:37:29.907] Server  LOG     ✓ Compiled in 51ms
+[00:39:07.773] Server  LOG     ✓ Compiled in 95ms
+[00:39:25.834] Server  LOG     ✓ Compiled in 30ms
+[00:40:06.672] Server  LOG     ✓ Compiled in 77ms
+[00:40:31.397] Server  LOG     ✓ Compiled in 56ms
+[00:41:40.188] Server  LOG     ✓ Compiled in 24ms
+[00:43:15.585] Browser WARN    Google Maps JavaScript API has been loaded directly without loading=async. This can result in suboptimal performance. For best-practice loading patterns please see https://goo.gle/js-api-loading
+[00:43:15.585] Browser WARN    As of March 1st, 2025, google.maps.places.Autocomplete is not available to new customers. Please use google.maps.places.PlaceAutocompleteElement instead. At this time, google.maps.places.Autocomplete is not scheduled to be discontinued, but google.maps.places.PlaceAutocompleteElement is recommended over google.maps.places.Autocomplete. While google.maps.places.Autocomplete will continue to receive bug fixes for any major regressions, existing bugs in google.maps.places.Autocomplete will not be addressed. At least 12 months notice will be given before support is discontinued. Please see https://developers.google.com/maps/legacy for additional details and https://developers.google.com/maps/documentation/javascript/places-migration-overview for the migration guide.
+[00:43:50.796] Server  LOG     ✓ Compiled in 66ms
+[00:44:47.636] Server  LOG     ✓ Compiled in 77ms
+[00:45:27.290] Server  LOG     ✓ Compiled in 64ms
+[00:45:42.578] Browser WARN    Detected `scroll-behavior: smooth` on the `<html>` element. To disable smooth scrolling during route transitions, add `data-scroll-behavior="smooth"` to your <html> element. Learn more: https://nextjs.org/docs/messages/missing-data-scroll-behavior
+[00:46:38.525] Server  LOG     ✓ Compiled in 17ms
+[00:47:22.525] Server  LOG     ✓ Compiled in 38ms
+[00:47:22.617] Browser ERROR   The `%s` prop supplied to <select> must be an array if `multiple` is true.%s value 
+
+Check the render method of `NewProductPage`.
+[00:47:40.335] Server  LOG     ✓ Compiled in 7ms
+[00:49:09.483] Server  LOG     ✓ Compiled in 49ms
+[00:49:36.469] Server  LOG     ✓ Compiled in 38ms
+[08:58:47.288] Server  LOG     ✓ Compiled in 221ms
+[08:59:04.528] Server  LOG     ✓ Compiled in 41ms
+[09:00:11.444] Server  LOG     ✓ Compiled in 57ms
+[09:02:49.925] Server  LOG     ✓ Compiled in 49ms
+[18:37:26.832] Server  LOG     ✓ Compiled in 64ms
+[18:41:16.409] Server  LOG     ✓ Compiled in 75ms
+[18:42:34.664] Server  LOG     ✓ Compiled in 90ms
+[18:43:35.534] Server  LOG     ✓ Compiled in 37ms
+[18:45:21.091] Server  LOG     ✓ Compiled in 26ms
+[18:46:44.347] Server  LOG     ✓ Compiled in 295ms
+[18:48:03.693] Server  LOG     ✓ Compiled in 169ms
+[18:50:59.836] Server  LOG     ✓ Compiled in 98ms
+[18:53:38.844] Browser WARN    Detected `scroll-behavior: smooth` on the `<html>` element. To disable smooth scrolling during route transitions, add `data-scroll-behavior="smooth"` to your <html> element. Learn more: https://nextjs.org/docs/messages/missing-data-scroll-behavior
+[18:54:12.403] Browser WARN    Google Maps JavaScript API has been loaded directly without loading=async. This can result in suboptimal performance. For best-practice loading patterns please see https://goo.gle/js-api-loading
+[18:54:12.403] Browser WARN    As of March 1st, 2025, google.maps.places.Autocomplete is not available to new customers. Please use google.maps.places.PlaceAutocompleteElement instead. At this time, google.maps.places.Autocomplete is not scheduled to be discontinued, but google.maps.places.PlaceAutocompleteElement is recommended over google.maps.places.Autocomplete. While google.maps.places.Autocomplete will continue to receive bug fixes for any major regressions, existing bugs in google.maps.places.Autocomplete will not be addressed. At least 12 months notice will be given before support is discontinued. Please see https://developers.google.com/maps/legacy for additional details and https://developers.google.com/maps/documentation/javascript/places-migration-overview for the migration guide.

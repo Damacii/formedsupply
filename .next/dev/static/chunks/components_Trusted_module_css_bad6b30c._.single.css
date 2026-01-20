@@ -1,0 +1,64 @@
+/* [project]/components/Trusted.module.css [app-client] (css) */
+.Trusted-module__TZMPnq__trusted {
+  padding: var(--space-5) 0 var(--space-4);
+  border-bottom: 1px solid var(--accent);
+}
+
+.Trusted-module__TZMPnq__logoMarquee {
+  padding: var(--space-2) 0;
+  background: var(--bg);
+  border-top: 1px solid var(--accent);
+  border-bottom: 1px solid var(--accent);
+  border-radius: 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.Trusted-module__TZMPnq__logoMarquee:before, .Trusted-module__TZMPnq__logoMarquee:after {
+  content: "";
+  pointer-events: none;
+  z-index: 1;
+  width: 80px;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+}
+
+.Trusted-module__TZMPnq__logoMarquee:before {
+  background: linear-gradient(90deg, var(--bg) 0%, #f4f4f200 100%);
+  left: 0;
+}
+
+.Trusted-module__TZMPnq__logoMarquee:after {
+  background: linear-gradient(270deg, var(--bg) 0%, #f4f4f200 100%);
+  right: 0;
+}
+
+.Trusted-module__TZMPnq__logoTrack {
+  gap: var(--space-4);
+  width: max-content;
+  color: var(--muted);
+  align-items: center;
+  animation: 30s linear infinite Trusted-module__TZMPnq__marquee;
+  display: flex;
+}
+
+.Trusted-module__TZMPnq__logoTrack svg {
+  filter: grayscale();
+  opacity: .8;
+  flex-shrink: 0;
+  width: 140px;
+  height: auto;
+}
+
+@keyframes Trusted-module__TZMPnq__marquee {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+/*# sourceMappingURL=components_Trusted_module_css_bad6b30c._.single.css.map*/

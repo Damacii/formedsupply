@@ -1,0 +1,78 @@
+.lead {
+  padding: var(--space-6) 0;
+  border-top: 1px solid var(--accent);
+}
+
+.leadGrid {
+  display: grid;
+  gap: var(--space-5);
+  align-items: start;
+}
+
+.leadCopy h2 {
+  text-transform: uppercase;
+  font-weight: 800;
+  margin-bottom: var(--space-2);
+}
+
+.leadCopy p {
+  color: var(--muted);
+  font-size: 1.1rem;
+}
+
+.leadForm {
+  display: grid;
+  gap: var(--space-3);
+  background: #FFF;
+  padding: var(--space-4);
+  border: 1px solid #111;
+  box-shadow: 8px 8px 0 rgba(17,17,17,0.1);
+}
+
+.formRow {
+  display: grid;
+  gap: var(--space-3);
+}
+
+.leadForm label {
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  margin-bottom: 0.4rem;
+  display: block;
+}
+
+.leadForm input,
+.leadForm textarea {
+  padding: 0.8rem 1rem;
+  border-radius: 0; /* Square */
+  border: 1px solid var(--accent);
+  background: #fff;
+  font: inherit;
+  width: 100%;
+}
+
+.leadForm input:focus,
+.leadForm textarea:focus {
+  border-color: #111;
+  outline: none;
+  background: #FAFAFA;
+}
+
+.formNote {
+  color: var(--muted);
+  min-height: 1.2rem;
+  font-size: 0.9rem;
+  margin-top: 1rem;
+}
+
+@media (min-width: 768px) {
+  .leadGrid {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-6);
+  }
+
+  .formRow {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
