@@ -72,9 +72,6 @@
   display: inline-flex;
 }
 
-.navAdmin {
-  display: inline-flex;
-}
 
 @media (min-width: 768px) {
   .headerInner {

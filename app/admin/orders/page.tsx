@@ -13,8 +13,8 @@ type RequestRow = {
   name: string;
   email: string;
   company: string | null;
-  product_interest: string | null;
-  quantity: string | null;
+  products: { id: string; name: string; moq?: number | null }[] | null;
+  quantities: Record<string, string> | null;
   message: string | null;
   created_at: string;
   status: string | null;
@@ -26,6 +26,7 @@ export default function AdminOrdersPage() {
   const [role, setRole] = useState<Role>("guest");
   const [requests, setRequests] = useState<RequestRow[]>([]);
   const [requestsLoading, setRequestsLoading] = useState(false);
+  const [requestsError, setRequestsError] = useState("");
 
   useEffect(() => {
     const loadUser = async () => {
@@ -56,15 +57,16 @@ export default function AdminOrdersPage() {
   useEffect(() => {
     const loadRequests = async () => {
       setRequestsLoading(true);
+      setRequestsError("");
       const { data, error } = await supabase
         .from("requests")
-        .select(
-          "id, name, email, company, product_interest, quantity, message, created_at, status"
-        )
+        .select("*")
         .order("created_at", { ascending: false })
         .limit(20);
 
-      if (!error && data) {
+      if (error) {
+        setRequestsError("Unable to load requests. Check table permissions/columns.");
+      } else if (data) {
         setRequests(data as RequestRow[]);
       }
       setRequestsLoading(false);
@@ -131,6 +133,9 @@ export default function AdminOrdersPage() {
               {requestsLoading ? "…" : requests.length}
             </span>
           </div>
+          {requestsError ? (
+            <p className={styles.empty}>{requestsError}</p>
+          ) : null}
           {requests.length === 0 && !requestsLoading ? (
             <p className={styles.empty}>
               No new requests yet. Incoming submissions will appear here.
@@ -151,8 +156,10 @@ export default function AdminOrdersPage() {
                     </span>
                   </div>
                   <p className={styles.orderDetails}>
-                    {request.product_interest ?? "General inquiry"}
-                    {request.quantity ? ` · ${request.quantity}` : ""}
+                    {request.products?.length
+                      ? request.products.map((product) => product.name).join(", ")
+                      : "General inquiry"}
+                    {request.quantities ? " · Quantities provided" : ""}
                   </p>
                 </article>
               ))}

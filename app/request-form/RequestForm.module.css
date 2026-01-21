@@ -31,6 +31,10 @@
   max-width: 40ch;
 }
 
+.oneLineNote {
+  white-space: nowrap;
+}
+
 .trustRow {
   display: flex;
   flex-wrap: wrap;
@@ -67,6 +71,28 @@
   /* No rounded corners for industrial feel */
   border-radius: 0;
   box-shadow: 8px 8px 0px rgba(17, 17, 17, 0.1); /* Hard shadow */
+}
+
+.thankYou {
+  display: grid;
+  place-items: center;
+  text-align: center;
+  background: #ffffff;
+  border: 2px solid #111;
+  padding: var(--space-5);
+  box-shadow: 8px 8px 0px rgba(17, 17, 17, 0.1);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.thankYouAnimation {
+  width: min(320px, 70vw);
+  height: min(320px, 70vw);
+}
+
+.thankYouMessage {
+  margin-top: var(--space-2);
 }
 
 .stepHeader {

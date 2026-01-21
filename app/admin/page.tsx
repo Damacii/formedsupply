@@ -217,6 +217,9 @@ export default function AdminHome() {
             <Link className="btn btn-primary" href="/admin/products/new">
               Add Product
             </Link>
+            <Link className="btn btn-secondary" href="/#edit-site">
+              Edit Site
+            </Link>
             <button className="btn btn-secondary" type="button" onClick={handleSignOut}>
               Sign out
             </button>

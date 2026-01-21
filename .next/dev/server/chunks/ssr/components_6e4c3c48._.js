@@ -9,6 +9,7 @@ __turbopack_context__.v({
   "heroEditorActions": "Hero-module__Z8hQ_W__heroEditorActions",
   "heroEditorAnchor": "Hero-module__Z8hQ_W__heroEditorAnchor",
   "heroEditorEmpty": "Hero-module__Z8hQ_W__heroEditorEmpty",
+  "heroEditorError": "Hero-module__Z8hQ_W__heroEditorError",
   "heroEditorField": "Hero-module__Z8hQ_W__heroEditorField",
   "heroEditorForm": "Hero-module__Z8hQ_W__heroEditorForm",
   "heroEditorHeader": "Hero-module__Z8hQ_W__heroEditorHeader",
@@ -68,6 +69,8 @@ function Hero() {
         ], []);
     const [customSlides, setCustomSlides] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])([]);
     const [isEditing, setIsEditing] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(false);
+    const [storageError, setStorageError] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(false);
+    const [isDirty, setIsDirty] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(false);
     const slides = customSlides.length ? customSlides : defaultSlides;
     const slideCount = slides.length;
     const [activeIndex, setActiveIndex] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(0);
@@ -100,17 +103,8 @@ function Hero() {
             }
         }
         hasLoaded.current = true;
+        setIsDirty(false);
     }, []);
-    (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useEffect"])(()=>{
-        if (!hasLoaded.current) return;
-        if (customSlides.length === 0) {
-            window.localStorage.removeItem(HERO_SLIDES_KEY);
-            return;
-        }
-        window.localStorage.setItem(HERO_SLIDES_KEY, JSON.stringify(customSlides));
-    }, [
-        customSlides
-    ]);
     (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useEffect"])(()=>{
         const updateEditorState = ()=>{
             setIsEditing(window.location.hash === "#edit-site");
@@ -125,7 +119,7 @@ function Hero() {
         }
         const timer = window.setInterval(()=>{
             setActiveIndex((index)=>(index + 1) % slideCount);
-        }, 5000);
+        }, 3500);
         return ()=>window.clearInterval(timer);
     }, [
         isDragging,
@@ -146,26 +140,66 @@ function Hero() {
             history.replaceState(null, "", window.location.pathname + window.location.search);
         }
     };
+    const handleSaveSlides = ()=>{
+        if (!hasLoaded.current) return;
+        try {
+            if (customSlides.length === 0) {
+                window.localStorage.removeItem(HERO_SLIDES_KEY);
+            } else {
+                window.localStorage.setItem(HERO_SLIDES_KEY, JSON.stringify(customSlides));
+            }
+            setStorageError(false);
+            setIsDirty(false);
+        } catch  {
+            setStorageError(true);
+        }
+    };
+    const compressImage = async (file)=>{
+        const bitmap = await createImageBitmap(file);
+        const maxSize = 2560;
+        const scale = Math.min(1, maxSize / Math.max(bitmap.width, bitmap.height));
+        const targetWidth = Math.round(bitmap.width * scale);
+        const targetHeight = Math.round(bitmap.height * scale);
+        const canvas = document.createElement("canvas");
+        canvas.width = targetWidth;
+        canvas.height = targetHeight;
+        const ctx = canvas.getContext("2d");
+        if (!ctx) {
+            throw new Error("No canvas context");
+        }
+        ctx.drawImage(bitmap, 0, 0, targetWidth, targetHeight);
+        return canvas.toDataURL("image/webp", 0.95);
+    };
     const handleImageUpload = async (event)=>{
         const files = Array.from(event.target.files ?? []);
         if (!files.length) return;
         const uploads = await Promise.all(files.map((file)=>new Promise((resolve, reject)=>{
-                const reader = new FileReader();
-                reader.onload = ()=>{
+                compressImage(file).then((dataUrl)=>{
                     resolve({
                         id: `${Date.now()}-${Math.random().toString(16).slice(2)}`,
-                        src: String(reader.result || ""),
+                        src: dataUrl,
                         sku: "",
                         href: ""
                     });
-                };
-                reader.onerror = ()=>reject(new Error("Failed to read image"));
-                reader.readAsDataURL(file);
+                }).catch(()=>{
+                    const reader = new FileReader();
+                    reader.onload = ()=>{
+                        resolve({
+                            id: `${Date.now()}-${Math.random().toString(16).slice(2)}`,
+                            src: String(reader.result || ""),
+                            sku: "",
+                            href: ""
+                        });
+                    };
+                    reader.onerror = ()=>reject(new Error("Failed to read image"));
+                    reader.readAsDataURL(file);
+                });
             })));
         setCustomSlides((prev)=>[
                 ...prev,
                 ...uploads
             ]);
+        setIsDirty(true);
         event.target.value = "";
     };
     const handleSlideMetaChange = (index, field, value)=>{
@@ -173,9 +207,11 @@ function Hero() {
                     ...slide,
                     [field]: value
                 } : slide));
+        setIsDirty(true);
     };
     const handleRemoveSlide = (index)=>{
         setCustomSlides((prev)=>prev.filter((_, slideIndex)=>slideIndex !== index));
+        setIsDirty(true);
     };
     const handlePointerDown = (event)=>{
         dragStartX.current = event.clientX;
@@ -244,7 +280,7 @@ function Hero() {
                                 children: "Branded print & supplies for coffee shops and restaurants."
                             }, void 0, false, {
                                 fileName: "[project]/components/Hero.tsx",
-                                lineNumber: 215,
+                                lineNumber: 255,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -252,7 +288,7 @@ function Hero() {
                                 children: "Cups, menus, labels, packaging, signage — consistent, fast, and clean."
                             }, void 0, false, {
                                 fileName: "[project]/components/Hero.tsx",
-                                lineNumber: 216,
+                                lineNumber: 256,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -264,7 +300,7 @@ function Hero() {
                                         children: "Request a Quote"
                                     }, void 0, false, {
                                         fileName: "[project]/components/Hero.tsx",
-                                        lineNumber: 220,
+                                        lineNumber: 260,
                                         columnNumber: 11
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("a", {
@@ -273,13 +309,13 @@ function Hero() {
                                         children: "View Products"
                                     }, void 0, false, {
                                         fileName: "[project]/components/Hero.tsx",
-                                        lineNumber: 223,
+                                        lineNumber: 263,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/components/Hero.tsx",
-                                lineNumber: 219,
+                                lineNumber: 259,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -290,33 +326,33 @@ function Hero() {
                                         children: "Proof before print"
                                     }, void 0, false, {
                                         fileName: "[project]/components/Hero.tsx",
-                                        lineNumber: 228,
+                                        lineNumber: 268,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                         children: "Quotes in 24 hours"
                                     }, void 0, false, {
                                         fileName: "[project]/components/Hero.tsx",
-                                        lineNumber: 229,
+                                        lineNumber: 269,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                         children: "Reorder-ready"
                                     }, void 0, false, {
                                         fileName: "[project]/components/Hero.tsx",
-                                        lineNumber: 230,
+                                        lineNumber: 270,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/components/Hero.tsx",
-                                lineNumber: 227,
+                                lineNumber: 267,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/components/Hero.tsx",
-                        lineNumber: 214,
+                        lineNumber: 254,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -353,13 +389,13 @@ function Hero() {
                                             "aria-hidden": "true"
                                         }, slide.id, false, {
                                             fileName: "[project]/components/Hero.tsx",
-                                            lineNumber: 267,
+                                            lineNumber: 307,
                                             columnNumber: 19
                                         }, this);
                                     })
                                 }, void 0, false, {
                                     fileName: "[project]/components/Hero.tsx",
-                                    lineNumber: 240,
+                                    lineNumber: 280,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -371,30 +407,30 @@ function Hero() {
                                             children: activeSku ? activeSku : "Unassigned"
                                         }, void 0, false, {
                                             fileName: "[project]/components/Hero.tsx",
-                                            lineNumber: 278,
+                                            lineNumber: 318,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/components/Hero.tsx",
-                                    lineNumber: 276,
+                                    lineNumber: 316,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/components/Hero.tsx",
-                            lineNumber: 239,
+                            lineNumber: 279,
                             columnNumber: 11
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/components/Hero.tsx",
-                        lineNumber: 233,
+                        lineNumber: 273,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/components/Hero.tsx",
-                lineNumber: 213,
+                lineNumber: 253,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -402,7 +438,7 @@ function Hero() {
                 id: "edit-site"
             }, void 0, false, {
                 fileName: "[project]/components/Hero.tsx",
-                lineNumber: 283,
+                lineNumber: 323,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -417,43 +453,56 @@ function Hero() {
                                         children: "Edit Site"
                                     }, void 0, false, {
                                         fileName: "[project]/components/Hero.tsx",
-                                        lineNumber: 287,
+                                        lineNumber: 327,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                                         children: "Upload hero images and link each one to a SKU or product page."
                                     }, void 0, false, {
                                         fileName: "[project]/components/Hero.tsx",
-                                        lineNumber: 288,
+                                        lineNumber: 328,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/components/Hero.tsx",
-                                lineNumber: 286,
+                                lineNumber: 326,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                 className: __TURBOPACK__imported__module__$5b$project$5d2f$components$2f$Hero$2e$module$2e$css__$5b$app$2d$ssr$5d$__$28$css__module$29$__["default"].heroEditorActions,
-                                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
-                                    className: "btn btn-secondary",
-                                    type: "button",
-                                    onClick: handleCloseEditor,
-                                    children: "Close Editor"
-                                }, void 0, false, {
-                                    fileName: "[project]/components/Hero.tsx",
-                                    lineNumber: 291,
-                                    columnNumber: 13
-                                }, this)
-                            }, void 0, false, {
+                                children: [
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                                        className: "btn btn-primary",
+                                        type: "button",
+                                        onClick: handleSaveSlides,
+                                        disabled: !isDirty,
+                                        children: "Save Changes"
+                                    }, void 0, false, {
+                                        fileName: "[project]/components/Hero.tsx",
+                                        lineNumber: 331,
+                                        columnNumber: 13
+                                    }, this),
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                                        className: "btn btn-secondary",
+                                        type: "button",
+                                        onClick: handleCloseEditor,
+                                        children: "Close Editor"
+                                    }, void 0, false, {
+                                        fileName: "[project]/components/Hero.tsx",
+                                        lineNumber: 339,
+                                        columnNumber: 13
+                                    }, this)
+                                ]
+                            }, void 0, true, {
                                 fileName: "[project]/components/Hero.tsx",
-                                lineNumber: 290,
+                                lineNumber: 330,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/components/Hero.tsx",
-                        lineNumber: 285,
+                        lineNumber: 325,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -466,7 +515,7 @@ function Hero() {
                                         children: "Upload hero images"
                                     }, void 0, false, {
                                         fileName: "[project]/components/Hero.tsx",
-                                        lineNumber: 298,
+                                        lineNumber: 346,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -476,21 +525,29 @@ function Hero() {
                                         onChange: handleImageUpload
                                     }, void 0, false, {
                                         fileName: "[project]/components/Hero.tsx",
-                                        lineNumber: 299,
+                                        lineNumber: 347,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/components/Hero.tsx",
-                                lineNumber: 297,
+                                lineNumber: 345,
                                 columnNumber: 11
                             }, this),
+                            storageError ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                                className: __TURBOPACK__imported__module__$5b$project$5d2f$components$2f$Hero$2e$module$2e$css__$5b$app$2d$ssr$5d$__$28$css__module$29$__["default"].heroEditorError,
+                                children: "Storage limit reached. Upload fewer/smaller images or refresh to clear saved data."
+                            }, void 0, false, {
+                                fileName: "[project]/components/Hero.tsx",
+                                lineNumber: 350,
+                                columnNumber: 13
+                            }, this) : null,
                             customSlides.length === 0 ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                                 className: __TURBOPACK__imported__module__$5b$project$5d2f$components$2f$Hero$2e$module$2e$css__$5b$app$2d$ssr$5d$__$28$css__module$29$__["default"].heroEditorEmpty,
                                 children: "No hero images uploaded yet."
                             }, void 0, false, {
                                 fileName: "[project]/components/Hero.tsx",
-                                lineNumber: 302,
+                                lineNumber: 356,
                                 columnNumber: 13
                             }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                 className: __TURBOPACK__imported__module__$5b$project$5d2f$components$2f$Hero$2e$module$2e$css__$5b$app$2d$ssr$5d$__$28$css__module$29$__["default"].heroEditorList,
@@ -504,12 +561,12 @@ function Hero() {
                                                     alt: ""
                                                 }, void 0, false, {
                                                     fileName: "[project]/components/Hero.tsx",
-                                                    lineNumber: 308,
+                                                    lineNumber: 362,
                                                     columnNumber: 34
                                                 }, this) : null
                                             }, void 0, false, {
                                                 fileName: "[project]/components/Hero.tsx",
-                                                lineNumber: 307,
+                                                lineNumber: 361,
                                                 columnNumber: 19
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
@@ -519,7 +576,7 @@ function Hero() {
                                                         children: "SKU"
                                                     }, void 0, false, {
                                                         fileName: "[project]/components/Hero.tsx",
-                                                        lineNumber: 311,
+                                                        lineNumber: 365,
                                                         columnNumber: 21
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -528,13 +585,13 @@ function Hero() {
                                                         onChange: (event)=>handleSlideMetaChange(index, "sku", event.target.value)
                                                     }, void 0, false, {
                                                         fileName: "[project]/components/Hero.tsx",
-                                                        lineNumber: 312,
+                                                        lineNumber: 366,
                                                         columnNumber: 21
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/components/Hero.tsx",
-                                                lineNumber: 310,
+                                                lineNumber: 364,
                                                 columnNumber: 19
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
@@ -544,7 +601,7 @@ function Hero() {
                                                         children: "Product link"
                                                     }, void 0, false, {
                                                         fileName: "[project]/components/Hero.tsx",
-                                                        lineNumber: 321,
+                                                        lineNumber: 375,
                                                         columnNumber: 21
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -554,13 +611,13 @@ function Hero() {
                                                         onChange: (event)=>handleSlideMetaChange(index, "href", event.target.value)
                                                     }, void 0, false, {
                                                         fileName: "[project]/components/Hero.tsx",
-                                                        lineNumber: 322,
+                                                        lineNumber: 376,
                                                         columnNumber: 21
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/components/Hero.tsx",
-                                                lineNumber: 320,
+                                                lineNumber: 374,
                                                 columnNumber: 19
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -570,36 +627,36 @@ function Hero() {
                                                 children: "Remove"
                                             }, void 0, false, {
                                                 fileName: "[project]/components/Hero.tsx",
-                                                lineNumber: 331,
+                                                lineNumber: 385,
                                                 columnNumber: 19
                                             }, this)
                                         ]
                                     }, slide.id, true, {
                                         fileName: "[project]/components/Hero.tsx",
-                                        lineNumber: 306,
+                                        lineNumber: 360,
                                         columnNumber: 17
                                     }, this))
                             }, void 0, false, {
                                 fileName: "[project]/components/Hero.tsx",
-                                lineNumber: 304,
+                                lineNumber: 358,
                                 columnNumber: 13
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/components/Hero.tsx",
-                        lineNumber: 296,
+                        lineNumber: 344,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/components/Hero.tsx",
-                lineNumber: 284,
+                lineNumber: 324,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/components/Hero.tsx",
-        lineNumber: 212,
+        lineNumber: 252,
         columnNumber: 5
     }, this);
 }

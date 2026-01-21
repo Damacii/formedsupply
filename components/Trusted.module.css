@@ -52,6 +52,101 @@
   opacity: 0.8;
 }
 
+.logoImage {
+  width: 140px;
+  height: 40px;
+  object-fit: contain;
+  flex-shrink: 0;
+  filter: grayscale(100%);
+  opacity: 0.8;
+}
+
+.logoEditor {
+  margin-top: var(--space-4);
+  border: 2px solid var(--text);
+  background: #fff;
+  padding: var(--space-4);
+  box-shadow: var(--shadow);
+}
+
+.logoEditorHeader {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--space-3);
+}
+
+.logoEditorHeader h2 {
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.5rem;
+}
+
+.logoEditorHeader p {
+  color: var(--muted);
+  max-width: 48ch;
+}
+
+.logoEditorActions {
+  display: flex;
+  gap: var(--space-2);
+}
+
+.logoEditorField {
+  display: grid;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-bottom: var(--space-3);
+}
+
+.logoEditorField input {
+  border: 2px solid var(--text);
+  padding: 0.6rem 0.8rem;
+  font-size: 0.95rem;
+}
+
+.logoEditorError {
+  color: #8c1d1d;
+  font-weight: 600;
+}
+
+.logoEditorEmpty {
+  color: var(--muted);
+}
+
+.logoEditorList {
+  display: grid;
+  gap: var(--space-2);
+}
+
+.logoEditorItem {
+  display: grid;
+  gap: var(--space-2);
+  grid-template-columns: 120px minmax(0, 1fr) auto;
+  align-items: center;
+  border: 1px solid var(--accent);
+  padding: var(--space-2);
+}
+
+.logoEditorThumb {
+  width: 120px;
+  height: 48px;
+  border: 1px solid var(--accent);
+  background: var(--bg);
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+}
+
+.logoEditorThumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
 @keyframes marquee {
   0% {
     transform: translateX(0);

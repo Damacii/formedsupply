@@ -1,12 +1,15 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import styles from "./RequestForm.module.css";
 import { supabase } from "../../lib/supabaseClient";
 
 export default function RequestFormPage() {
   const [status, setStatus] = useState("");
   const [submitting, setSubmitting] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
+  const [showThankYou, setShowThankYou] = useState(false);
+  const animationRef = useRef<HTMLDivElement | null>(null);
   const [step, setStep] = useState(0);
   const [products, setProducts] = useState<
     {
@@ -67,12 +70,6 @@ export default function RequestFormPage() {
       return;
     }
 
-    if (!logoFile) {
-      setStatus("Please upload a logo file.");
-      setSubmitting(false);
-      return;
-    }
-
     const invalidQuantity = form.productSelections.find((product) => {
       const raw = form.quantities[product.id];
       if (!raw) return true;
@@ -98,18 +95,16 @@ export default function RequestFormPage() {
           .from("request-logos")
           .upload(path, logoFile, {
             cacheControl: "3600",
-            upsert: false,
+            upsert: true,
             contentType: logoFile.type || "image/png"
           });
 
         if (uploadError) {
-          throw new Error(
-            `Logo upload failed. Make sure the 'request-logos' bucket exists and allows public inserts.`
-          );
+          setStatus("Logo upload failed, submitting without the logo.");
+        } else {
+          const { data } = supabase.storage.from("request-logos").getPublicUrl(path);
+          logoUrl = data.publicUrl;
         }
-
-        const { data } = supabase.storage.from("request-logos").getPublicUrl(path);
-        logoUrl = data.publicUrl;
       }
 
       const response = await fetch("/api/requests", {
@@ -126,6 +121,8 @@ export default function RequestFormPage() {
       }
 
       setStatus("Request received. Our team will reach out within 24 hours.");
+      setSubmitted(true);
+      setShowThankYou(false);
       setForm({
         name: "",
         email: "",
@@ -230,6 +227,66 @@ export default function RequestFormPage() {
     };
   }, []);
 
+  useEffect(() => {
+    if (!submitted || !animationRef.current) {
+      return;
+    }
+    let animation: any;
+    let isMounted = true;
+
+    const startAnimation = () => {
+      const lottie = (window as any).lottie;
+      if (!lottie || !animationRef.current) return;
+      animation = lottie.loadAnimation({
+        container: animationRef.current,
+        renderer: "svg",
+        loop: false,
+        autoplay: true,
+        path: "/lottie/message-sent.json"
+      });
+      animation.addEventListener("complete", () => {
+        if (isMounted) {
+          setShowThankYou(true);
+        }
+      });
+    };
+
+    if (!(window as any).lottie) {
+      const existingScript = document.querySelector<HTMLScriptElement>(
+        "script[data-lottie-player]"
+      );
+      if (existingScript) {
+        existingScript.addEventListener("load", startAnimation, { once: true });
+      } else {
+        const script = document.createElement("script");
+        script.src = "https://unpkg.com/lottie-web@5.12.2/build/player/lottie.min.js";
+        script.async = true;
+        script.dataset.lottiePlayer = "true";
+        script.addEventListener("load", startAnimation, { once: true });
+        document.body.appendChild(script);
+      }
+    } else {
+      startAnimation();
+    }
+
+    return () => {
+      isMounted = false;
+      if (animation && animation.destroy) {
+        animation.destroy();
+      }
+    };
+  }, [submitted]);
+
+  useEffect(() => {
+    if (!showThankYou) {
+      return;
+    }
+    const timer = window.setTimeout(() => {
+      window.location.href = "/";
+    }, 2000);
+    return () => window.clearTimeout(timer);
+  }, [showThankYou]);
+
   const filteredProducts = useMemo(() => {
     const query = search.trim().toLowerCase();
     if (!query) return products;
@@ -279,11 +336,21 @@ export default function RequestFormPage() {
             <span>Proof before print</span>
             <span>Reorder-ready</span>
           </div>
-          <p>
+          <p className={styles.oneLineNote}>
             Our team responds within 24 hours with a supplier-ready quote.
           </p>
         </div>
-        <form className={styles.form} onSubmit={handleSubmit}>
+        {submitted ? (
+          <div className={styles.thankYou} role="status" aria-live="polite">
+            <div ref={animationRef} className={styles.thankYouAnimation}></div>
+            {showThankYou ? (
+              <p className={styles.thankYouMessage}>
+                Thank you, a team member will contact you!
+              </p>
+            ) : null}
+          </div>
+        ) : (
+          <form className={styles.form} onSubmit={handleSubmit}>
           <div className={styles.stepHeader}>
             <div>
               <p className={styles.stepEyebrow}>
@@ -446,7 +513,6 @@ export default function RequestFormPage() {
                       <input
                         type="file"
                         accept="image/*"
-                        required
                         onChange={(event) =>
                           setLogoFile(event.target.files?.[0] ?? null)
                         }
@@ -546,7 +612,8 @@ export default function RequestFormPage() {
           <p className={styles.formNote} role="status" aria-live="polite">
             {status}
           </p>
-        </form>
+          </form>
+        )}
       </div>
     </section>
   );

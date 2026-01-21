@@ -14,6 +14,7 @@ __turbopack_context__.v({
   "helperText": "RequestForm-module__okqXIq__helperText",
   "imagePlaceholder": "RequestForm-module__okqXIq__imagePlaceholder",
   "layout": "RequestForm-module__okqXIq__layout",
+  "oneLineNote": "RequestForm-module__okqXIq__oneLineNote",
   "page": "RequestForm-module__okqXIq__page",
   "productList": "RequestForm-module__okqXIq__productList",
   "productMeta": "RequestForm-module__okqXIq__productMeta",
@@ -36,6 +37,9 @@ __turbopack_context__.v({
   "stepEyebrow": "RequestForm-module__okqXIq__stepEyebrow",
   "stepHeader": "RequestForm-module__okqXIq__stepHeader",
   "stepper": "RequestForm-module__okqXIq__stepper",
+  "thankYou": "RequestForm-module__okqXIq__thankYou",
+  "thankYouAnimation": "RequestForm-module__okqXIq__thankYouAnimation",
+  "thankYouMessage": "RequestForm-module__okqXIq__thankYouMessage",
   "trustRow": "RequestForm-module__okqXIq__trustRow",
 });
 }),
@@ -80,6 +84,9 @@ function RequestFormPage() {
     _s();
     const [status, setStatus] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])("");
     const [submitting, setSubmitting] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(false);
+    const [submitted, setSubmitted] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(false);
+    const [showThankYou, setShowThankYou] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(false);
+    const animationRef = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useRef"])(null);
     const [step, setStep] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(0);
     const [products, setProducts] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])([]);
     const [search, setSearch] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])("");
@@ -129,11 +136,6 @@ function RequestFormPage() {
             setSubmitting(false);
             return;
         }
-        if (!logoFile) {
-            setStatus("Please upload a logo file.");
-            setSubmitting(false);
-            return;
-        }
         const invalidQuantity = form.productSelections.find((product)=>{
             const raw = form.quantities[product.id];
             if (!raw) return true;
@@ -155,14 +157,15 @@ function RequestFormPage() {
                 const path = `requests/${Date.now()}-${safeName || `logo.${extension}`}`;
                 const { error: uploadError } = await __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$supabaseClient$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["supabase"].storage.from("request-logos").upload(path, logoFile, {
                     cacheControl: "3600",
-                    upsert: false,
+                    upsert: true,
                     contentType: logoFile.type || "image/png"
                 });
                 if (uploadError) {
-                    throw new Error(`Logo upload failed. Make sure the 'request-logos' bucket exists and allows public inserts.`);
+                    setStatus("Logo upload failed, submitting without the logo.");
+                } else {
+                    const { data } = __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$supabaseClient$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["supabase"].storage.from("request-logos").getPublicUrl(path);
+                    logoUrl = data.publicUrl;
                 }
-                const { data } = __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$supabaseClient$2e$ts__$5b$app$2d$client$5d$__$28$ecmascript$29$__["supabase"].storage.from("request-logos").getPublicUrl(path);
-                logoUrl = data.publicUrl;
             }
             const response = await fetch("/api/requests", {
                 method: "POST",
@@ -178,6 +181,8 @@ function RequestFormPage() {
                 throw new Error("Unable to submit request.");
             }
             setStatus("Request received. Our team will reach out within 24 hours.");
+            setSubmitted(true);
+            setShowThankYou(false);
             setForm({
                 name: "",
                 email: "",
@@ -288,6 +293,81 @@ function RequestFormPage() {
             })["RequestFormPage.useEffect"];
         }
     }["RequestFormPage.useEffect"], []);
+    (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useEffect"])({
+        "RequestFormPage.useEffect": ()=>{
+            if (!submitted || !animationRef.current) {
+                return;
+            }
+            let animation;
+            let isMounted = true;
+            const startAnimation = {
+                "RequestFormPage.useEffect.startAnimation": ()=>{
+                    const lottie = window.lottie;
+                    if (!lottie || !animationRef.current) return;
+                    animation = lottie.loadAnimation({
+                        container: animationRef.current,
+                        renderer: "svg",
+                        loop: false,
+                        autoplay: true,
+                        path: "/lottie/message-sent.json"
+                    });
+                    animation.addEventListener("complete", {
+                        "RequestFormPage.useEffect.startAnimation": ()=>{
+                            if (isMounted) {
+                                setShowThankYou(true);
+                            }
+                        }
+                    }["RequestFormPage.useEffect.startAnimation"]);
+                }
+            }["RequestFormPage.useEffect.startAnimation"];
+            if (!window.lottie) {
+                const existingScript = document.querySelector("script[data-lottie-player]");
+                if (existingScript) {
+                    existingScript.addEventListener("load", startAnimation, {
+                        once: true
+                    });
+                } else {
+                    const script = document.createElement("script");
+                    script.src = "https://unpkg.com/lottie-web@5.12.2/build/player/lottie.min.js";
+                    script.async = true;
+                    script.dataset.lottiePlayer = "true";
+                    script.addEventListener("load", startAnimation, {
+                        once: true
+                    });
+                    document.body.appendChild(script);
+                }
+            } else {
+                startAnimation();
+            }
+            return ({
+                "RequestFormPage.useEffect": ()=>{
+                    isMounted = false;
+                    if (animation && animation.destroy) {
+                        animation.destroy();
+                    }
+                }
+            })["RequestFormPage.useEffect"];
+        }
+    }["RequestFormPage.useEffect"], [
+        submitted
+    ]);
+    (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useEffect"])({
+        "RequestFormPage.useEffect": ()=>{
+            if (!showThankYou) {
+                return;
+            }
+            const timer = window.setTimeout({
+                "RequestFormPage.useEffect.timer": ()=>{
+                    window.location.href = "/";
+                }
+            }["RequestFormPage.useEffect.timer"], 2000);
+            return ({
+                "RequestFormPage.useEffect": ()=>window.clearTimeout(timer)
+            })["RequestFormPage.useEffect"];
+        }
+    }["RequestFormPage.useEffect"], [
+        showThankYou
+    ]);
     const filteredProducts = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useMemo"])({
         "RequestFormPage.useMemo[filteredProducts]": ()=>{
             const query = search.trim().toLowerCase();
@@ -360,7 +440,7 @@ function RequestFormPage() {
                             children: "Request a quote."
                         }, void 0, false, {
                             fileName: "[project]/app/request-form/page.tsx",
-                            lineNumber: 277,
+                            lineNumber: 334,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -370,36 +450,63 @@ function RequestFormPage() {
                                     children: "Proof before print"
                                 }, void 0, false, {
                                     fileName: "[project]/app/request-form/page.tsx",
-                                    lineNumber: 279,
+                                    lineNumber: 336,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                     children: "Reorder-ready"
                                 }, void 0, false, {
                                     fileName: "[project]/app/request-form/page.tsx",
-                                    lineNumber: 280,
+                                    lineNumber: 337,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/app/request-form/page.tsx",
-                            lineNumber: 278,
+                            lineNumber: 335,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                            className: __TURBOPACK__imported__module__$5b$project$5d2f$app$2f$request$2d$form$2f$RequestForm$2e$module$2e$css__$5b$app$2d$client$5d$__$28$css__module$29$__["default"].oneLineNote,
                             children: "Our team responds within 24 hours with a supplier-ready quote."
                         }, void 0, false, {
                             fileName: "[project]/app/request-form/page.tsx",
-                            lineNumber: 282,
+                            lineNumber: 339,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/app/request-form/page.tsx",
-                    lineNumber: 276,
+                    lineNumber: 333,
                     columnNumber: 9
                 }, this),
-                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("form", {
+                submitted ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                    className: __TURBOPACK__imported__module__$5b$project$5d2f$app$2f$request$2d$form$2f$RequestForm$2e$module$2e$css__$5b$app$2d$client$5d$__$28$css__module$29$__["default"].thankYou,
+                    role: "status",
+                    "aria-live": "polite",
+                    children: [
+                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                            ref: animationRef,
+                            className: __TURBOPACK__imported__module__$5b$project$5d2f$app$2f$request$2d$form$2f$RequestForm$2e$module$2e$css__$5b$app$2d$client$5d$__$28$css__module$29$__["default"].thankYouAnimation
+                        }, void 0, false, {
+                            fileName: "[project]/app/request-form/page.tsx",
+                            lineNumber: 345,
+                            columnNumber: 13
+                        }, this),
+                        showThankYou ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                            className: __TURBOPACK__imported__module__$5b$project$5d2f$app$2f$request$2d$form$2f$RequestForm$2e$module$2e$css__$5b$app$2d$client$5d$__$28$css__module$29$__["default"].thankYouMessage,
+                            children: "Thank you, a team member will contact you!"
+                        }, void 0, false, {
+                            fileName: "[project]/app/request-form/page.tsx",
+                            lineNumber: 347,
+                            columnNumber: 15
+                        }, this) : null
+                    ]
+                }, void 0, true, {
+                    fileName: "[project]/app/request-form/page.tsx",
+                    lineNumber: 344,
+                    columnNumber: 11
+                }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("form", {
                     className: __TURBOPACK__imported__module__$5b$project$5d2f$app$2f$request$2d$form$2f$RequestForm$2e$module$2e$css__$5b$app$2d$client$5d$__$28$css__module$29$__["default"].form,
                     onSubmit: handleSubmit,
                     children: [
@@ -418,14 +525,14 @@ function RequestFormPage() {
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/app/request-form/page.tsx",
-                                            lineNumber: 289,
+                                            lineNumber: 356,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
                                             children: steps[step].title
                                         }, void 0, false, {
                                             fileName: "[project]/app/request-form/page.tsx",
-                                            lineNumber: 292,
+                                            lineNumber: 359,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -433,13 +540,13 @@ function RequestFormPage() {
                                             children: steps[step].description
                                         }, void 0, false, {
                                             fileName: "[project]/app/request-form/page.tsx",
-                                            lineNumber: 293,
+                                            lineNumber: 360,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/request-form/page.tsx",
-                                    lineNumber: 288,
+                                    lineNumber: 355,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -449,18 +556,18 @@ function RequestFormPage() {
                                             className: `${__TURBOPACK__imported__module__$5b$project$5d2f$app$2f$request$2d$form$2f$RequestForm$2e$module$2e$css__$5b$app$2d$client$5d$__$28$css__module$29$__["default"].stepDot} ${index <= step ? __TURBOPACK__imported__module__$5b$project$5d2f$app$2f$request$2d$form$2f$RequestForm$2e$module$2e$css__$5b$app$2d$client$5d$__$28$css__module$29$__["default"].stepDotActive : ""}`
                                         }, item.title, false, {
                                             fileName: "[project]/app/request-form/page.tsx",
-                                            lineNumber: 297,
+                                            lineNumber: 364,
                                             columnNumber: 17
                                         }, this))
                                 }, void 0, false, {
                                     fileName: "[project]/app/request-form/page.tsx",
-                                    lineNumber: 295,
+                                    lineNumber: 362,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/app/request-form/page.tsx",
-                            lineNumber: 287,
+                            lineNumber: 354,
                             columnNumber: 11
                         }, this),
                         step === 0 ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Fragment"], {
@@ -478,13 +585,13 @@ function RequestFormPage() {
                                                     onChange: (event)=>handleChange("name", event.target.value)
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/request-form/page.tsx",
-                                                    lineNumber: 310,
+                                                    lineNumber: 377,
                                                     columnNumber: 19
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/app/request-form/page.tsx",
-                                            lineNumber: 308,
+                                            lineNumber: 375,
                                             columnNumber: 17
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
@@ -497,19 +604,19 @@ function RequestFormPage() {
                                                     onChange: (event)=>handleChange("email", event.target.value)
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/request-form/page.tsx",
-                                                    lineNumber: 319,
+                                                    lineNumber: 386,
                                                     columnNumber: 19
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/app/request-form/page.tsx",
-                                            lineNumber: 317,
+                                            lineNumber: 384,
                                             columnNumber: 17
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/request-form/page.tsx",
-                                    lineNumber: 307,
+                                    lineNumber: 374,
                                     columnNumber: 15
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -524,13 +631,13 @@ function RequestFormPage() {
                                                     onChange: (event)=>handleChange("phone", formatPhone(event.target.value))
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/request-form/page.tsx",
-                                                    lineNumber: 330,
+                                                    lineNumber: 397,
                                                     columnNumber: 19
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/app/request-form/page.tsx",
-                                            lineNumber: 328,
+                                            lineNumber: 395,
                                             columnNumber: 17
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
@@ -545,7 +652,7 @@ function RequestFormPage() {
                                                             children: "Select language"
                                                         }, void 0, false, {
                                                             fileName: "[project]/app/request-form/page.tsx",
-                                                            lineNumber: 342,
+                                                            lineNumber: 409,
                                                             columnNumber: 21
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
@@ -553,7 +660,7 @@ function RequestFormPage() {
                                                             children: "English"
                                                         }, void 0, false, {
                                                             fileName: "[project]/app/request-form/page.tsx",
-                                                            lineNumber: 343,
+                                                            lineNumber: 410,
                                                             columnNumber: 21
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
@@ -561,7 +668,7 @@ function RequestFormPage() {
                                                             children: "Spanish"
                                                         }, void 0, false, {
                                                             fileName: "[project]/app/request-form/page.tsx",
-                                                            lineNumber: 344,
+                                                            lineNumber: 411,
                                                             columnNumber: 21
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
@@ -569,7 +676,7 @@ function RequestFormPage() {
                                                             children: "French"
                                                         }, void 0, false, {
                                                             fileName: "[project]/app/request-form/page.tsx",
-                                                            lineNumber: 345,
+                                                            lineNumber: 412,
                                                             columnNumber: 21
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
@@ -577,25 +684,25 @@ function RequestFormPage() {
                                                             children: "Arabic"
                                                         }, void 0, false, {
                                                             fileName: "[project]/app/request-form/page.tsx",
-                                                            lineNumber: 346,
+                                                            lineNumber: 413,
                                                             columnNumber: 21
                                                         }, this)
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/app/request-form/page.tsx",
-                                                    lineNumber: 338,
+                                                    lineNumber: 405,
                                                     columnNumber: 19
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/app/request-form/page.tsx",
-                                            lineNumber: 336,
+                                            lineNumber: 403,
                                             columnNumber: 17
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/request-form/page.tsx",
-                                    lineNumber: 327,
+                                    lineNumber: 394,
                                     columnNumber: 15
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
@@ -610,14 +717,14 @@ function RequestFormPage() {
                                             onChange: (event)=>handleChange("address", event.target.value)
                                         }, void 0, false, {
                                             fileName: "[project]/app/request-form/page.tsx",
-                                            lineNumber: 352,
+                                            lineNumber: 419,
                                             columnNumber: 17
                                         }, this),
                                         ("TURBOPACK compile-time falsy", 0) ? /*#__PURE__*/ "TURBOPACK unreachable" : null
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/request-form/page.tsx",
-                                    lineNumber: 350,
+                                    lineNumber: 417,
                                     columnNumber: 15
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -635,7 +742,7 @@ function RequestFormPage() {
                                                             children: "Select method"
                                                         }, void 0, false, {
                                                             fileName: "[project]/app/request-form/page.tsx",
-                                                            lineNumber: 372,
+                                                            lineNumber: 439,
                                                             columnNumber: 21
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
@@ -643,7 +750,7 @@ function RequestFormPage() {
                                                             children: "Email"
                                                         }, void 0, false, {
                                                             fileName: "[project]/app/request-form/page.tsx",
-                                                            lineNumber: 373,
+                                                            lineNumber: 440,
                                                             columnNumber: 21
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
@@ -651,7 +758,7 @@ function RequestFormPage() {
                                                             children: "Text"
                                                         }, void 0, false, {
                                                             fileName: "[project]/app/request-form/page.tsx",
-                                                            lineNumber: 374,
+                                                            lineNumber: 441,
                                                             columnNumber: 21
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
@@ -659,7 +766,7 @@ function RequestFormPage() {
                                                             children: "WhatsApp"
                                                         }, void 0, false, {
                                                             fileName: "[project]/app/request-form/page.tsx",
-                                                            lineNumber: 375,
+                                                            lineNumber: 442,
                                                             columnNumber: 21
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
@@ -667,19 +774,19 @@ function RequestFormPage() {
                                                             children: "Instagram"
                                                         }, void 0, false, {
                                                             fileName: "[project]/app/request-form/page.tsx",
-                                                            lineNumber: 376,
+                                                            lineNumber: 443,
                                                             columnNumber: 21
                                                         }, this)
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/app/request-form/page.tsx",
-                                                    lineNumber: 368,
+                                                    lineNumber: 435,
                                                     columnNumber: 19
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/app/request-form/page.tsx",
-                                            lineNumber: 366,
+                                            lineNumber: 433,
                                             columnNumber: 17
                                         }, this),
                                         isInstagram ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
@@ -692,19 +799,19 @@ function RequestFormPage() {
                                                     onChange: (event)=>handleChange("instagramHandle", event.target.value)
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/request-form/page.tsx",
-                                                    lineNumber: 382,
+                                                    lineNumber: 449,
                                                     columnNumber: 21
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/app/request-form/page.tsx",
-                                            lineNumber: 380,
+                                            lineNumber: 447,
                                             columnNumber: 19
                                         }, this) : null
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/request-form/page.tsx",
-                                    lineNumber: 365,
+                                    lineNumber: 432,
                                     columnNumber: 15
                                 }, this)
                             ]
@@ -727,13 +834,13 @@ function RequestFormPage() {
                                                         onChange: (event)=>setSearch(event.target.value)
                                                     }, void 0, false, {
                                                         fileName: "[project]/app/request-form/page.tsx",
-                                                        lineNumber: 400,
+                                                        lineNumber: 467,
                                                         columnNumber: 21
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/app/request-form/page.tsx",
-                                                lineNumber: 398,
+                                                lineNumber: 465,
                                                 columnNumber: 19
                                             }, this),
                                             search.trim() ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -749,7 +856,7 @@ function RequestFormPage() {
                                                                 onChange: ()=>toggleProduct(product)
                                                             }, void 0, false, {
                                                                 fileName: "[project]/app/request-form/page.tsx",
-                                                                lineNumber: 420,
+                                                                lineNumber: 487,
                                                                 columnNumber: 29
                                                             }, this),
                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -759,18 +866,18 @@ function RequestFormPage() {
                                                                     alt: product.name
                                                                 }, void 0, false, {
                                                                     fileName: "[project]/app/request-form/page.tsx",
-                                                                    lineNumber: 427,
+                                                                    lineNumber: 494,
                                                                     columnNumber: 33
                                                                 }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                                                     className: __TURBOPACK__imported__module__$5b$project$5d2f$app$2f$request$2d$form$2f$RequestForm$2e$module$2e$css__$5b$app$2d$client$5d$__$28$css__module$29$__["default"].imagePlaceholder
                                                                 }, void 0, false, {
                                                                     fileName: "[project]/app/request-form/page.tsx",
-                                                                    lineNumber: 429,
+                                                                    lineNumber: 496,
                                                                     columnNumber: 33
                                                                 }, this)
                                                             }, void 0, false, {
                                                                 fileName: "[project]/app/request-form/page.tsx",
-                                                                lineNumber: 425,
+                                                                lineNumber: 492,
                                                                 columnNumber: 29
                                                             }, this),
                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -781,7 +888,7 @@ function RequestFormPage() {
                                                                         children: product.name
                                                                     }, void 0, false, {
                                                                         fileName: "[project]/app/request-form/page.tsx",
-                                                                        lineNumber: 433,
+                                                                        lineNumber: 500,
                                                                         columnNumber: 31
                                                                     }, this),
                                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -789,25 +896,25 @@ function RequestFormPage() {
                                                                         children: product.moq ? `MOQ ${product.moq}` : "No MOQ"
                                                                     }, void 0, false, {
                                                                         fileName: "[project]/app/request-form/page.tsx",
-                                                                        lineNumber: 434,
+                                                                        lineNumber: 501,
                                                                         columnNumber: 31
                                                                     }, this)
                                                                 ]
                                                             }, void 0, true, {
                                                                 fileName: "[project]/app/request-form/page.tsx",
-                                                                lineNumber: 432,
+                                                                lineNumber: 499,
                                                                 columnNumber: 29
                                                             }, this)
                                                         ]
                                                     }, product.id, true, {
                                                         fileName: "[project]/app/request-form/page.tsx",
-                                                        lineNumber: 414,
+                                                        lineNumber: 481,
                                                         columnNumber: 27
                                                     }, this);
                                                 })
                                             }, void 0, false, {
                                                 fileName: "[project]/app/request-form/page.tsx",
-                                                lineNumber: 408,
+                                                lineNumber: 475,
                                                 columnNumber: 21
                                             }, this) : null,
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -819,17 +926,16 @@ function RequestFormPage() {
                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
                                                                 type: "file",
                                                                 accept: "image/*",
-                                                                required: true,
                                                                 onChange: (event)=>setLogoFile(event.target.files?.[0] ?? null)
                                                             }, void 0, false, {
                                                                 fileName: "[project]/app/request-form/page.tsx",
-                                                                lineNumber: 446,
+                                                                lineNumber: 513,
                                                                 columnNumber: 23
                                                             }, this)
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "[project]/app/request-form/page.tsx",
-                                                        lineNumber: 444,
+                                                        lineNumber: 511,
                                                         columnNumber: 21
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
@@ -842,19 +948,19 @@ function RequestFormPage() {
                                                                 onChange: (event)=>handleChange("logoColor", event.target.value)
                                                             }, void 0, false, {
                                                                 fileName: "[project]/app/request-form/page.tsx",
-                                                                lineNumber: 457,
+                                                                lineNumber: 523,
                                                                 columnNumber: 23
                                                             }, this)
                                                         ]
                                                     }, void 0, true, {
                                                         fileName: "[project]/app/request-form/page.tsx",
-                                                        lineNumber: 455,
+                                                        lineNumber: 521,
                                                         columnNumber: 21
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/app/request-form/page.tsx",
-                                                lineNumber: 443,
+                                                lineNumber: 510,
                                                 columnNumber: 19
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
@@ -867,19 +973,19 @@ function RequestFormPage() {
                                                         onChange: (event)=>handleChange("message", event.target.value)
                                                     }, void 0, false, {
                                                         fileName: "[project]/app/request-form/page.tsx",
-                                                        lineNumber: 467,
+                                                        lineNumber: 533,
                                                         columnNumber: 21
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/app/request-form/page.tsx",
-                                                lineNumber: 465,
+                                                lineNumber: 531,
                                                 columnNumber: 19
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/app/request-form/page.tsx",
-                                        lineNumber: 397,
+                                        lineNumber: 464,
                                         columnNumber: 17
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -891,7 +997,7 @@ function RequestFormPage() {
                                                     children: "Selected products"
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/request-form/page.tsx",
-                                                    lineNumber: 476,
+                                                    lineNumber: 542,
                                                     columnNumber: 21
                                                 }, this),
                                                 form.productSelections.length ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -908,18 +1014,18 @@ function RequestFormPage() {
                                                                         alt: product.name
                                                                     }, void 0, false, {
                                                                         fileName: "[project]/app/request-form/page.tsx",
-                                                                        lineNumber: 486,
+                                                                        lineNumber: 552,
                                                                         columnNumber: 35
                                                                     }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                                                         className: __TURBOPACK__imported__module__$5b$project$5d2f$app$2f$request$2d$form$2f$RequestForm$2e$module$2e$css__$5b$app$2d$client$5d$__$28$css__module$29$__["default"].imagePlaceholder
                                                                     }, void 0, false, {
                                                                         fileName: "[project]/app/request-form/page.tsx",
-                                                                        lineNumber: 488,
+                                                                        lineNumber: 554,
                                                                         columnNumber: 35
                                                                     }, this)
                                                                 }, void 0, false, {
                                                                     fileName: "[project]/app/request-form/page.tsx",
-                                                                    lineNumber: 484,
+                                                                    lineNumber: 550,
                                                                     columnNumber: 31
                                                                 }, this),
                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -929,20 +1035,20 @@ function RequestFormPage() {
                                                                             children: product.name
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/app/request-form/page.tsx",
-                                                                            lineNumber: 492,
+                                                                            lineNumber: 558,
                                                                             columnNumber: 31
                                                                         }, this),
                                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                                                             children: product.moq ? `MOQ ${product.moq}` : "No MOQ listed"
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/app/request-form/page.tsx",
-                                                                            lineNumber: 493,
+                                                                            lineNumber: 559,
                                                                             columnNumber: 31
                                                                         }, this)
                                                                     ]
                                                                 }, void 0, true, {
                                                                     fileName: "[project]/app/request-form/page.tsx",
-                                                                    lineNumber: 491,
+                                                                    lineNumber: 557,
                                                                     columnNumber: 29
                                                                 }, this),
                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -953,7 +1059,7 @@ function RequestFormPage() {
                                                                     onChange: (event)=>updateQuantity(product.id, event.target.value)
                                                                 }, void 0, false, {
                                                                     fileName: "[project]/app/request-form/page.tsx",
-                                                                    lineNumber: 497,
+                                                                    lineNumber: 563,
                                                                     columnNumber: 29
                                                                 }, this),
                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -963,43 +1069,43 @@ function RequestFormPage() {
                                                                     children: "Remove"
                                                                 }, void 0, false, {
                                                                     fileName: "[project]/app/request-form/page.tsx",
-                                                                    lineNumber: 506,
+                                                                    lineNumber: 572,
                                                                     columnNumber: 29
                                                                 }, this)
                                                             ]
                                                         }, product.id, true, {
                                                             fileName: "[project]/app/request-form/page.tsx",
-                                                            lineNumber: 483,
+                                                            lineNumber: 549,
                                                             columnNumber: 29
                                                         }, this);
                                                     })
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/request-form/page.tsx",
-                                                    lineNumber: 478,
+                                                    lineNumber: 544,
                                                     columnNumber: 23
                                                 }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                                                     className: __TURBOPACK__imported__module__$5b$project$5d2f$app$2f$request$2d$form$2f$RequestForm$2e$module$2e$css__$5b$app$2d$client$5d$__$28$css__module$29$__["default"].empty,
                                                     children: "No products selected yet."
                                                 }, void 0, false, {
                                                     fileName: "[project]/app/request-form/page.tsx",
-                                                    lineNumber: 518,
+                                                    lineNumber: 584,
                                                     columnNumber: 23
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/app/request-form/page.tsx",
-                                            lineNumber: 475,
+                                            lineNumber: 541,
                                             columnNumber: 19
                                         }, this)
                                     }, void 0, false, {
                                         fileName: "[project]/app/request-form/page.tsx",
-                                        lineNumber: 474,
+                                        lineNumber: 540,
                                         columnNumber: 17
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/request-form/page.tsx",
-                                lineNumber: 396,
+                                lineNumber: 463,
                                 columnNumber: 15
                             }, this)
                         }, void 0, false) : null,
@@ -1014,7 +1120,7 @@ function RequestFormPage() {
                                     children: "Back"
                                 }, void 0, false, {
                                     fileName: "[project]/app/request-form/page.tsx",
-                                    lineNumber: 527,
+                                    lineNumber: 593,
                                     columnNumber: 13
                                 }, this),
                                 step < steps.length - 1 ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -1024,7 +1130,7 @@ function RequestFormPage() {
                                     children: "Continue"
                                 }, void 0, false, {
                                     fileName: "[project]/app/request-form/page.tsx",
-                                    lineNumber: 536,
+                                    lineNumber: 602,
                                     columnNumber: 15
                                 }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                                     className: "btn btn-primary",
@@ -1033,13 +1139,13 @@ function RequestFormPage() {
                                     children: submitting ? "Sending..." : "Request a Quote"
                                 }, void 0, false, {
                                     fileName: "[project]/app/request-form/page.tsx",
-                                    lineNumber: 540,
+                                    lineNumber: 606,
                                     columnNumber: 11
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/app/request-form/page.tsx",
-                            lineNumber: 526,
+                            lineNumber: 592,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -1049,28 +1155,28 @@ function RequestFormPage() {
                             children: status
                         }, void 0, false, {
                             fileName: "[project]/app/request-form/page.tsx",
-                            lineNumber: 546,
+                            lineNumber: 612,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/app/request-form/page.tsx",
-                    lineNumber: 286,
-                    columnNumber: 9
+                    lineNumber: 353,
+                    columnNumber: 11
                 }, this)
             ]
         }, void 0, true, {
             fileName: "[project]/app/request-form/page.tsx",
-            lineNumber: 275,
+            lineNumber: 332,
             columnNumber: 7
         }, this)
     }, void 0, false, {
         fileName: "[project]/app/request-form/page.tsx",
-        lineNumber: 274,
+        lineNumber: 331,
         columnNumber: 5
     }, this);
 }
-_s(RequestFormPage, "lFhpFVjKxxhiHbtpR21gUzyxl8U=");
+_s(RequestFormPage, "3LD2p6VR802lLlZoSckdw4FiMyQ=");
 _c = RequestFormPage;
 var _c;
 __turbopack_context__.k.register(_c, "RequestFormPage");

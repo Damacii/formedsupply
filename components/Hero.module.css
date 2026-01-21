@@ -74,15 +74,16 @@
 
 .heroSliderWrap {
   display: grid;
-  gap: var(--space-2);
-  justify-items: end;
-  transform: translate(-12px, -144px);
+  gap: var(--space-4);
+  justify-items: center;
+  width: 100%;
+  position: relative;
 }
 
 .heroSlider {
   position: relative;
-  width: min(520px, 100%);
-  aspect-ratio: 5 / 4;
+  width: 90%;
+  aspect-ratio: 1 / 1;
   perspective: 1200px;
   transform-style: preserve-3d;
   margin-left: auto;
@@ -99,23 +100,20 @@
 .heroSlide {
   position: absolute;
   inset: 0;
-  border: 2px solid var(--text);
-  box-shadow: 10px 12px 0 rgba(0, 0, 0, 0.18);
+  border: none;
+  box-shadow: none;
   opacity: 0.25;
-  transform: translate3d(160px, -36px, -220px) rotateY(-14deg) rotateX(4deg) rotateZ(-4deg);
+  transform: translate3d(160px, -36px, -220px);
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   filter: blur(10px);
-  transition: opacity 700ms ease, transform 700ms ease, filter 700ms ease;
+  transition: opacity 1200ms ease, transform 1200ms ease, filter 1200ms ease;
   will-change: opacity, transform;
 }
 
 .heroSlide::after {
-  content: '';
-  position: absolute;
-  inset: 10%;
-  border: 1px solid rgba(17, 17, 17, 0.35);
+  content: none;
 }
 
 .heroSlideOne {
@@ -138,34 +136,48 @@
 
 .heroSlideFront {
   opacity: 1;
-  transform: translate3d(-20px, 8px, 0) rotateY(-6deg) rotateX(2deg) rotateZ(-2deg);
+  transform: translate3d(-20px, -117px, 0) scale(1.08);
   filter: blur(0);
 }
 
 .heroSlideMid {
   opacity: 0.6;
-  transform: translate3d(70px, -16px, -120px) rotateY(-10deg) rotateX(3deg) rotateZ(-3deg);
+  transform: translate3d(70px, -141px, -120px) scale(1.02);
   filter: blur(4px);
 }
 
 .heroSlideBack {
   opacity: 0.25;
-  transform: translate3d(160px, -36px, -220px) rotateY(-14deg) rotateX(4deg) rotateZ(-4deg);
+  transform: translate3d(160px, -161px, -220px) scale(0.98);
   filter: blur(10px);
 }
 
 .heroSkuBox {
-  width: min(520px, 100%);
-  padding: 0.65rem 1rem;
-  border: 2px solid var(--text);
-  background: #fff;
+  width: auto;
+  position: absolute;
+  right: 6%;
+  bottom: 14px;
+  padding: 0.4rem 0.75rem;
+  text-align: right;
+  margin: 0;
+  background: transparent;
   font-size: 0.85rem;
   text-transform: uppercase;
   letter-spacing: 0.06em;
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 220ms ease, transform 220ms ease;
+  pointer-events: none;
 }
 
 .heroSkuBox span {
   font-weight: 700;
+}
+
+.heroSliderWrap:hover .heroSkuBox,
+.heroSliderWrap:focus-within .heroSkuBox {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .heroEditorAnchor {
@@ -233,6 +245,11 @@
   color: var(--muted);
 }
 
+.heroEditorError {
+  color: #8c1d1d;
+  font-weight: 600;
+}
+
 .heroEditorList {
   display: grid;
   gap: var(--space-3);
@@ -269,13 +286,14 @@
   }
 
   .heroSlider {
-    width: min(420px, 100%);
+    width: min(800px, 100%);
     margin: 0 auto;
     transform: translate(0, 0) translateX(var(--drag-x, 0px));
   }
 
   .heroSkuBox {
-    width: min(420px, 100%);
+    width: min(800px, 100%);
+    margin: var(--space-5) auto 0;
   }
 
   .heroEditorItem {
@@ -285,7 +303,7 @@
 
 @media (min-width: 900px) {
   .heroGrid {
-    grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+    grid-template-columns: 1fr 1fr;
   }
 }
 

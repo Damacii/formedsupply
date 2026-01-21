@@ -32,6 +32,10 @@
   line-height: 1.5;
 }
 
+.RequestForm-module__okqXIq__oneLineNote {
+  white-space: nowrap;
+}
+
 .RequestForm-module__okqXIq__trustRow {
   border-top: 1px solid #1111111a;
   flex-wrap: wrap;
@@ -67,6 +71,28 @@
   border-radius: 0;
   display: grid;
   box-shadow: 8px 8px #1111111a;
+}
+
+.RequestForm-module__okqXIq__thankYou {
+  text-align: center;
+  padding: var(--space-5);
+  text-transform: uppercase;
+  letter-spacing: .04em;
+  background: #fff;
+  border: 2px solid #111;
+  place-items: center;
+  font-weight: 700;
+  display: grid;
+  box-shadow: 8px 8px #1111111a;
+}
+
+.RequestForm-module__okqXIq__thankYouAnimation {
+  width: min(320px, 70vw);
+  height: min(320px, 70vw);
+}
+
+.RequestForm-module__okqXIq__thankYouMessage {
+  margin-top: var(--space-2);
 }
 
 .RequestForm-module__okqXIq__stepHeader {
@@ -344,7 +370,13 @@
 
 .RequestForm-module__okqXIq__selectionItem input {
   text-align: center;
-  width: 120px;
+  width: 80px;
+}
+
+@media (min-width: 600px) {
+  .RequestForm-module__okqXIq__selectionItem input {
+    width: 120px;
+  }
 }
 
 .RequestForm-module__okqXIq__removeButton {
@@ -389,10 +421,6 @@
   .RequestForm-module__okqXIq__layout {
     gap: var(--space-6);
     grid-template-columns: 1fr;
-  }
-
-  .RequestForm-module__okqXIq__copy h1 {
-    white-space: nowrap;
   }
 
   .RequestForm-module__okqXIq__formRow {

@@ -33,6 +33,8 @@ export default function Hero() {
   );
   const [customSlides, setCustomSlides] = useState<HeroSlide[]>([]);
   const [isEditing, setIsEditing] = useState(false);
+  const [storageError, setStorageError] = useState(false);
+  const [isDirty, setIsDirty] = useState(false);
   const slides = customSlides.length ? customSlides : defaultSlides;
   const slideCount = slides.length;
   const [activeIndex, setActiveIndex] = useState(0);
@@ -66,16 +68,8 @@ export default function Hero() {
       }
     }
     hasLoaded.current = true;
+    setIsDirty(false);
   }, []);
-
-  useEffect(() => {
-    if (!hasLoaded.current) return;
-    if (customSlides.length === 0) {
-      window.localStorage.removeItem(HERO_SLIDES_KEY);
-      return;
-    }
-    window.localStorage.setItem(HERO_SLIDES_KEY, JSON.stringify(customSlides));
-  }, [customSlides]);
 
   useEffect(() => {
     const updateEditorState = () => {
@@ -92,7 +86,7 @@ export default function Hero() {
     }
     const timer = window.setInterval(() => {
       setActiveIndex((index) => (index + 1) % slideCount);
-    }, 5000);
+    }, 3500);
     return () => window.clearInterval(timer);
   }, [isDragging, isHovered, slideCount]);
 
@@ -109,6 +103,38 @@ export default function Hero() {
     }
   };
 
+  const handleSaveSlides = () => {
+    if (!hasLoaded.current) return;
+    try {
+      if (customSlides.length === 0) {
+        window.localStorage.removeItem(HERO_SLIDES_KEY);
+      } else {
+        window.localStorage.setItem(HERO_SLIDES_KEY, JSON.stringify(customSlides));
+      }
+      setStorageError(false);
+      setIsDirty(false);
+    } catch {
+      setStorageError(true);
+    }
+  };
+
+  const compressImage = async (file: File) => {
+    const bitmap = await createImageBitmap(file);
+    const maxSize = 2560;
+    const scale = Math.min(1, maxSize / Math.max(bitmap.width, bitmap.height));
+    const targetWidth = Math.round(bitmap.width * scale);
+    const targetHeight = Math.round(bitmap.height * scale);
+    const canvas = document.createElement("canvas");
+    canvas.width = targetWidth;
+    canvas.height = targetHeight;
+    const ctx = canvas.getContext("2d");
+    if (!ctx) {
+      throw new Error("No canvas context");
+    }
+    ctx.drawImage(bitmap, 0, 0, targetWidth, targetHeight);
+    return canvas.toDataURL("image/webp", 0.95);
+  };
+
   const handleImageUpload = async (event: ChangeEvent<HTMLInputElement>) => {
     const files = Array.from(event.target.files ?? []);
     if (!files.length) return;
@@ -116,21 +142,33 @@ export default function Hero() {
       files.map(
         (file) =>
           new Promise<HeroSlide>((resolve, reject) => {
-            const reader = new FileReader();
-            reader.onload = () => {
-              resolve({
-                id: `${Date.now()}-${Math.random().toString(16).slice(2)}`,
-                src: String(reader.result || ""),
-                sku: "",
-                href: "",
+            compressImage(file)
+              .then((dataUrl) => {
+                resolve({
+                  id: `${Date.now()}-${Math.random().toString(16).slice(2)}`,
+                  src: dataUrl,
+                  sku: "",
+                  href: "",
+                });
+              })
+              .catch(() => {
+                const reader = new FileReader();
+                reader.onload = () => {
+                  resolve({
+                    id: `${Date.now()}-${Math.random().toString(16).slice(2)}`,
+                    src: String(reader.result || ""),
+                    sku: "",
+                    href: "",
+                  });
+                };
+                reader.onerror = () => reject(new Error("Failed to read image"));
+                reader.readAsDataURL(file);
               });
-            };
-            reader.onerror = () => reject(new Error("Failed to read image"));
-            reader.readAsDataURL(file);
           })
       )
     );
     setCustomSlides((prev) => [...prev, ...uploads]);
+    setIsDirty(true);
     event.target.value = "";
   };
 
@@ -144,10 +182,12 @@ export default function Hero() {
         slideIndex === index ? { ...slide, [field]: value } : slide
       )
     );
+    setIsDirty(true);
   };
 
   const handleRemoveSlide = (index: number) => {
     setCustomSlides((prev) => prev.filter((_, slideIndex) => slideIndex !== index));
+    setIsDirty(true);
   };
 
   const handlePointerDown = (event: PointerEvent<HTMLDivElement>) => {
@@ -288,6 +328,14 @@ export default function Hero() {
             <p>Upload hero images and link each one to a SKU or product page.</p>
           </div>
           <div className={styles.heroEditorActions}>
+            <button
+              className="btn btn-primary"
+              type="button"
+              onClick={handleSaveSlides}
+              disabled={!isDirty}
+            >
+              Save Changes
+            </button>
             <button className="btn btn-secondary" type="button" onClick={handleCloseEditor}>
               Close Editor
             </button>
@@ -298,6 +346,12 @@ export default function Hero() {
             <span>Upload hero images</span>
             <input type="file" accept="image/*" multiple onChange={handleImageUpload} />
           </label>
+          {storageError ? (
+            <p className={styles.heroEditorError}>
+              Storage limit reached. Upload fewer/smaller images or refresh to clear saved
+              data.
+            </p>
+          ) : null}
           {customSlides.length === 0 ? (
             <p className={styles.heroEditorEmpty}>No hero images uploaded yet.</p>
           ) : (
